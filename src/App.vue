@@ -1,10 +1,56 @@
-<script setup>
-	import { RouterView } from 'vue-router';
-</script>
-
 <template>
-	<div class="parent"></div>
-	<RouterView />
+	<div></div>
 </template>
 
-<style lang="scss"></style>
+<script></script>
+
+<style lang="scss">
+	html {
+		font-size: 62.5%;
+	}
+
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	@font-face {
+		font-family: 'Termina';
+		src: url('@/assets/fonts/Termina-Regular.woff2') format('woff2'),
+			url('@/assets/fonts/Termina-Regular.woff') format('woff'),
+			url('@/assets/fonts/Termina-Regular.ttf') format('truetype');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Termina';
+		src: url('@/assets/fonts/Termina-Medium.woff2') format('woff2'),
+			url('@/assets/fonts/Termina-Medium.woff') format('woff'),
+			url('@/assets/fonts/Termina-Medium.ttf') format('truetype');
+		font-weight: 500;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Termina';
+		src: url('@/assets/fonts/Termina-Demi.woff2') format('woff2'),
+			url('@/assets/fonts/Termina-Demi.woff') format('woff'),
+			url('@/assets/fonts/Termina-Demi.ttf') format('truetype');
+		font-weight: 600;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Termina';
+		src: url('@/assets/fonts/Termina-Bold.woff2') format('woff2'),
+			url('@/assets/fonts/Termina-Bold.woff') format('woff'),
+			url('@/assets/fonts/Termina-Bold.ttf') format('truetype');
+		font-weight: bold;
+		font-style: normal;
+		font-display: swap;
+	}
+</style>
