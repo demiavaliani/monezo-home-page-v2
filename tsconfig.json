@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"rootDir": ".",
+		"outDir": ".",
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"paths": {
+			"@/*": [
+				"src/*"
+			],
+		},
+		"allowJs": false,
+	},
+	"include": [
+		"src/**/*",
+		"src/**/*.ts",
+		"src/**/*.vue",
+	],
+	"exclude": [
+		"node_modules"
+	]
+}
