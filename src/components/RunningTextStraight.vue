@@ -5,9 +5,8 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, onMounted } from 'vue';
+	import { defineComponent, ref, onMounted, nextTick, computed } from 'vue';
 	import { gsap } from 'gsap';
-	import { useGsapHorizontalLoop } from '@/composables/gsapHorizontalLoop.js';
 
 	export default defineComponent({
 		props: {
@@ -15,40 +14,60 @@
 				type: String,
 				required: true,
 			},
+
+			parentElementWidth: {
+				type: Number,
+				required: true,
+			},
+
+			animationSpeed: {
+				type: Number,
+				required: true,
+			},
+
+			fontSize: {
+				type: Number,
+				required: false,
+			},
 		},
 
 		setup(props) {
 			const textElement = ref<HTMLElement | null>(null);
-			const { horizontalLoop } = useGsapHorizontalLoop();
+
+			const fontSizeFormatted = computed(() => `${props.fontSize}rem`);
 
 			onMounted(() => {
-				const elements = gsap.utils.toArray(textElement.value);
-				horizontalLoop(elements, {
-					repeat: -1,
-					speed: 3,
-					paddingRight: 550,
+				nextTick(() => {
+					if (textElement.value) {
+						gsap.fromTo(
+							textElement.value,
+							{ x: `-${textElement.value.offsetWidth}` },
+							{
+								duration: props.animationSpeed,
+								ease: 'none',
+								x: `${props.parentElementWidth}`,
+								repeat: -1,
+							}
+						);
+					}
 				});
 			});
 
-			return { textElement };
+			return { textElement, fontSizeFormatted };
 		},
 	});
 </script>
 
 <style lang="scss">
 	.running-text-straight {
-		width: 1000px;
+		width: 100%;
 		height: 100%;
 		overflow: hidden;
-		border: 1px solid black;
 
 		&__text {
-			display: inline-block;
-			// width: 100px;
-			// height: 50px;
+			width: fit-content;
 			white-space: nowrap;
-			font-size: 3rem;
-			// background-color: red;
+			font-size: v-bind(fontSizeFormatted);
 		}
 	}
 </style>
