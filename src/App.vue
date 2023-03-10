@@ -1,17 +1,37 @@
 <template>
-	<div></div>
+	<div class="app-wrapper">
+		<RunningTextStraight text="Start your passive income Journey with Monezo NFT" />
+	</div>
 </template>
 
-<script></script>
+<script lang="ts">
+	import { defineComponent, computed, ref } from 'vue';
+	import RunningTextStraight from './components/RunningTextStraight.vue';
+
+	export default defineComponent({
+		components: { RunningTextStraight },
+	});
+</script>
 
 <style lang="scss">
-	html {
+	* {
+		box-sizing: border-box;
+	}
+
+	html,
+	body {
+		width: 100%;
+		margin: 0;
+		padding: 0;
 		font-size: 62.5%;
 	}
 
-	body {
-		margin: 0;
-		padding: 0;
+	#app {
+		width: 100%;
+	}
+
+	.app-wrapper {
+		// width: 1000px;
 	}
 
 	@font-face {
