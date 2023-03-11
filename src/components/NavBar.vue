@@ -93,7 +93,6 @@
 
 			p {
 				margin-left: 1.2rem;
-				font-family: 'Termina';
 				font-size: 2.2rem;
 				font-weight: bold;
 				line-height: 2.6rem;
