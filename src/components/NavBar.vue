@@ -22,13 +22,13 @@
 		props: {
 			firstPage: {
 				type: Boolean,
-				required: false,
+				required: true,
 				default: false,
 			},
 
 			lastPage: {
 				type: Boolean,
-				required: false,
+				required: true,
 				default: false,
 			},
 		},
