@@ -63,8 +63,8 @@
 <style lang="scss">
 	.button-wrapper {
 		display: flex;
-		justify-content: flex-start;
-		width: 100%;
+		align-items: center;
+		height: 5.4rem;
 
 		.button {
 			display: inline-block;

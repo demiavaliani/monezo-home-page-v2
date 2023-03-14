@@ -1,6 +1,6 @@
 <template>
 	<div class="running-text-straight">
-		<p class="running-text-straight__text" ref="textElement">{{ text }}</p>
+		<slot />
 	</div>
 </template>
 
@@ -10,19 +10,25 @@
 
 	export default defineComponent({
 		props: {
-			text: {
-				type: String,
+			parentElementWidth: {
+				type: Number,
 				required: true,
 			},
 
-			parentElementWidth: {
-				type: Number,
+			groupId: {
+				type: String,
 				required: true,
 			},
 
 			animationSpeed: {
 				type: Number,
 				required: true,
+			},
+
+			direction: {
+				type: String,
+				required: true,
+				validator: (value: string) => ['left-to-right', 'right-to-left'].includes(value),
 			},
 
 			fontSize: {
@@ -32,42 +38,46 @@
 		},
 
 		setup(props) {
-			const textElement = ref<HTMLElement | null>(null);
+			const imageGroupWidth = ref(0);
 
-			const fontSizeFormatted = computed(() => `${props.fontSize}rem`);
+			const imageGroupWidthFormatted = computed(() => `-${imageGroupWidth.value}px`);
 
 			onMounted(() => {
 				nextTick(() => {
-					if (textElement.value) {
-						gsap.fromTo(
-							textElement.value,
-							{ x: `-${textElement.value.offsetWidth}` },
-							{
-								duration: props.animationSpeed,
-								ease: 'none',
-								x: `${props.parentElementWidth}`,
-								repeat: -1,
-							}
-						);
-					}
+					imageGroupWidth.value = document.getElementById(props.groupId).offsetWidth;
+					gsap.defaults({ duration: props.animationSpeed, ease: 'none', repeat: -1 });
+					gsap.set(`#${props.groupId}`, {
+						x: (i) =>
+							i * (imageGroupWidth.value + (props.parentElementWidth - imageGroupWidth.value) / 2),
+					});
+
+					let windowWrap = gsap.utils.wrap(0, props.parentElementWidth + imageGroupWidth.value);
+
+					const gsapOptions = {
+						x: `+=${props.parentElementWidth + imageGroupWidth.value}`,
+						modifiers: {
+							x: (x: string) => windowWrap(parseFloat(x)) + 'px',
+						},
+					};
+
+					props.direction === 'left-to-right'
+						? gsap.to(`#${props.groupId}`, gsapOptions)
+						: gsap.from(`#${props.groupId}`, gsapOptions);
 				});
 			});
 
-			return { textElement, fontSizeFormatted };
+			return { imageGroupWidthFormatted };
 		},
 	});
 </script>
 
 <style lang="scss">
 	.running-text-straight {
+		position: relative;
+		display: flex;
+		align-items: center;
 		width: 100%;
 		height: 100%;
-		overflow: hidden;
-
-		&__text {
-			width: fit-content;
-			white-space: nowrap;
-			font-size: v-bind(fontSizeFormatted);
-		}
+		left: v-bind(imageGroupWidthFormatted);
 	}
 </style>
