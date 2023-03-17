@@ -1,12 +1,15 @@
 <template>
-	<div class="app-wrapper"></div>
+	<div class="app-wrapper">
+		<FirstSection />
+	</div>
 </template>
 
 <script lang="ts">
 	import { defineComponent } from 'vue';
+	import FirstSection from './views/FirstSection.vue';
 
 	export default defineComponent({
-		components: {},
+		components: { FirstSection },
 	});
 </script>
 
