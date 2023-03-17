@@ -2,6 +2,15 @@
 	<div class="first-section">
 		<NavBar :first-page="true" :last-page="false" />
 
+		<img
+			src="../assets/images/monezo-nft-rotating-circle.png"
+			class="first-section__circle-outer"
+		/>
+		<img
+			src="../assets/images/monezo-nft-rotating-circle.png"
+			class="first-section__circle-inner"
+		/>
+
 		<div class="first-section__body">
 			<div class="first-section__body__title">
 				<p class="first-section__body__title--first-line">
@@ -34,6 +43,19 @@
 					:hover-width="28.6"
 				/>
 			</div>
+		</div>
+
+		<div class="first-section__circle-corner">
+			<img
+				src="../assets/images/monezo-nft-rotating-circle.png"
+				class="first-section__circle-corner__image"
+			/>
+		</div>
+
+		<div class="first-section__monkers">
+			<img src="../assets/images/monker-corner-1.png" class="monker" />
+			<img src="../assets/images/monker-corner-2.png" class="monker" />
+			<img src="../assets/images/monker-corner-3.png" class="monker" />
 		</div>
 
 		<div class="first-section__footer">
@@ -70,7 +92,8 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, computed } from 'vue';
+	import { defineComponent, ref, computed, onMounted } from 'vue';
+	import { gsap, Power1 } from 'gsap';
 	import NavBar from '@/components/NavBar.vue';
 	import Button from '@/components/Button.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
@@ -86,6 +109,36 @@
 				runningText.value ? runningText.value.offsetWidth : 0
 			);
 
+			onMounted(() => {
+				let tl = gsap.timeline({ repeat: -1 });
+
+				gsap.utils.toArray<HTMLImageElement>('.monker').forEach((monker) => {
+					tl.from(
+						monker,
+						{
+							xPercent: 110,
+							rotation: 30,
+							opacity: 0,
+							scale: 0.7,
+							duration: 1,
+							ease: Power1.easeInOut,
+						},
+						'>-1'
+					);
+					tl.from(monker, {
+						duration: 1,
+					});
+					tl.to(monker, {
+						xPercent: -120,
+						rotation: -30,
+						opacity: 0,
+						scale: 0.7,
+						duration: 1,
+						ease: Power1.easeInOut,
+					});
+				});
+			});
+
 			return { runningText, runningTextWidth };
 		},
 	});
@@ -93,6 +146,14 @@
 
 <style lang="scss">
 	.first-section {
+		--footer-height: 12.4rem;
+
+		@keyframes rotate {
+			to {
+				rotate: 360deg;
+			}
+		}
+
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -101,6 +162,22 @@
 		border: 2px solid $monezo-night-black;
 		background: linear-gradient(90deg, #b1b0fa 0%, #fbc7d4 100%);
 		overflow: hidden;
+
+		&__circle-outer {
+			position: absolute;
+			top: -88rem;
+			align-self: center;
+			width: 113.1rem;
+			animation: rotate 25s infinite linear;
+		}
+
+		&__circle-inner {
+			position: absolute;
+			top: -74rem;
+			align-self: center;
+			width: 84.5rem;
+			animation: rotate 25s infinite reverse linear;
+		}
 
 		&__body {
 			display: flex;
@@ -138,10 +215,42 @@
 			}
 		}
 
+		&__circle-corner {
+			position: absolute;
+			bottom: var(--footer-height);
+			right: 0rem;
+			width: 84.5rem;
+			height: 84.5rem;
+			overflow: hidden;
+
+			&__image {
+				position: absolute;
+				bottom: -41rem;
+				right: -35rem;
+				width: 84.5rem;
+				animation: rotate 25s infinite linear;
+			}
+		}
+
+		&__monkers {
+			position: absolute;
+			bottom: var(--footer-height);
+			right: -11rem;
+			width: 77.2rem;
+			height: 100%;
+			overflow: hidden;
+
+			img {
+				position: absolute;
+				width: 77.2rem;
+				bottom: 0;
+			}
+		}
+
 		&__footer {
 			display: flex;
 			width: 100vw;
-			height: 12.4rem;
+			height: var(--footer-height);
 			padding: 0 0 0 3rem;
 			border-top: 2px solid $monezo-night-black;
 
@@ -158,15 +267,53 @@
 			}
 
 			&__running-text {
+				position: relative;
 				width: 100%;
 				height: 100%;
 				overflow: hidden;
+				z-index: 1;
 
 				.images {
 					position: absolute;
 					display: flex;
 					// play with gap to adjust space between the groups
-					gap: 12rem;
+					gap: 22rem;
+
+					@media only screen and (max-width: 2304px) {
+						gap: 20rem;
+					}
+
+					@media only screen and (max-width: 2160px) {
+						gap: 18rem;
+					}
+
+					@media only screen and (max-width: 1920px) {
+						gap: 15rem;
+					}
+
+					@media only screen and (max-width: 1680px) {
+						gap: 12rem;
+					}
+
+					@media only screen and (max-width: 1600px) {
+						gap: 11rem;
+					}
+
+					@media only screen and (max-width: 1440px) {
+						gap: 9rem;
+					}
+
+					@media only screen and (max-width: 1366px) {
+						gap: 8rem;
+					}
+
+					@media only screen and (max-width: 1280px) {
+						gap: 7rem;
+					}
+
+					@media only screen and (max-width: 1080px) {
+						gap: 4rem;
+					}
 				}
 
 				img {
