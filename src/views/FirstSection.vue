@@ -117,6 +117,7 @@
 						monker,
 						{
 							xPercent: 110,
+							yPercent: 30,
 							rotation: 30,
 							opacity: 0,
 							scale: 0.7,
@@ -129,10 +130,11 @@
 						duration: 1,
 					});
 					tl.to(monker, {
-						xPercent: -120,
-						rotation: -30,
+						xPercent: -75,
+						yPercent: 60,
+						rotation: -55,
 						opacity: 0,
-						scale: 0.7,
+						scale: 0.6,
 						duration: 1,
 						ease: Power1.easeInOut,
 					});
@@ -370,7 +372,6 @@
 			right: -11rem;
 			width: 77.2rem;
 			height: 100%;
-			overflow: hidden;
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 				right: 0;
