@@ -67,7 +67,7 @@
 				<RunningTextStraight
 					:parent-element-width="runningTextWidth"
 					:group-id="'images'"
-					:animation-speed="15"
+					:animation-speed="20"
 					:direction="'right-to-left'"
 				>
 					<div id="images" class="images">
@@ -127,7 +127,7 @@
 						'>-1'
 					);
 					tl.from(monker, {
-						duration: 1,
+						duration: 4,
 					});
 					tl.to(monker, {
 						xPercent: -75,
@@ -182,7 +182,7 @@
 			top: -88rem;
 			align-self: center;
 			width: 113.1rem;
-			animation: rotate 25s infinite linear;
+			animation: rotate 30s infinite linear;
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 				top: -92rem;
@@ -210,7 +210,7 @@
 			top: -74rem;
 			align-self: center;
 			width: 84.5rem;
-			animation: rotate 25s infinite reverse linear;
+			animation: rotate 30s infinite reverse linear;
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 				top: -77rem;
@@ -330,7 +330,7 @@
 				bottom: -41rem;
 				right: -35rem;
 				width: 84.5rem;
-				animation: rotate 25s infinite linear;
+				animation: rotate 30s infinite linear;
 
 				@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 					width: 92.5rem;
