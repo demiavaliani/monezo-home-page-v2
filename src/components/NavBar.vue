@@ -1,9 +1,9 @@
 <template>
 	<div :class="[navbarClassAddons, 'nav-bar']">
-		<div class="nav-bar__logo">
+		<a class="nav-bar__logo" href="https://monezo.xyz/">
 			<img src="@/assets/images/monezo-logo.svg" />
 			<p v-if="firstPage" class="regular">Monezo</p>
-		</div>
+		</a>
 
 		<slot />
 
@@ -53,6 +53,7 @@
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		width: 100%;
 		height: 10.7rem;
 		padding: 0 3.9rem 0 2.5rem;
@@ -84,6 +85,7 @@
 		&__logo {
 			display: flex;
 			align-items: center;
+			height: 40%;
 			padding-right: 2.5rem;
 			border-right: 2px solid;
 
@@ -96,6 +98,7 @@
 				font-size: 2.2rem;
 				font-weight: bold;
 				line-height: 2.6rem;
+				color: $monezo-black;
 			}
 		}
 
