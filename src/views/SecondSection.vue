@@ -1,34 +1,90 @@
 <template>
 	<div class="second-section">
 		<NavBar :first-page="false" :last-page="false">
-			<div class="running-text-wrapper" ref="runningTextWrapper">
+			<div class="navbar-running-text-wrapper" ref="navbarRunningTextWrapper">
 				<RunningTextStraight
-					:group-id="'running-text-group'"
-					:parent-element-width="runningTextWrapperWidth"
-					:group-width="textGroupWidth"
-					:initial-position="initialPosition"
-					:wrap-max-at="wrapMaxAt"
-					:animation-speed="15"
+					:group-id="'navbar-running-text-group'"
+					:parent-element-width="navbarRunningTextWrapperWidth"
+					:group-width="navbarTextGroupWidth"
+					:initial-position="50"
+					:wrap-max-at="navbarWrapMaxAt"
+					:animation-speed="35"
 					:direction="'right-to-left'"
 					:font-size="5"
 				>
-					<div id="running-text-group" class="text-wrapper" ref="textGroup">
+					<div id="navbar-running-text-group" class="navbar-text-wrapper" ref="navbarTextGroup">
 						<p class="running-text">Start your passive income Journey with Monezo NFT</p>
 						<img src="../assets/images/start-your-journey-text-divider-icon.svg" />
 					</div>
 
-					<div id="running-text-group" class="text-wrapper">
+					<div id="navbar-running-text-group" class="navbar-text-wrapper">
 						<p class="running-text">Start your passive income Journey with Monezo NFT</p>
 						<img src="../assets/images/start-your-journey-text-divider-icon.svg" />
 					</div>
 
-					<div id="running-text-group" class="text-wrapper">
+					<div id="navbar-running-text-group" class="navbar-text-wrapper">
 						<p class="running-text">Start your passive income Journey with Monezo NFT</p>
 						<img src="../assets/images/start-your-journey-text-divider-icon.svg" />
 					</div>
 				</RunningTextStraight>
 			</div>
 		</NavBar>
+
+		<div class="second-section__sides">
+			<div class="second-section__sides__left-part"></div>
+
+			<div class="second-section__sides__right-part">
+				<div class="second-section__sides__right-part__top">
+					<img src="../assets/images/platform-rotating-circle.png" />
+				</div>
+
+				<div class="second-section__sides__right-part__middle">
+					<p>
+						With Monezo platform you get access to Monezo Yieldful NFT, which are backed by stable
+						income from real world assets and business revenue.
+					</p>
+					<p>
+						NFT holders can choose best options for everyone from different NFT collections with
+						fixed, flexible or combined yield which depends on asset type and business.
+					</p>
+					<Button
+						:text="'Get NFT'"
+						:background="'filled'"
+						:initial-width="18.2"
+						:hover-width="21"
+					/>
+				</div>
+
+				<div class="second-section__sides__right-part__bottom" ref="bottomRightRunningTextWrapper">
+					<RunningTextStraight
+						:group-id="'bottom-right-running-text-group'"
+						:parent-element-width="bottomRightRunningTextWrapperWidth"
+						:group-width="bottomRightTextGroupWidth"
+						:initial-position="50"
+						:wrap-max-at="bottomRightWrapMaxAt"
+						:animation-speed="20"
+						:direction="'right-to-left'"
+						:font-size="5"
+					>
+						<div
+							id="bottom-right-running-text-group"
+							class="bottom-right-text-wrapper"
+							ref="bottomRightTextGroup"
+						>
+							<p class="running-text">More than an investment platform</p>
+							<img src="../assets/images/platform-text-divider.svg" />
+						</div>
+
+						<div id="bottom-right-running-text-group" class="bottom-right-text-wrapper">
+							<p class="running-text">More than an investment platform</p>
+							<img src="../assets/images/platform-text-divider.svg" />
+						</div>
+					</RunningTextStraight>
+				</div>
+			</div>
+		</div>
+
+		<div class="pixelated-background"></div>
 	</div>
 </template>
 
@@ -37,19 +93,36 @@
 	import NavBar from '@/components/NavBar.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import { useResizeObserver } from '@vueuse/core';
+	import Button from '@/components/Button.vue';
 
 	export default defineComponent({
-		components: { NavBar, RunningTextStraight },
+		components: { NavBar, RunningTextStraight, Button },
 		setup() {
-			const runningTextWrapper = ref<HTMLDivElement | null>(null);
-			const textGroup = ref<HTMLDivElement | null>(null);
-			const textGroupWidth = ref(0);
-			const initialPosition = ref(0);
-			const wrapMaxAt = ref(0);
+			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
+			const navbarTextGroup = ref<HTMLDivElement | null>(null);
+			const navbarTextGroupWidth = ref(0);
+			const navbarWrapMaxAt = ref(0);
 
-			const runningTextWrapperWidth = computed(() =>
-				runningTextWrapper.value ? runningTextWrapper.value.offsetWidth : 0
+			const bottomRightRunningTextWrapper = ref<HTMLDListElement | null>(null);
+			const bottomRightTextGroup = ref<HTMLDivElement | null>(null);
+			const bottomRightTextGroupWidth = ref(0);
+			const bottomRightWrapMaxAt = ref(0);
+
+			const navbarRunningTextWrapperWidth = computed(() =>
+				navbarRunningTextWrapper.value ? navbarRunningTextWrapper.value.offsetWidth : 0
 			);
+
+			const bottomRightRunningTextWrapperWidth = computed(() =>
+				bottomRightRunningTextWrapper.value ? bottomRightRunningTextWrapper.value.offsetWidth : 0
+			);
+
+			useResizeObserver(navbarTextGroup, (entries) => {
+				navbarTextGroupWidth.value = entries[0].contentRect.width;
+			});
+
+			useResizeObserver(bottomRightTextGroup, (entries) => {
+				bottomRightTextGroupWidth.value = entries[0].contentRect.width;
+			});
 
 			const calculateMediaQuery = (width: number, height: number) => {
 				return window.matchMedia(
@@ -57,52 +130,64 @@
 				);
 			};
 
-			useResizeObserver(textGroup, (entries) => {
-				textGroupWidth.value = entries[0].contentRect.width;
-			});
-
 			onMounted(() => {
 				if (calculateMediaQuery(2560, 1700).matches) {
-					initialPosition.value = 50;
-					wrapMaxAt.value = 1280;
+					navbarWrapMaxAt.value = 1280;
+					bottomRightWrapMaxAt.value = 250;
 				}
 
 				if (calculateMediaQuery(2304, 1440).matches) {
-					wrapMaxAt.value = 1536;
+					navbarWrapMaxAt.value = 1536;
+					bottomRightWrapMaxAt.value = 350;
 				}
 
 				if (calculateMediaQuery(1920, 1200).matches) {
-					wrapMaxAt.value = 1920;
+					navbarWrapMaxAt.value = 1920;
+					bottomRightWrapMaxAt.value = 500;
 				}
 
 				if (calculateMediaQuery(1680, 1050).matches) {
-					wrapMaxAt.value = 2160;
+					navbarWrapMaxAt.value = 2160;
+					bottomRightWrapMaxAt.value = 600;
 				}
 
 				if (calculateMediaQuery(1600, 900).matches) {
-					wrapMaxAt.value = 2240;
+					navbarWrapMaxAt.value = 2240;
+					bottomRightWrapMaxAt.value = 630;
+				}
+
+				if (calculateMediaQuery(1512, 982).matches) {
+					navbarWrapMaxAt.value = 2330;
+					bottomRightWrapMaxAt.value = 665;
 				}
 
 				if (calculateMediaQuery(1440, 900).matches) {
-					wrapMaxAt.value = 2400;
+					navbarWrapMaxAt.value = 2400;
+					bottomRightWrapMaxAt.value = 700;
 				}
 
 				if (calculateMediaQuery(1366, 768).matches) {
-					wrapMaxAt.value = 2474;
+					navbarWrapMaxAt.value = 2474;
+					bottomRightWrapMaxAt.value = 725;
 				}
 
 				if (calculateMediaQuery(1280, 800).matches) {
-					wrapMaxAt.value = 2560;
+					navbarWrapMaxAt.value = 2560;
+					bottomRightWrapMaxAt.value = 760;
 				}
 			});
 
 			return {
-				runningTextWrapper,
-				runningTextWrapperWidth,
-				textGroup,
-				textGroupWidth,
-				initialPosition,
-				wrapMaxAt,
+				navbarRunningTextWrapper,
+				navbarRunningTextWrapperWidth,
+				navbarTextGroup,
+				navbarTextGroupWidth,
+				navbarWrapMaxAt,
+				bottomRightRunningTextWrapper,
+				bottomRightRunningTextWrapperWidth,
+				bottomRightTextGroup,
+				bottomRightTextGroupWidth,
+				bottomRightWrapMaxAt,
 			};
 		},
 	});
@@ -110,13 +195,188 @@
 
 <style lang="scss">
 	.second-section {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
 		height: 100vh;
+		border: 2px solid $monezo-night-black;
+		background: linear-gradient(90deg, #ddd6f3 0%, #faaca8 100%);
 
-		.running-text-wrapper {
+		&__sides {
+			display: flex;
+			height: 100%;
+
+			&__left-part {
+				width: 60%;
+				height: 100%;
+				border-right: 2px solid $monezo-night-black;
+			}
+
+			&__right-part {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				width: 40%;
+				height: 100%;
+
+				&__top {
+					position: relative;
+					width: 100%;
+					height: 30%;
+					border-bottom: 2px solid $monezo-night-black;
+					overflow: hidden;
+
+					@keyframes rotate {
+						to {
+							rotate: 360deg;
+						}
+					}
+
+					img {
+						position: absolute;
+						top: 8rem;
+						right: -27rem;
+						width: 110rem;
+						animation: rotate 30s infinite linear;
+					}
+
+					@media only screen and (max-width: 1920px) and (max-height: 1200px) {
+						img {
+							width: 100rem;
+						}
+					}
+
+					@media only screen and (max-width: 1920px) and (max-height: 1080px) {
+						height: 50%;
+					}
+
+					@media only screen and (max-width: 1680px) and (max-height: 1050px) {
+						img {
+							top: 7rem;
+							width: 90rem;
+						}
+					}
+
+					@media only screen and (max-width: 1600px) and (max-height: 900px) {
+						img {
+							top: 5rem;
+							width: 85rem;
+						}
+					}
+
+					@media only screen and (max-width: 1366px) and (max-height: 768px) {
+						img {
+							right: -25rem;
+							width: 75rem;
+						}
+					}
+
+					@media only screen and (max-width: 1280px) and (max-height: 800px) {
+						img {
+							right: -18rem;
+							width: 65rem;
+						}
+					}
+
+					@media only screen and (max-width: 1280px) and (max-height: 720px) {
+						img {
+							top: 4rem;
+						}
+					}
+				}
+
+				&__middle {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					gap: 9rem;
+					width: 100%;
+					height: auto;
+					padding: 8.6rem 11rem 6.3rem 6.8rem;
+					font-size: 2.8rem;
+					font-weight: 500;
+					line-height: 4.5rem;
+
+					.button-wrapper {
+						margin-top: 1rem;
+					}
+
+					@media only screen and (max-width: 2560px) and (max-height: 1440px) {
+						gap: 7rem;
+						font-size: 2.5rem;
+					}
+
+					@media only screen and (max-width: 1920px) and (max-height: 1200px) {
+						gap: 4rem;
+						font-size: 2rem;
+						line-height: 4rem;
+					}
+
+					@media only screen and (max-width: 1920px) and (max-height: 1080px) {
+						gap: 3rem;
+						line-height: 3.5rem;
+					}
+
+					@media only screen and (max-width: 1680px) and (max-height: 1050px) {
+						padding: 7rem 11rem 4.7rem 6.8rem;
+						font-size: 1.8rem;
+					}
+
+					@media only screen and (max-width: 1600px) and (max-height: 900px) {
+						padding: 4.5rem 9rem 3.2rem 6.8rem;
+						font-size: 1.6rem;
+						line-height: 3.2rem;
+					}
+
+					@media only screen and (max-width: 1512px) and (max-height: 982px) {
+						gap: 2rem;
+						padding: 3rem 7rem 2rem 5rem;
+						font-size: 1.4rem;
+					}
+
+					@media only screen and (max-width: 1366px) and (max-height: 768px) {
+						line-height: 3rem;
+					}
+
+					@media only screen and (max-width: 1280px) and (max-height: 800px) {
+						padding: 3rem 6rem 2rem 5rem;
+						font-size: 1.3rem;
+					}
+
+					@media only screen and (max-width: 1280px) and (max-height: 720px) {
+						padding: 3rem 3rem 2rem 3rem;
+						line-height: 2.6rem;
+					}
+				}
+
+				&__bottom {
+					width: 100%;
+					height: 10.7rem;
+					min-height: 10.7rem;
+					border-top: 2px solid $monezo-night-black;
+					overflow: hidden;
+
+					.bottom-right-text-wrapper {
+						position: absolute;
+						display: flex;
+						width: fit-content;
+						gap: 5rem;
+						white-space: nowrap;
+
+						.running-text {
+							font-weight: bold;
+						}
+					}
+				}
+			}
+		}
+
+		.navbar-running-text-wrapper {
 			width: 100%;
 			overflow: hidden;
 
-			.text-wrapper {
+			.navbar-text-wrapper {
 				position: absolute;
 				display: flex;
 				width: fit-content;
@@ -131,6 +391,16 @@
 					width: 4.134rem;
 				}
 			}
+		}
+
+		.pixelated-background {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+			background: url('@/assets/images/pixelated-background.svg');
+			mix-blend-mode: overlay;
+			opacity: 1;
 		}
 	}
 </style>
