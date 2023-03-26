@@ -23,13 +23,11 @@
 			firstPage: {
 				type: Boolean,
 				required: true,
-				default: false,
 			},
 
 			lastPage: {
 				type: Boolean,
 				required: true,
-				default: false,
 			},
 		},
 
@@ -58,6 +56,7 @@
 		height: 10.7rem;
 		padding: 0 3.9rem 0 2.5rem;
 		border: 2px solid;
+		border-top: 0;
 
 		&--first-page {
 			padding: 0 6.2rem;
