@@ -20,7 +20,7 @@
 				required: true,
 			},
 
-			imageGroupWidth: {
+			groupWidth: {
 				type: Number,
 				required: true,
 			},
@@ -55,23 +55,23 @@
 
 		setup(props) {
 			const fontSizeFormatted = computed(() => `${props.fontSize}rem`);
-			const imageGroupWidthFormatted = computed(() => `-${props.imageGroupWidth}px`);
+			const groupWidthFormatted = computed(() => `-${props.groupWidth}px`);
 
 			watch(
-				() => props.imageGroupWidth,
+				() => props.groupWidth,
 				() => {
 					gsap.defaults({ duration: props.animationSpeed, ease: 'none', repeat: -1 });
 					gsap.set(`#${props.groupId}`, {
-						x: (i) => i * (props.imageGroupWidth + props.initialPosition),
+						x: (i) => i * (props.groupWidth + props.initialPosition),
 					});
 
 					let windowWrap = gsap.utils.wrap(
 						0,
-						props.parentElementWidth + props.imageGroupWidth + props.wrapMaxAt
+						props.parentElementWidth + props.groupWidth + props.wrapMaxAt
 					);
 
 					const gsapOptions = {
-						x: `+=${props.parentElementWidth + props.imageGroupWidth + props.wrapMaxAt}`,
+						x: `+=${props.parentElementWidth + props.groupWidth + props.wrapMaxAt}`,
 						modifiers: {
 							x: (x: string) => {
 								return windowWrap(parseFloat(x)) + 'px';
@@ -85,7 +85,7 @@
 				}
 			);
 
-			return { imageGroupWidthFormatted, fontSizeFormatted };
+			return { groupWidthFormatted, fontSizeFormatted };
 		},
 	});
 </script>
@@ -93,7 +93,7 @@
 <style lang="scss">
 	.running-text-straight {
 		position: relative;
-		left: v-bind(imageGroupWidthFormatted);
+		left: v-bind(groupWidthFormatted);
 		display: flex;
 		align-items: center;
 		width: 100%;
