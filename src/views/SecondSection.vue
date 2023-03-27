@@ -31,7 +31,65 @@
 		</NavBar>
 
 		<div class="second-section__sides">
-			<div class="second-section__sides__left-part"></div>
+			<div class="second-section__sides__left-part">
+				<div class="column__left" ref="runningMonkerWrapper">
+					<RunningTextVertical
+						:group-id="'monker-column-left-group'"
+						:initial-position="50"
+						:wrap-max-at="runningMonkerWrapMaxAt"
+						:animation-speed="10"
+						:direction="'top-to-bottom'"
+						:parent-element-height="runningMonkerWrapperHeight"
+						:group-height="runningMonkerGroupHeight"
+					>
+						<img
+							id="monker-column-left-group"
+							class="column__left__monker-group"
+							ref="runningMonkerGroup"
+							src="../assets/images/monker-column-1k.png"
+						/>
+						<img
+							id="monker-column-left-group"
+							class="column__left__monker-group"
+							src="../assets/images/monker-column-100.png"
+						/>
+						<img
+							id="monker-column-left-group"
+							class="column__left__monker-group"
+							src="../assets/images/monker-column-1k.png"
+						/>
+					</RunningTextVertical>
+				</div>
+
+				<div class="column__right">
+					<RunningTextVertical
+						:group-id="'monker-column-right-group'"
+						:initial-position="50"
+						:wrap-max-at="runningMonkerWrapMaxAt"
+						:animation-speed="10"
+						:direction="'bottom-to-top'"
+						:parent-element-height="runningMonkerWrapperHeight"
+						:group-height="runningMonkerGroupHeight"
+					>
+						<img
+							id="monker-column-right-group"
+							class="column__left__monker-group"
+							ref="runningMonkerGroup"
+							src="../assets/images/monker-column-5k.png"
+						/>
+						<img
+							id="monker-column-right-group"
+							class="column__left__monker-group"
+							src="../assets/images/monker-column-10k.png"
+						/>
+						<img
+							id="monker-column-right-group"
+							class="column__left__monker-group"
+							src="../assets/images/monker-column-5k.png"
+						/>
+					</RunningTextVertical>
+				</div>
+			</div>
 
 			<div class="second-section__sides__right-part">
 				<div class="second-section__sides__right-part__top">
@@ -92,11 +150,12 @@
 	import { defineComponent, ref, computed, onMounted } from 'vue';
 	import NavBar from '@/components/NavBar.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
+	import RunningTextVertical from '@/components/RunningTextVertical.vue';
 	import { useResizeObserver } from '@vueuse/core';
 	import Button from '@/components/Button.vue';
 
 	export default defineComponent({
-		components: { NavBar, RunningTextStraight, Button },
+		components: { NavBar, RunningTextStraight, Button, RunningTextVertical },
 		setup() {
 			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const navbarTextGroup = ref<HTMLDivElement | null>(null);
@@ -108,6 +167,11 @@
 			const bottomRightTextGroupWidth = ref(0);
 			const bottomRightWrapMaxAt = ref(0);
 
+			const runningMonkerWrapper = ref<HTMLDListElement | null>(null);
+			const runningMonkerGroup = ref<HTMLDivElement | null>(null);
+			const runningMonkerGroupHeight = ref(0);
+			const runningMonkerWrapMaxAt = ref(628);
+
 			const navbarRunningTextWrapperWidth = computed(() =>
 				navbarRunningTextWrapper.value ? navbarRunningTextWrapper.value.offsetWidth : 0
 			);
@@ -116,12 +180,20 @@
 				bottomRightRunningTextWrapper.value ? bottomRightRunningTextWrapper.value.offsetWidth : 0
 			);
 
+			const runningMonkerWrapperHeight = computed(() =>
+				runningMonkerWrapper.value ? runningMonkerWrapper.value.offsetHeight : 0
+			);
+
 			useResizeObserver(navbarTextGroup, (entries) => {
 				navbarTextGroupWidth.value = entries[0].contentRect.width;
 			});
 
 			useResizeObserver(bottomRightTextGroup, (entries) => {
 				bottomRightTextGroupWidth.value = entries[0].contentRect.width;
+			});
+
+			useResizeObserver(runningMonkerGroup, (entries) => {
+				runningMonkerGroupHeight.value = entries[0].contentRect.height;
 			});
 
 			const calculateMediaQuery = (width: number, height: number) => {
@@ -188,6 +260,11 @@
 				bottomRightTextGroup,
 				bottomRightTextGroupWidth,
 				bottomRightWrapMaxAt,
+				runningMonkerWrapper,
+				runningMonkerWrapperHeight,
+				runningMonkerGroup,
+				runningMonkerGroupHeight,
+				runningMonkerWrapMaxAt,
 			};
 		},
 	});
@@ -208,9 +285,29 @@
 			height: 100%;
 
 			&__left-part {
+				display: flex;
 				width: 60%;
 				height: 100%;
 				border-right: 2px solid $monezo-night-black;
+
+				.column {
+					&__left {
+						width: 50%;
+						height: 100%;
+						overflow: hidden;
+
+						&__monker-group {
+							position: absolute;
+							width: 70rem;
+						}
+					}
+
+					&__right {
+						width: 50%;
+						height: 100%;
+						overflow: hidden;
+					}
+				}
 			}
 
 			&__right-part {
