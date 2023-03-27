@@ -98,7 +98,6 @@
 		align-items: center;
 		width: 100%;
 		height: 100%;
-		gap: 5rem;
 		font-size: v-bind(fontSizeFormatted);
 	}
 </style>
