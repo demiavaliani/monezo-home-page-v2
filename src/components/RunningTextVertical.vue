@@ -31,11 +31,6 @@
 				required: true,
 			},
 
-			wrapMaxAt: {
-				type: Number,
-				required: true,
-			},
-
 			animationSpeed: {
 				type: Number,
 				required: true,
@@ -69,12 +64,21 @@
 
 					let windowWrap = gsap.utils.wrap(
 						0,
-						props.parentElementHeight + props.groupHeight + props.wrapMaxAt
+						props.parentElementHeight +
+							props.groupHeight +
+							(props.groupHeight * (groupCount.value.length - 1) +
+								50 * groupCount.value.length -
+								props.parentElementHeight)
 					);
 
 					const gsapOptions = {
-						y: `+=${props.parentElementHeight + props.groupHeight + props.wrapMaxAt}`,
-
+						y: `+=${
+							props.parentElementHeight +
+							props.groupHeight +
+							(props.groupHeight * (groupCount.value.length - 1) +
+								50 * groupCount.value.length -
+								props.parentElementHeight)
+						}`,
 						modifiers: {
 							y: (y: string) => {
 								return windowWrap(parseFloat(y)) + 'px';

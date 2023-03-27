@@ -36,7 +36,6 @@
 					<RunningTextVertical
 						:group-id="'monker-column-left-group'"
 						:initial-position="50"
-						:wrap-max-at="runningMonkerWrapMaxAt"
 						:animation-speed="10"
 						:direction="'top-to-bottom'"
 						:parent-element-height="runningMonkerWrapperHeight"
@@ -65,7 +64,6 @@
 					<RunningTextVertical
 						:group-id="'monker-column-right-group'"
 						:initial-position="50"
-						:wrap-max-at="runningMonkerWrapMaxAt"
 						:animation-speed="10"
 						:direction="'bottom-to-top'"
 						:parent-element-height="runningMonkerWrapperHeight"
@@ -170,7 +168,6 @@
 			const runningMonkerWrapper = ref<HTMLDListElement | null>(null);
 			const runningMonkerGroup = ref<HTMLDivElement | null>(null);
 			const runningMonkerGroupHeight = ref(0);
-			const runningMonkerWrapMaxAt = ref(628);
 
 			const navbarRunningTextWrapperWidth = computed(() =>
 				navbarRunningTextWrapper.value ? navbarRunningTextWrapper.value.offsetWidth : 0
@@ -264,7 +261,6 @@
 				runningMonkerWrapperHeight,
 				runningMonkerGroup,
 				runningMonkerGroupHeight,
-				runningMonkerWrapMaxAt,
 			};
 		},
 	});
