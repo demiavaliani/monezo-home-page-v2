@@ -7,6 +7,7 @@
 					:parent-element-width="navbarRunningTextWrapperWidth"
 					:group-width="navbarTextGroupWidth"
 					:initial-position="50"
+					:gap="50"
 					:animation-speed="50"
 					:direction="'right-to-left'"
 					:font-size="5"
