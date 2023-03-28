@@ -56,7 +56,6 @@
 			watch(
 				() => props.groupHeight,
 				() => {
-					console.log(groupCount.value.length);
 					gsap.defaults({ duration: props.animationSpeed, ease: 'none', repeat: -1 });
 					gsap.set(`#${props.groupId}`, {
 						y: (i) => i * (props.groupHeight + props.initialPosition),

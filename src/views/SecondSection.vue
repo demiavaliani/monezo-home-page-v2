@@ -8,7 +8,7 @@
 					:group-width="navbarTextGroupWidth"
 					:initial-position="50"
 					:wrap-max-at="navbarWrapMaxAt"
-					:animation-speed="35"
+					:animation-speed="70"
 					:direction="'right-to-left'"
 					:font-size="5"
 				>
@@ -36,7 +36,7 @@
 					<RunningTextVertical
 						:group-id="'monker-column-left-group'"
 						:initial-position="50"
-						:animation-speed="10"
+						:animation-speed="15"
 						:direction="'top-to-bottom'"
 						:parent-element-height="runningMonkerWrapperHeight"
 						:group-height="runningMonkerGroupHeight"
@@ -64,7 +64,7 @@
 					<RunningTextVertical
 						:group-id="'monker-column-right-group'"
 						:initial-position="50"
-						:animation-speed="10"
+						:animation-speed="15"
 						:direction="'bottom-to-top'"
 						:parent-element-height="runningMonkerWrapperHeight"
 						:group-height="runningMonkerGroupHeight"
@@ -295,6 +295,30 @@
 						&__monker-group {
 							position: absolute;
 							width: 70rem;
+
+							@media only screen and (max-width: 2304px) and (max-height: 1440px) {
+								width: 62rem;
+							}
+
+							@media only screen and (max-width: 1920px) and (max-height: 1200px) {
+								width: 50rem;
+							}
+
+							@media only screen and (max-width: 1680px) and (max-height: 1050px) {
+								width: 42rem;
+							}
+
+							@media only screen and (max-width: 1512px) and (max-height: 982px) {
+								width: 38rem;
+							}
+
+							@media only screen and (max-width: 1366px) and (max-height: 768px) {
+								width: 34rem;
+							}
+
+							@media only screen and (max-width: 1280px) and (max-height: 800px) {
+								width: 32rem;
+							}
 						}
 					}
 
