@@ -486,7 +486,6 @@
 			.navbar-text-wrapper {
 				position: absolute;
 				display: flex;
-				width: fit-content;
 				gap: 5rem;
 				white-space: nowrap;
 
