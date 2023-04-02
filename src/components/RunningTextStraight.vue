@@ -31,7 +31,7 @@
 				required: true,
 			},
 
-			wrapMaxAt: {
+			gap: {
 				type: Number,
 				required: true,
 			},
@@ -56,22 +56,35 @@
 		setup(props) {
 			const fontSizeFormatted = computed(() => `${props.fontSize}rem`);
 			const groupWidthFormatted = computed(() => `-${props.groupWidth}px`);
+			const groupCount = computed(() => document.querySelectorAll(`#${props.groupId}`));
+			const gapFormatted = computed(() => props.gap * 10);
+			const initialPositionFormatted = computed(() => props.initialPosition * 10);
 
 			watch(
 				() => props.groupWidth,
 				() => {
 					gsap.defaults({ duration: props.animationSpeed, ease: 'none', repeat: -1 });
 					gsap.set(`#${props.groupId}`, {
-						x: (i) => i * (props.groupWidth + props.initialPosition),
+						x: (i) => i * (props.groupWidth + initialPositionFormatted.value),
 					});
 
 					let windowWrap = gsap.utils.wrap(
 						0,
-						props.parentElementWidth + props.groupWidth + props.wrapMaxAt
+						props.parentElementWidth +
+							props.groupWidth +
+							(props.groupWidth * (groupCount.value.length - 1) +
+								gapFormatted.value * groupCount.value.length -
+								props.parentElementWidth)
 					);
 
 					const gsapOptions = {
-						x: `+=${props.parentElementWidth + props.groupWidth + props.wrapMaxAt}`,
+						x: `+=${
+							props.parentElementWidth +
+							props.groupWidth +
+							(props.groupWidth * (groupCount.value.length - 1) +
+								gapFormatted.value * groupCount.value.length -
+								props.parentElementWidth)
+						}`,
 						modifiers: {
 							x: (x: string) => {
 								return windowWrap(parseFloat(x)) + 'px';

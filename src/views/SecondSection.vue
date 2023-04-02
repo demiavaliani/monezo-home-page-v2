@@ -6,8 +6,8 @@
 					:group-id="'navbar-running-text-group'"
 					:parent-element-width="navbarRunningTextWrapperWidth"
 					:group-width="navbarTextGroupWidth"
-					:initial-position="50"
-					:wrap-max-at="navbarWrapMaxAt"
+					:initial-position="5"
+					:gap="5"
 					:animation-speed="70"
 					:direction="'right-to-left'"
 					:font-size="5"
@@ -116,11 +116,11 @@
 						:group-id="'bottom-right-running-text-group'"
 						:parent-element-width="bottomRightRunningTextWrapperWidth"
 						:group-width="bottomRightTextGroupWidth"
-						:initial-position="50"
-						:wrap-max-at="bottomRightWrapMaxAt"
+						:initial-position="5"
+						:gap="5"
 						:animation-speed="20"
 						:direction="'right-to-left'"
-						:font-size="5"
+						:font-size="bottomRightFontSize"
 					>
 						<div
 							id="bottom-right-running-text-group"
@@ -158,12 +158,11 @@
 			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const navbarTextGroup = ref<HTMLDivElement | null>(null);
 			const navbarTextGroupWidth = ref(0);
-			const navbarWrapMaxAt = ref(0);
 
 			const bottomRightRunningTextWrapper = ref<HTMLDListElement | null>(null);
 			const bottomRightTextGroup = ref<HTMLDivElement | null>(null);
 			const bottomRightTextGroupWidth = ref(0);
-			const bottomRightWrapMaxAt = ref(0);
+			const bottomRightFontSize = ref(5);
 
 			const runningMonkerWrapper = ref<HTMLDListElement | null>(null);
 			const runningMonkerGroup = ref<HTMLDivElement | null>(null);
@@ -200,49 +199,20 @@
 			};
 
 			onMounted(() => {
-				if (calculateMediaQuery(2560, 1700).matches) {
-					navbarWrapMaxAt.value = 1280;
-					bottomRightWrapMaxAt.value = 250;
-				}
-
-				if (calculateMediaQuery(2304, 1440).matches) {
-					navbarWrapMaxAt.value = 1536;
-					bottomRightWrapMaxAt.value = 350;
-				}
-
-				if (calculateMediaQuery(1920, 1200).matches) {
-					navbarWrapMaxAt.value = 1920;
-					bottomRightWrapMaxAt.value = 500;
-				}
-
 				if (calculateMediaQuery(1680, 1050).matches) {
-					navbarWrapMaxAt.value = 2160;
-					bottomRightWrapMaxAt.value = 600;
-				}
-
-				if (calculateMediaQuery(1600, 900).matches) {
-					navbarWrapMaxAt.value = 2240;
-					bottomRightWrapMaxAt.value = 630;
-				}
-
-				if (calculateMediaQuery(1512, 982).matches) {
-					navbarWrapMaxAt.value = 2330;
-					bottomRightWrapMaxAt.value = 665;
+					bottomRightFontSize.value = 4;
 				}
 
 				if (calculateMediaQuery(1440, 900).matches) {
-					navbarWrapMaxAt.value = 2400;
-					bottomRightWrapMaxAt.value = 700;
+					bottomRightFontSize.value = 3.5;
 				}
 
 				if (calculateMediaQuery(1366, 768).matches) {
-					navbarWrapMaxAt.value = 2474;
-					bottomRightWrapMaxAt.value = 725;
+					bottomRightFontSize.value = 3;
 				}
 
 				if (calculateMediaQuery(1280, 800).matches) {
-					navbarWrapMaxAt.value = 2560;
-					bottomRightWrapMaxAt.value = 760;
+					bottomRightFontSize.value = 3;
 				}
 			});
 
@@ -251,12 +221,11 @@
 				navbarRunningTextWrapperWidth,
 				navbarTextGroup,
 				navbarTextGroupWidth,
-				navbarWrapMaxAt,
 				bottomRightRunningTextWrapper,
 				bottomRightRunningTextWrapperWidth,
 				bottomRightTextGroup,
 				bottomRightTextGroupWidth,
-				bottomRightWrapMaxAt,
+				bottomRightFontSize,
 				runningMonkerWrapper,
 				runningMonkerWrapperHeight,
 				runningMonkerGroup,
@@ -295,6 +264,7 @@
 						&__monker-group {
 							position: absolute;
 							width: 70rem;
+							z-index: 1;
 
 							@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 								width: 62rem;
@@ -477,12 +447,31 @@
 					.bottom-right-text-wrapper {
 						position: absolute;
 						display: flex;
+						align-items: center;
 						width: fit-content;
 						gap: 5rem;
 						white-space: nowrap;
 
 						.running-text {
 							font-weight: bold;
+						}
+
+						img {
+							@media only screen and (max-width: 1680px) and (max-height: 1050px) {
+								width: 4.2rem;
+							}
+
+							@media only screen and (max-width: 1440px) and (max-height: 900px) {
+								width: 3.9rem;
+							}
+
+							@media only screen and (max-width: 1366px) and (max-height: 768px) {
+								width: 3.5rem;
+							}
+
+							@media only screen and (max-width: 1280px) and (max-height: 800px) {
+								width: 3.2rem;
+							}
 						}
 					}
 				}

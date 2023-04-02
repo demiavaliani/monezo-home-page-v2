@@ -65,22 +65,22 @@
 
 			<div class="first-section__footer__running-text" ref="runningText">
 				<RunningTextStraight
-					:group-id="'images'"
+					:group-id="'images-group'"
 					:parent-element-width="runningTextWidth"
 					:group-width="imageGroupWidth"
 					:initial-position="initialPosition"
-					:wrap-max-at="wrapMaxAt"
+					:gap="runningTextLogoGap"
 					:animation-speed="20"
 					:direction="'right-to-left'"
 				>
-					<div id="images" class="images" ref="imageGroup">
+					<div id="images-group" class="images" ref="imageGroup">
 						<img src="@/assets/images/multibank-logo.png" />
 						<img src="@/assets/images/megogo-logo.png" />
 						<img src="@/assets/images/castles-logo.png" />
 						<img src="@/assets/images/pion-logo.png" />
 					</div>
 
-					<div id="images" class="images">
+					<div id="images-group" class="images">
 						<img src="@/assets/images/multibank-logo.png" />
 						<img src="@/assets/images/megogo-logo.png" />
 						<img src="@/assets/images/castles-logo.png" />
@@ -110,8 +110,9 @@
 			const runningText = ref<HTMLDivElement | null>(null);
 			const imageGroup = ref<HTMLDivElement | null>(null);
 			const imageGroupWidth = ref(0);
-			const initialPosition = ref(200);
+			const initialPosition = ref(25);
 			const wrapMaxAt = ref(0);
+			const runningTextLogoGap = ref(25);
 
 			const runningTextWidth = computed(() =>
 				runningText.value ? runningText.value.offsetWidth : 0
@@ -155,23 +156,18 @@
 				});
 
 				if (calculateMediaQuery(1920, 1200).matches) {
-					initialPosition.value = 150;
+					initialPosition.value = 20;
+					runningTextLogoGap.value = 20;
 				}
 
 				if (calculateMediaQuery(1680, 1050).matches) {
-					initialPosition.value = 100;
+					initialPosition.value = 18;
+					runningTextLogoGap.value = 18;
 				}
 
-				if (calculateMediaQuery(1440, 900).matches) {
-					wrapMaxAt.value = 100;
-				}
-
-				if (calculateMediaQuery(1366, 768).matches) {
-					wrapMaxAt.value = 150;
-				}
-
-				if (calculateMediaQuery(1280, 800).matches) {
-					wrapMaxAt.value = 200;
+				if (calculateMediaQuery(1512, 982).matches) {
+					initialPosition.value = 15;
+					runningTextLogoGap.value = 15;
 				}
 			});
 
@@ -186,6 +182,7 @@
 				imageGroupWidth,
 				initialPosition,
 				wrapMaxAt,
+				runningTextLogoGap,
 			};
 		},
 	});
@@ -228,6 +225,7 @@
 			align-self: center;
 			width: 113.1rem;
 			animation: rotate 30s infinite linear;
+			z-index: 1;
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 				top: -92rem;
@@ -256,6 +254,7 @@
 			align-self: center;
 			width: 84.5rem;
 			animation: rotate 30s infinite reverse linear;
+			z-index: 1;
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 				top: -77rem;
@@ -369,6 +368,7 @@
 			width: 84.5rem;
 			height: 84.5rem;
 			overflow: hidden;
+			z-index: 1;
 
 			&__image {
 				position: absolute;
@@ -417,6 +417,7 @@
 			right: -11rem;
 			width: 77.2rem;
 			height: 100%;
+			z-index: 1;
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 				right: 0;
@@ -535,24 +536,16 @@
 					// play with gap to adjust space between the groups
 					gap: 25rem;
 
-					@media only screen and (max-width: 2304px) and (max-height: 1440px) {
+					@media only screen and (max-width: 1920px) and (max-height: 1200px) {
 						gap: 20rem;
 					}
 
-					@media only screen and (max-width: 2160px) {
+					@media only screen and (max-width: 1680px) and (max-height: 1050px) {
 						gap: 18rem;
 					}
 
-					@media only screen and (max-width: 1920px) and (max-height: 1200px) {
+					@media only screen and (max-width: 1512px) and (max-height: 982px) {
 						gap: 15rem;
-					}
-
-					@media only screen and (max-width: 1680px) and (max-height: 1050px) {
-						gap: 12rem;
-					}
-
-					@media only screen and (max-width: 1600px) and (max-height: 900px) {
-						gap: 11rem;
 					}
 				}
 
