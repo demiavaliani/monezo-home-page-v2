@@ -35,7 +35,8 @@
 				<div class="column__left" ref="runningMonkerWrapper">
 					<RunningTextVertical
 						:group-id="'monker-column-left-group'"
-						:initial-position="50"
+						:initial-position="5"
+						:gap="5"
 						:animation-speed="15"
 						:direction="'top-to-bottom'"
 						:parent-element-height="runningMonkerWrapperHeight"
@@ -63,7 +64,8 @@
 				<div class="column__right">
 					<RunningTextVertical
 						:group-id="'monker-column-right-group'"
-						:initial-position="50"
+						:initial-position="5"
+						:gap="5"
 						:animation-speed="15"
 						:direction="'bottom-to-top'"
 						:parent-element-height="runningMonkerWrapperHeight"
