@@ -405,6 +405,8 @@
 
 					@media only screen and (max-width: 1920px) and (max-height: 1080px) {
 						gap: 3rem;
+						padding: 6rem 11rem 4rem 6.8rem;
+						font-size: 1.8rem;
 						line-height: 3.5rem;
 					}
 
