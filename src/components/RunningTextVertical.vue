@@ -31,6 +31,11 @@
 				required: true,
 			},
 
+			gap: {
+				type: Number,
+				required: true,
+			},
+
 			animationSpeed: {
 				type: Number,
 				required: true,
@@ -52,12 +57,14 @@
 			const fontSizeFormatted = computed(() => `${props.fontSize}rem`);
 			const groupHeightFormatted = computed(() => `-${props.groupHeight}px`);
 			const groupCount = computed(() => document.querySelectorAll(`#${props.groupId}`));
+			const gapFormatted = computed(() => props.gap * 10);
+			const initialPositionFormatted = computed(() => props.initialPosition * 10);
 
 			watch(
 				() => props.groupHeight,
 				() => {
 					gsap.set(`#${props.groupId}`, {
-						y: (i) => i * (props.groupHeight + props.initialPosition),
+						y: (i) => i * (props.groupHeight + initialPositionFormatted.value),
 					});
 
 					let windowWrap = gsap.utils.wrap(
@@ -65,7 +72,7 @@
 						props.parentElementHeight +
 							props.groupHeight +
 							(props.groupHeight * (groupCount.value.length - 1) +
-								50 * groupCount.value.length -
+								gapFormatted.value * groupCount.value.length -
 								props.parentElementHeight)
 					);
 
@@ -74,7 +81,7 @@
 							props.parentElementHeight +
 							props.groupHeight +
 							(props.groupHeight * (groupCount.value.length - 1) +
-								50 * groupCount.value.length -
+								gapFormatted.value * groupCount.value.length -
 								props.parentElementHeight)
 						}`,
 						modifiers: {
