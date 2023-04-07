@@ -1,5 +1,5 @@
 <template>
-	<div class="running-text-straight">
+	<div class="running-text-vertical">
 		<slot />
 	</div>
 </template>
@@ -15,23 +15,18 @@
 				required: true,
 			},
 
-			parentElementWidth: {
+			parentElementHeight: {
 				type: Number,
 				required: true,
 			},
 
-			groupWidth: {
+			groupHeight: {
 				type: Number,
 				required: true,
 			},
 
 			// ideally, should be same as gap between each element in the group
 			initialPosition: {
-				type: Number,
-				required: true,
-			},
-
-			gap: {
 				type: Number,
 				required: true,
 			},
@@ -44,7 +39,7 @@
 			direction: {
 				type: String,
 				required: true,
-				validator: (value: string) => ['left-to-right', 'right-to-left'].includes(value),
+				validator: (value: string) => ['top-to-bottom', 'bottom-to-top'].includes(value),
 			},
 
 			fontSize: {
@@ -55,38 +50,36 @@
 
 		setup(props) {
 			const fontSizeFormatted = computed(() => `${props.fontSize}rem`);
-			const groupWidthFormatted = computed(() => `-${props.groupWidth}px`);
+			const groupHeightFormatted = computed(() => `-${props.groupHeight}px`);
 			const groupCount = computed(() => document.querySelectorAll(`#${props.groupId}`));
-			const gapFormatted = computed(() => props.gap * 10);
-			const initialPositionFormatted = computed(() => props.initialPosition * 10);
 
 			watch(
-				() => props.groupWidth,
+				() => props.groupHeight,
 				() => {
 					gsap.set(`#${props.groupId}`, {
-						x: (i) => i * (props.groupWidth + initialPositionFormatted.value),
+						y: (i) => i * (props.groupHeight + props.initialPosition),
 					});
 
 					let windowWrap = gsap.utils.wrap(
 						0,
-						props.parentElementWidth +
-							props.groupWidth +
-							(props.groupWidth * (groupCount.value.length - 1) +
-								gapFormatted.value * groupCount.value.length -
-								props.parentElementWidth)
+						props.parentElementHeight +
+							props.groupHeight +
+							(props.groupHeight * (groupCount.value.length - 1) +
+								50 * groupCount.value.length -
+								props.parentElementHeight)
 					);
 
 					const gsapOptions = {
-						x: `+=${
-							props.parentElementWidth +
-							props.groupWidth +
-							(props.groupWidth * (groupCount.value.length - 1) +
-								gapFormatted.value * groupCount.value.length -
-								props.parentElementWidth)
+						y: `+=${
+							props.parentElementHeight +
+							props.groupHeight +
+							(props.groupHeight * (groupCount.value.length - 1) +
+								50 * groupCount.value.length -
+								props.parentElementHeight)
 						}`,
 						modifiers: {
-							x: (x: string) => {
-								return windowWrap(parseFloat(x)) + 'px';
+							y: (y: string) => {
+								return windowWrap(parseFloat(y)) + 'px';
 							},
 						},
 						duration: props.animationSpeed,
@@ -94,23 +87,23 @@
 						repeat: -1,
 					};
 
-					props.direction === 'left-to-right'
+					props.direction === 'top-to-bottom'
 						? gsap.to(`#${props.groupId}`, gsapOptions)
 						: gsap.from(`#${props.groupId}`, gsapOptions);
 				}
 			);
 
-			return { groupWidthFormatted, fontSizeFormatted };
+			return { groupHeightFormatted, fontSizeFormatted };
 		},
 	});
 </script>
 
 <style lang="scss">
-	.running-text-straight {
+	.running-text-vertical {
 		position: relative;
-		left: v-bind(groupWidthFormatted);
+		top: v-bind(groupHeightFormatted);
 		display: flex;
-		align-items: center;
+		justify-content: center;
 		width: 100%;
 		height: 100%;
 		font-size: v-bind(fontSizeFormatted);

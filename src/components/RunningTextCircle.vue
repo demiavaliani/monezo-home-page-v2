@@ -15,8 +15,7 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, onMounted, computed, ref, reactive } from 'vue';
-	import { gsap } from 'gsap';
+	import { defineComponent, computed, ref } from 'vue';
 
 	export default defineComponent({
 		components: {},

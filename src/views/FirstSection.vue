@@ -1,5 +1,5 @@
 <template>
-	<div class="first-section">
+	<div class="first-section" id="snap-section">
 		<NavBar :first-page="true" :last-page="false" />
 
 		<img
@@ -65,19 +65,22 @@
 
 			<div class="first-section__footer__running-text" ref="runningText">
 				<RunningTextStraight
+					:group-id="'images-group'"
 					:parent-element-width="runningTextWidth"
-					:group-id="'images'"
+					:group-width="imageGroupWidth"
+					:initial-position="initialPosition"
+					:gap="runningTextLogoGap"
 					:animation-speed="20"
 					:direction="'right-to-left'"
 				>
-					<div id="images" class="images">
+					<div id="images-group" class="images" ref="imageGroup">
 						<img src="@/assets/images/multibank-logo.png" />
 						<img src="@/assets/images/megogo-logo.png" />
 						<img src="@/assets/images/castles-logo.png" />
 						<img src="@/assets/images/pion-logo.png" />
 					</div>
 
-					<div id="images" class="images">
+					<div id="images-group" class="images">
 						<img src="@/assets/images/multibank-logo.png" />
 						<img src="@/assets/images/megogo-logo.png" />
 						<img src="@/assets/images/castles-logo.png" />
@@ -98,16 +101,28 @@
 	import Button from '@/components/Button.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import RunningTextCircle from '@/components/RunningTextCircle.vue';
+	import { useResizeObserver } from '@vueuse/core';
 
 	export default defineComponent({
 		components: { NavBar, Button, RunningTextStraight, RunningTextCircle },
 
 		setup() {
 			const runningText = ref<HTMLDivElement | null>(null);
+			const imageGroup = ref<HTMLDivElement | null>(null);
+			const imageGroupWidth = ref(0);
+			const initialPosition = ref(25);
+			const wrapMaxAt = ref(0);
+			const runningTextLogoGap = ref(25);
 
 			const runningTextWidth = computed(() =>
 				runningText.value ? runningText.value.offsetWidth : 0
 			);
+
+			const calculateMediaQuery = (width: number, height: number) => {
+				return window.matchMedia(
+					`screen and (max-width: ${width}px) and (max-height: ${height}px)`
+				);
+			};
 
 			onMounted(() => {
 				let tl = gsap.timeline({ repeat: -1 });
@@ -139,9 +154,36 @@
 						ease: Power1.easeInOut,
 					});
 				});
+
+				if (calculateMediaQuery(1920, 1200).matches) {
+					initialPosition.value = 20;
+					runningTextLogoGap.value = 20;
+				}
+
+				if (calculateMediaQuery(1680, 1050).matches) {
+					initialPosition.value = 18;
+					runningTextLogoGap.value = 18;
+				}
+
+				if (calculateMediaQuery(1512, 982).matches) {
+					initialPosition.value = 15;
+					runningTextLogoGap.value = 15;
+				}
 			});
 
-			return { runningText, runningTextWidth };
+			useResizeObserver(imageGroup, (entries) => {
+				imageGroupWidth.value = entries[0].contentRect.width;
+			});
+
+			return {
+				runningText,
+				runningTextWidth,
+				imageGroup,
+				imageGroupWidth,
+				initialPosition,
+				wrapMaxAt,
+				runningTextLogoGap,
+			};
 		},
 	});
 </script>
@@ -183,6 +225,7 @@
 			align-self: center;
 			width: 113.1rem;
 			animation: rotate 30s infinite linear;
+			z-index: 1;
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 				top: -92rem;
@@ -211,6 +254,7 @@
 			align-self: center;
 			width: 84.5rem;
 			animation: rotate 30s infinite reverse linear;
+			z-index: 1;
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 				top: -77rem;
@@ -324,6 +368,7 @@
 			width: 84.5rem;
 			height: 84.5rem;
 			overflow: hidden;
+			z-index: 1;
 
 			&__image {
 				position: absolute;
@@ -372,6 +417,7 @@
 			right: -11rem;
 			width: 77.2rem;
 			height: 100%;
+			z-index: 1;
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
 				right: 0;
@@ -488,42 +534,18 @@
 					position: absolute;
 					display: flex;
 					// play with gap to adjust space between the groups
-					gap: 22rem;
+					gap: 25rem;
 
-					@media only screen and (max-width: 2304px) and (max-height: 1440px) {
+					@media only screen and (max-width: 1920px) and (max-height: 1200px) {
 						gap: 20rem;
 					}
 
-					@media only screen and (max-width: 2160px) {
+					@media only screen and (max-width: 1680px) and (max-height: 1050px) {
 						gap: 18rem;
 					}
 
-					@media only screen and (max-width: 1920px) and (max-height: 1080px) {
+					@media only screen and (max-width: 1512px) and (max-height: 982px) {
 						gap: 15rem;
-					}
-
-					@media only screen and (max-width: 1680px) and (max-height: 1050px) {
-						gap: 12rem;
-					}
-
-					@media only screen and (max-width: 1600px) and (max-height: 900px) {
-						gap: 11rem;
-					}
-
-					@media only screen and (max-width: 1440px) and (max-height: 900px) {
-						gap: 9rem;
-					}
-
-					@media only screen and (max-width: 1366px) and (max-height: 768px) {
-						gap: 8rem;
-					}
-
-					@media only screen and (max-width: 1280px) and (max-height: 800px) {
-						gap: 7rem;
-					}
-
-					@media only screen and (max-width: 1080px) {
-						gap: 4rem;
 					}
 				}
 

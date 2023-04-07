@@ -23,13 +23,11 @@
 			firstPage: {
 				type: Boolean,
 				required: true,
-				default: false,
 			},
 
 			lastPage: {
 				type: Boolean,
 				required: true,
-				default: false,
 			},
 		},
 
@@ -53,11 +51,13 @@
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
 		width: 100%;
 		height: 10.7rem;
 		padding: 0 3.9rem 0 2.5rem;
-		border: 2px solid;
+		border: 2px solid $monezo-night-black;
+		border-top: 0;
+		border-left: 0;
+		border-right: 0;
 
 		&--first-page {
 			padding: 0 6.2rem;
@@ -85,9 +85,8 @@
 		&__logo {
 			display: flex;
 			align-items: center;
-			height: 40%;
 			padding-right: 2.5rem;
-			border-right: 2px solid;
+			border-right: 2px solid $monezo-night-black;
 
 			& img {
 				width: 5.8rem;
@@ -105,7 +104,7 @@
 		&__menu {
 			display: flex;
 			padding-left: 3.9rem;
-			border-left: 2px solid;
+			border-left: 2px solid $monezo-night-black;
 
 			img {
 				width: 3rem;
