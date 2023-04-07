@@ -40,12 +40,50 @@
 		</NavBar>
 
 		<div class="third-section__sides">
-			<div class="third-section__sides__left-part"></div>
+			<div class="third-section__sides__left-part" id="fade">
+				<img class="monkers" src="@/assets/images/monker-column-1k.png" />
+				<img class="monkers" src="@/assets/images/monker-column-10k.png" />
+			</div>
 
 			<div class="third-section__sides__right-part">
-				<div class="third-section__sides__right-part__top"></div>
+				<div class="left-wrapper">
+					<div class="third-section__sides__right-part__top">
+						<p class="title">REAL ESTATE<br />MONKER</p>
 
-				<div class="third-section__sides__right-part__bottom"></div>
+						<div class="description-wrapper">
+							<p>
+								This collection suits best conservative investors, which prefer stable and
+								predictable Yield. Stake NFT and get as much as 12% APY Yield return paid daily.
+							</p>
+							<p>
+								Real Estate Monker collection is fully backed by income from real estate business.
+							</p>
+						</div>
+
+						<div class="numbers-description">
+							<div class="numbers-description__left">
+								<p class="text--large">$ 1000</p>
+								<p class="text--small">Invest from</p>
+							</div>
+
+							<div class="numbers-description__right">
+								<p class="text--large">12% APY</p>
+								<p class="text--small">Paid daily</p>
+							</div>
+						</div>
+
+						<Button
+							:text="'View Collection'"
+							:background="'filled'"
+							:initial-width="26.2"
+							:hover-width="29"
+						/>
+					</div>
+
+					<div class="third-section__sides__right-part__bottom">
+						<p>Check other →</p>
+					</div>
+				</div>
 
 				<div class="third-section__sides__right-part__running-text" ref="rightRunningTextWrapper">
 					<RunningTextVertical
@@ -84,14 +122,16 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, computed } from 'vue';
+	import { defineComponent, ref, computed, onMounted, nextTick } from 'vue';
 	import NavBar from '@/components/NavBar.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import RunningTextVertical from '@/components/RunningTextVertical.vue';
 	import { useResizeObserver } from '@vueuse/core';
+	import Button from '@/components/Button.vue';
+	import { gsap } from 'gsap';
 
 	export default defineComponent({
-		components: { NavBar, RunningTextStraight, RunningTextVertical },
+		components: { NavBar, RunningTextStraight, RunningTextVertical, Button },
 		setup() {
 			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const navbarTextGroup = ref<HTMLDivElement | null>(null);
@@ -115,6 +155,35 @@
 
 			useResizeObserver(rightTextGroup, (entries) => {
 				rightTextGroupHeight.value = entries[0].contentRect.height;
+			});
+
+			onMounted(() => {
+				const wrapper = document.querySelector('#fade');
+				const monkers = gsap.utils.toArray('.monkers').reverse();
+
+				const timeline = gsap.timeline({ paused: true });
+
+				monkers.forEach((monker: HTMLElement, index) => {
+					timeline.to(monker, {
+						x: '-400',
+						duration: 1,
+						opacity: 0,
+					});
+					timeline.set(monker, {
+						x: 0,
+						zIndex: 1,
+						opacity: 1,
+					});
+					timeline.addLabel(`label${index}`);
+				});
+
+				wrapper.addEventListener('click', () => {
+					if (timeline.nextLabel()) {
+						timeline.tweenTo(timeline.nextLabel());
+					} else {
+						timeline.progress(0).tweenTo(timeline.nextLabel());
+					}
+				});
 			});
 
 			return {
@@ -166,15 +235,27 @@
 			height: 100%;
 
 			&__left-part {
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				width: 40%;
 				height: 100%;
 				border: 1px solid $monezo-night-black;
 				border-top: 0;
 				border-bottom: 0;
 				border-left: 0;
+
+				img {
+					position: absolute;
+					width: 50rem;
+					height: 60rem;
+					z-index: 2;
+				}
 			}
 
 			&__right-part {
+				$wrapper: &;
+
 				display: flex;
 				width: 60%;
 				height: 100%;
@@ -183,11 +264,77 @@
 				border-right: 0;
 				border-bottom: 0;
 
-				&__top {
-					flex-grow: 1;
-				}
+				& .left-wrapper {
+					width: 85%;
+					height: 100%;
 
-				&__bottom {
+					#{$wrapper}__top {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: flex-start;
+						height: 90%;
+						padding-left: 10rem;
+
+						.title {
+							margin-bottom: 5rem;
+							font-size: 5rem;
+							font-weight: bold;
+							line-height: 6rem;
+						}
+
+						.description-wrapper {
+							width: 45rem;
+							margin-bottom: 6rem;
+
+							p {
+								font-size: 1.8rem;
+								font-weight: 500;
+								line-height: 2.86rem;
+
+								&:first-child {
+									margin-bottom: 3.8rem;
+								}
+							}
+						}
+
+						.numbers-description {
+							display: flex;
+							gap: 5rem;
+							margin-bottom: 3rem;
+
+							.text {
+								&--large {
+									font-size: 5rem;
+									font-weight: bold;
+									line-height: 6rem;
+									white-space: nowrap;
+								}
+
+								&--small {
+									font-size: 1.8rem;
+									font-weight: 400;
+									line-height: 2.7rem;
+									white-space: nowrap;
+								}
+							}
+						}
+					}
+
+					#{$wrapper}__bottom {
+						display: flex;
+						justify-content: flex-start;
+						align-items: center;
+						height: 10%;
+						padding-left: 10rem;
+						border-top: 2px solid $monezo-night-black;
+
+						p {
+							font-size: 1.6rem;
+							font-weight: bold;
+							line-height: 1.9rem;
+						}
+					}
 				}
 
 				&__running-text {
