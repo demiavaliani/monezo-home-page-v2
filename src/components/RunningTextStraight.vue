@@ -63,7 +63,6 @@
 			watch(
 				() => props.groupWidth,
 				() => {
-					gsap.defaults({ duration: props.animationSpeed, ease: 'none', repeat: -1 });
 					gsap.set(`#${props.groupId}`, {
 						x: (i) => i * (props.groupWidth + initialPositionFormatted.value),
 					});
@@ -90,6 +89,9 @@
 								return windowWrap(parseFloat(x)) + 'px';
 							},
 						},
+						duration: props.animationSpeed,
+						ease: 'none',
+						repeat: -1,
 					};
 
 					props.direction === 'left-to-right'

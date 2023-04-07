@@ -1,5 +1,5 @@
 <template>
-	<div class="second-section">
+	<div class="second-section" id="snap-section">
 		<NavBar :first-page="false" :last-page="false">
 			<div class="navbar-running-text-wrapper" ref="navbarRunningTextWrapper">
 				<RunningTextStraight
@@ -243,6 +243,7 @@
 		overflow: hidden;
 		height: 100vh;
 		border: 2px solid $monezo-night-black;
+		border-top: 0;
 		background: linear-gradient(90deg, #ddd6f3 0%, #faaca8 100%);
 
 		&__sides {

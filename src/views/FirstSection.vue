@@ -1,5 +1,5 @@
 <template>
-	<div class="first-section">
+	<div class="first-section" id="snap-section">
 		<NavBar :first-page="true" :last-page="false" />
 
 		<img

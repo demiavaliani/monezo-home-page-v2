@@ -56,7 +56,6 @@
 			watch(
 				() => props.groupHeight,
 				() => {
-					gsap.defaults({ duration: props.animationSpeed, ease: 'none', repeat: -1 });
 					gsap.set(`#${props.groupId}`, {
 						y: (i) => i * (props.groupHeight + props.initialPosition),
 					});
@@ -83,6 +82,9 @@
 								return windowWrap(parseFloat(y)) + 'px';
 							},
 						},
+						duration: props.animationSpeed,
+						ease: 'none',
+						repeat: -1,
 					};
 
 					props.direction === 'top-to-bottom'
