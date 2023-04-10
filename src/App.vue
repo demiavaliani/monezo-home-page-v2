@@ -1,20 +1,18 @@
 <template>
 	<div class="app-wrapper">
-		<FirstSection></FirstSection>
-		<SecondSection></SecondSection>
+		<ThirdSection></ThirdSection>
 	</div>
 </template>
 
 <script lang="ts">
 	import { defineComponent, onMounted } from 'vue';
-	import FirstSection from './views/FirstSection.vue';
+	import ThirdSection from './views/ThirdSection.vue';
 	import gsap from 'gsap';
-	import SecondSection from './views/SecondSection.vue';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 	export default defineComponent({
-		components: { FirstSection, SecondSection },
+		components: { ThirdSection },
 
 		setup() {
 			const goToSection = (section) => {

@@ -1,9 +1,9 @@
 <template>
-	<div class="third-section">
+	<div class="third-section" id="snap-section">
 		<NavBar :first-page="false" :last-page="false">
 			<div class="navbar-running-text-wrapper" ref="navbarRunningTextWrapper">
 				<RunningTextStraight
-					:group-id="'navbar-running-text-group'"
+					:group-id="'third-section-navbar-running-text-group'"
 					:parent-element-width="navbarRunningTextWrapperWidth"
 					:group-width="navbarTextGroupWidth"
 					:initial-position="5"
@@ -13,7 +13,7 @@
 					:font-size="5"
 				>
 					<div
-						id="navbar-running-text-group"
+						id="third-section-navbar-running-text-group"
 						class="navbar-running-text-group"
 						ref="navbarTextGroup"
 					>
@@ -21,17 +21,17 @@
 						<img src="../assets/images/featuring-collection-text-divider-icon.svg" />
 					</div>
 
-					<div id="navbar-running-text-group" class="navbar-running-text-group">
+					<div id="third-section-navbar-running-text-group" class="navbar-running-text-group">
 						<p class="running-text">Featuring collection</p>
 						<img src="../assets/images/featuring-collection-text-divider-icon.svg" />
 					</div>
 
-					<div id="navbar-running-text-group" class="navbar-running-text-group">
+					<div id="third-section-navbar-running-text-group" class="navbar-running-text-group">
 						<p class="running-text">Featuring collection</p>
 						<img src="../assets/images/featuring-collection-text-divider-icon.svg" />
 					</div>
 
-					<div id="navbar-running-text-group" class="navbar-running-text-group">
+					<div id="third-section-navbar-running-text-group" class="navbar-running-text-group">
 						<p class="running-text">Featuring collection</p>
 						<img src="../assets/images/featuring-collection-text-divider-icon.svg" />
 					</div>
@@ -41,8 +41,8 @@
 
 		<div class="third-section__sides">
 			<div class="third-section__sides__left-part" id="fade">
-				<img class="monkers" src="@/assets/images/monker-column-1k.png" />
-				<img class="monkers" src="@/assets/images/monker-column-10k.png" />
+				<img class="monkers 1k" src="@/assets/images/monker-real-estate-1k.png" />
+				<img class="monkers 10k" src="@/assets/images/monker-real-estate-10k.png" />
 			</div>
 
 			<div class="third-section__sides__right-part">
@@ -159,18 +159,21 @@
 
 			onMounted(() => {
 				const wrapper = document.querySelector('#fade');
-				const monkers = gsap.utils.toArray('.monkers').reverse();
+				const monkers = gsap.utils.toArray('.monkers').reverse() as HTMLElement[];
 
 				const timeline = gsap.timeline({ paused: true });
 
 				monkers.forEach((monker: HTMLElement, index) => {
 					timeline.to(monker, {
-						x: '-400',
-						duration: 1,
+						xPercent: '-100',
+						scale: 0.8,
+						duration: 0.5,
 						opacity: 0,
 					});
+
 					timeline.set(monker, {
-						x: 0,
+						xPercent: 0,
+						scale: 1,
 						zIndex: 1,
 						opacity: 1,
 					});
@@ -178,10 +181,21 @@
 				});
 
 				wrapper.addEventListener('click', () => {
+					console.log('current', timeline.currentLabel());
+					console.log('next', timeline.nextLabel());
+
 					if (timeline.nextLabel()) {
 						timeline.tweenTo(timeline.nextLabel());
 					} else {
 						timeline.progress(0).tweenTo(timeline.nextLabel());
+					}
+
+					if (timeline.currentLabel() === 'label1' || timeline.nextLabel() === 'label0') {
+						monkers[1].classList.add('scale');
+						monkers[0].classList.remove('scale');
+					} else if (timeline.currentLabel() === 'label0') {
+						monkers[1].classList.remove('scale');
+						monkers[0].classList.add('scale');
 					}
 				});
 			});
@@ -245,11 +259,26 @@
 				border-bottom: 0;
 				border-left: 0;
 
+				@keyframes scale {
+					0% {
+						width: 60rem;
+					}
+					100% {
+						width: 80rem;
+					}
+				}
+
 				img {
 					position: absolute;
-					width: 50rem;
-					height: 60rem;
+					width: 80rem;
+					max-height: 130rem;
 					z-index: 2;
+					pointer-events: all;
+
+					&.scale {
+						animation: scale 0.5s;
+						animation-fill-mode: forwards;
+					}
 				}
 			}
 
