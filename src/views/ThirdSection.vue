@@ -41,8 +41,16 @@
 
 		<div class="third-section__sides">
 			<div class="third-section__sides__left-part" id="fade">
-				<img class="monkers 1k" src="@/assets/images/monker-real-estate-1k.png" />
-				<img class="monkers 10k" src="@/assets/images/monker-real-estate-10k.png" />
+				<img
+					class="1k"
+					ref="thirdSectionMonkers1k"
+					src="@/assets/images/monker-real-estate-1k.png"
+				/>
+				<img
+					class="10k"
+					ref="thirdSectionMonkers10k"
+					src="@/assets/images/monker-real-estate-10k.png"
+				/>
 			</div>
 
 			<div class="third-section__sides__right-part">
@@ -133,6 +141,8 @@
 	export default defineComponent({
 		components: { NavBar, RunningTextStraight, RunningTextVertical, Button },
 		setup() {
+			const thirdSectionMonkers1k = ref<HTMLImageElement | null>(null);
+			const thirdSectionMonkers10k = ref<HTMLImageElement | null>(null);
 			const monkerTransitionStartWidth = ref('60rem');
 			const monkerFullWidth = ref('80rem');
 
@@ -168,7 +178,9 @@
 
 			onMounted(() => {
 				const wrapper = document.querySelector('#fade');
-				const monkers = gsap.utils.toArray('.monkers').reverse() as HTMLElement[];
+				const monkers = gsap.utils
+					.toArray([thirdSectionMonkers1k.value, thirdSectionMonkers10k.value])
+					.reverse() as HTMLElement[];
 
 				const timeline = gsap.timeline({ paused: true });
 
@@ -190,9 +202,6 @@
 				});
 
 				wrapper.addEventListener('click', () => {
-					console.log('current', timeline.currentLabel());
-					console.log('next', timeline.nextLabel());
-
 					if (timeline.nextLabel()) {
 						timeline.tweenTo(timeline.nextLabel());
 					} else {
@@ -245,6 +254,8 @@
 				rightRunningTextWrapperHeight,
 				monkerTransitionStartWidth,
 				monkerFullWidth,
+				thirdSectionMonkers1k,
+				thirdSectionMonkers10k,
 			};
 		},
 	});
