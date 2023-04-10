@@ -67,7 +67,7 @@
 						y: (i) => i * (props.groupHeight + initialPositionFormatted.value),
 					});
 
-					let windowWrap = gsap.utils.wrap(
+					const windowWrap = gsap.utils.wrap(
 						0,
 						props.parentElementHeight +
 							props.groupHeight +
