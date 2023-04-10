@@ -133,6 +133,9 @@
 	export default defineComponent({
 		components: { NavBar, RunningTextStraight, RunningTextVertical, Button },
 		setup() {
+			const monkerTransitionStartWidth = ref('60rem');
+			const monkerFullWidth = ref('80rem');
+
 			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const navbarTextGroup = ref<HTMLDivElement | null>(null);
 			const navbarTextGroupWidth = ref(0);
@@ -156,6 +159,12 @@
 			useResizeObserver(rightTextGroup, (entries) => {
 				rightTextGroupHeight.value = entries[0].contentRect.height;
 			});
+
+			const calculateMediaQuery = (width: number, height: number) => {
+				return window.matchMedia(
+					`screen and (max-width: ${width}px) and (max-height: ${height}px)`
+				);
+			};
 
 			onMounted(() => {
 				const wrapper = document.querySelector('#fade');
@@ -198,6 +207,31 @@
 						monkers[0].classList.add('scale');
 					}
 				});
+
+				if (calculateMediaQuery(1920, 1200).matches) {
+					monkerTransitionStartWidth.value = '45rem';
+					monkerFullWidth.value = '65rem';
+				}
+
+				if (calculateMediaQuery(1680, 1050).matches) {
+					monkerTransitionStartWidth.value = '35rem';
+					monkerFullWidth.value = '55rem';
+				}
+
+				if (calculateMediaQuery(1512, 982).matches) {
+					monkerTransitionStartWidth.value = '30rem';
+					monkerFullWidth.value = '50rem';
+				}
+
+				if (calculateMediaQuery(1366, 768).matches) {
+					monkerTransitionStartWidth.value = '25rem';
+					monkerFullWidth.value = '45rem';
+				}
+
+				if (calculateMediaQuery(1280, 800).matches) {
+					monkerTransitionStartWidth.value = '20rem';
+					monkerFullWidth.value = '40rem';
+				}
 			});
 
 			return {
@@ -209,6 +243,8 @@
 				rightTextGroup,
 				rightTextGroupHeight,
 				rightRunningTextWrapperHeight,
+				monkerTransitionStartWidth,
+				monkerFullWidth,
 			};
 		},
 	});
@@ -261,16 +297,16 @@
 
 				@keyframes scale {
 					0% {
-						width: 60rem;
+						width: v-bind(monkerTransitionStartWidth);
 					}
 					100% {
-						width: 80rem;
+						width: v-bind(monkerFullWidth);
 					}
 				}
 
 				img {
 					position: absolute;
-					width: 80rem;
+					width: v-bind(monkerFullWidth);
 					max-height: 130rem;
 					z-index: 2;
 					pointer-events: all;
@@ -310,11 +346,29 @@
 							font-size: 5rem;
 							font-weight: bold;
 							line-height: 6rem;
+
+							@media only screen and (max-width: 1366px) and (max-height: 768px) {
+								margin-bottom: 2rem;
+								font-size: 4.5rem;
+							}
+
+							@media only screen and (max-width: 1280px) and (max-height: 800px) {
+								margin-bottom: 2rem;
+								font-size: 4rem;
+							}
 						}
 
 						.description-wrapper {
 							width: 45rem;
 							margin-bottom: 6rem;
+
+							@media only screen and (max-width: 1366px) and (max-height: 768px) {
+								margin-bottom: 3rem;
+							}
+
+							@media only screen and (max-width: 1280px) and (max-height: 800px) {
+								margin-bottom: 3rem;
+							}
 
 							p {
 								font-size: 1.8rem;
@@ -323,6 +377,14 @@
 
 								&:first-child {
 									margin-bottom: 3.8rem;
+
+									@media only screen and (max-width: 1366px) and (max-height: 768px) {
+										margin-bottom: 2rem;
+									}
+
+									@media only screen and (max-width: 1280px) and (max-height: 800px) {
+										margin-bottom: 2rem;
+									}
 								}
 							}
 						}
@@ -338,6 +400,14 @@
 									font-weight: bold;
 									line-height: 6rem;
 									white-space: nowrap;
+
+									@media only screen and (max-width: 1366px) and (max-height: 768px) {
+										font-size: 4.5rem;
+									}
+
+									@media only screen and (max-width: 1280px) and (max-height: 800px) {
+										font-size: 4.5rem;
+									}
 								}
 
 								&--small {
