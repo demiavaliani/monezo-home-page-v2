@@ -3,7 +3,7 @@
 		<NavBar :first-page="false" :last-page="false">
 			<div class="navbar-running-text-wrapper" ref="navbarRunningTextWrapper">
 				<RunningTextStraight
-					:group-id="'navbar-running-text-group'"
+					:group-id="'second-section-navbar-running-text-group'"
 					:parent-element-width="navbarRunningTextWrapperWidth"
 					:group-width="navbarTextGroupWidth"
 					:initial-position="5"
@@ -12,17 +12,21 @@
 					:direction="'right-to-left'"
 					:font-size="5"
 				>
-					<div id="navbar-running-text-group" class="navbar-text-wrapper" ref="navbarTextGroup">
+					<div
+						id="second-section-navbar-running-text-group"
+						class="navbar-text-wrapper"
+						ref="navbarTextGroup"
+					>
 						<p class="running-text">Start your passive income Journey with Monezo NFT</p>
 						<img src="../assets/images/start-your-journey-text-divider-icon.svg" />
 					</div>
 
-					<div id="navbar-running-text-group" class="navbar-text-wrapper">
+					<div id="second-section-navbar-running-text-group" class="navbar-text-wrapper">
 						<p class="running-text">Start your passive income Journey with Monezo NFT</p>
 						<img src="../assets/images/start-your-journey-text-divider-icon.svg" />
 					</div>
 
-					<div id="navbar-running-text-group" class="navbar-text-wrapper">
+					<div id="second-section-navbar-running-text-group" class="navbar-text-wrapper">
 						<p class="running-text">Start your passive income Journey with Monezo NFT</p>
 						<img src="../assets/images/start-your-journey-text-divider-icon.svg" />
 					</div>
@@ -35,7 +39,8 @@
 				<div class="column__left" ref="runningMonkerWrapper">
 					<RunningTextVertical
 						:group-id="'monker-column-left-group'"
-						:initial-position="50"
+						:initial-position="5"
+						:gap="5"
 						:animation-speed="15"
 						:direction="'top-to-bottom'"
 						:parent-element-height="runningMonkerWrapperHeight"
@@ -45,17 +50,17 @@
 							id="monker-column-left-group"
 							class="column__left__monker-group"
 							ref="runningMonkerGroup"
-							src="../assets/images/monker-column-1k.png"
+							src="../assets/images/monker-real-estate-1k.png"
 						/>
 						<img
 							id="monker-column-left-group"
 							class="column__left__monker-group"
-							src="../assets/images/monker-column-100.png"
+							src="../assets/images/monker-real-estate-100.png"
 						/>
 						<img
 							id="monker-column-left-group"
 							class="column__left__monker-group"
-							src="../assets/images/monker-column-1k.png"
+							src="../assets/images/monker-real-estate-1k.png"
 						/>
 					</RunningTextVertical>
 				</div>
@@ -63,7 +68,8 @@
 				<div class="column__right">
 					<RunningTextVertical
 						:group-id="'monker-column-right-group'"
-						:initial-position="50"
+						:initial-position="5"
+						:gap="5"
 						:animation-speed="15"
 						:direction="'bottom-to-top'"
 						:parent-element-height="runningMonkerWrapperHeight"
@@ -73,17 +79,17 @@
 							id="monker-column-right-group"
 							class="column__left__monker-group"
 							ref="runningMonkerGroup"
-							src="../assets/images/monker-column-5k.png"
+							src="../assets/images/monker-car-rental-5k.png"
 						/>
 						<img
 							id="monker-column-right-group"
 							class="column__left__monker-group"
-							src="../assets/images/monker-column-10k.png"
+							src="../assets/images/monker-car-rental-10k.png"
 						/>
 						<img
 							id="monker-column-right-group"
 							class="column__left__monker-group"
-							src="../assets/images/monker-column-5k.png"
+							src="../assets/images/monker-car-rental-5k.png"
 						/>
 					</RunningTextVertical>
 				</div>
@@ -403,6 +409,8 @@
 
 					@media only screen and (max-width: 1920px) and (max-height: 1080px) {
 						gap: 3rem;
+						padding: 6rem 11rem 4rem 6.8rem;
+						font-size: 1.8rem;
 						line-height: 3.5rem;
 					}
 
@@ -486,7 +494,6 @@
 			.navbar-text-wrapper {
 				position: absolute;
 				display: flex;
-				width: fit-content;
 				gap: 5rem;
 				white-space: nowrap;
 

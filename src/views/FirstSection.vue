@@ -53,9 +53,9 @@
 		</div>
 
 		<div class="first-section__monkers">
-			<img src="../assets/images/monker-corner-1.png" class="monker" />
-			<img src="../assets/images/monker-corner-2.png" class="monker" />
-			<img src="../assets/images/monker-corner-3.png" class="monker" />
+			<img src="../assets/images/monker-corner-1.png" ref="firstSectionMonker1" />
+			<img src="../assets/images/monker-corner-2.png" ref="firstSectionMonker2" />
+			<img src="../assets/images/monker-corner-3.png" ref="firstSectionMonker3" />
 		</div>
 
 		<div class="first-section__footer">
@@ -65,7 +65,7 @@
 
 			<div class="first-section__footer__running-text" ref="runningText">
 				<RunningTextStraight
-					:group-id="'images-group'"
+					:group-id="'first-section-images-group'"
 					:parent-element-width="runningTextWidth"
 					:group-width="imageGroupWidth"
 					:initial-position="initialPosition"
@@ -73,14 +73,14 @@
 					:animation-speed="20"
 					:direction="'right-to-left'"
 				>
-					<div id="images-group" class="images" ref="imageGroup">
+					<div id="first-section-images-group" class="images" ref="imageGroup">
 						<img src="@/assets/images/multibank-logo.png" />
 						<img src="@/assets/images/megogo-logo.png" />
 						<img src="@/assets/images/castles-logo.png" />
 						<img src="@/assets/images/pion-logo.png" />
 					</div>
 
-					<div id="images-group" class="images">
+					<div id="first-section-images-group" class="images">
 						<img src="@/assets/images/multibank-logo.png" />
 						<img src="@/assets/images/megogo-logo.png" />
 						<img src="@/assets/images/castles-logo.png" />
@@ -107,6 +107,9 @@
 		components: { NavBar, Button, RunningTextStraight, RunningTextCircle },
 
 		setup() {
+			const firstSectionMonker1 = ref<HTMLImageElement | null>(null);
+			const firstSectionMonker2 = ref<HTMLImageElement | null>(null);
+			const firstSectionMonker3 = ref<HTMLImageElement | null>(null);
 			const runningText = ref<HTMLDivElement | null>(null);
 			const imageGroup = ref<HTMLDivElement | null>(null);
 			const imageGroupWidth = ref(0);
@@ -125,9 +128,14 @@
 			};
 
 			onMounted(() => {
-				let tl = gsap.timeline({ repeat: -1 });
+				const monkers = gsap.utils.toArray([
+					firstSectionMonker1.value,
+					firstSectionMonker2.value,
+					firstSectionMonker3.value,
+				]) as HTMLImageElement[];
+				const tl = gsap.timeline({ repeat: -1 });
 
-				gsap.utils.toArray<HTMLImageElement>('.monker').forEach((monker) => {
+				monkers.forEach((monker) => {
 					tl.from(
 						monker,
 						{
@@ -183,6 +191,9 @@
 				initialPosition,
 				wrapMaxAt,
 				runningTextLogoGap,
+				firstSectionMonker1,
+				firstSectionMonker2,
+				firstSectionMonker3,
 			};
 		},
 	});
