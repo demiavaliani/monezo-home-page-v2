@@ -4,6 +4,7 @@
 		<SecondSection></SecondSection>
 		<ThirdSection></ThirdSection>
 		<FourthSection></FourthSection>
+		<FifthSection></FifthSection>
 	</div>
 </template>
 
@@ -13,6 +14,7 @@
 	import SecondSection from './views/SecondSection.vue';
 	import ThirdSection from './views/ThirdSection.vue';
 	import FourthSection from './views/FourthSection.vue';
+	import FifthSection from './views/FifthSection.vue';
 
 	export default defineComponent({
 		components: {
@@ -20,6 +22,7 @@
 			SecondSection,
 			ThirdSection,
 			FourthSection,
+			FifthSection,
 		},
 	});
 </script>
