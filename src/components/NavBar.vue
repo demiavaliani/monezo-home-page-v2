@@ -1,7 +1,7 @@
 <template>
 	<div :class="[navbarClassAddons, 'nav-bar']">
 		<a class="nav-bar__logo" href="https://monezo.xyz/">
-			<img src="@/assets/images/monezo-logo.svg" />
+			<img src="@/assets/images/monezo-logo.png" />
 			<p v-if="firstPage" class="regular">Monezo</p>
 		</a>
 
