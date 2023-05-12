@@ -539,15 +539,13 @@
 			}
 		}
 		.yieldful-nft-square {
-			--square-height: 45rem;
+			--square-height: 35rem;
+			--circle-height: 52%;
 			--double-border-font-size: 2rem;
-
-			@media only screen and (max-width: 2560px) and (max-height: 1700px) {
-				--circle-height: 50%;
-			}
 
 			@media only screen and (max-width: 2560px) and (max-height: 1440px) {
 				--square-height: 35rem;
+				--circle-height: 50%;
 			}
 
 			@media only screen and (max-width: 2304px) and (max-height: 1440px) {
