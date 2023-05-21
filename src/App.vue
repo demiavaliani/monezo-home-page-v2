@@ -3,6 +3,7 @@
 		<FirstSection></FirstSection>
 		<SecondSection></SecondSection>
 		<ThirdSection></ThirdSection>
+		<FourthSection></FourthSection>
 	</div>
 </template>
 
@@ -11,9 +12,15 @@
 	import FirstSection from './views/FirstSection.vue';
 	import SecondSection from './views/SecondSection.vue';
 	import ThirdSection from './views/ThirdSection.vue';
+	import FourthSection from './views/FourthSection.vue';
 
 	export default defineComponent({
-		components: { FirstSection, SecondSection, ThirdSection },
+		components: {
+			FirstSection,
+			SecondSection,
+			ThirdSection,
+			FourthSection,
+		},
 	});
 </script>
 

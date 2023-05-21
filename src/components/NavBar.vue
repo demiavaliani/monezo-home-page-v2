@@ -47,12 +47,13 @@
 <style lang="scss">
 	.nav-bar {
 		$parent: &;
+		--min-height: 10.7rem;
 
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
 		width: 100%;
-		height: 10.7rem;
+		min-height: var(--min-height);
 		padding: 0 3.9rem 0 2.5rem;
 		border: 2px solid $monezo-night-black;
 		border-top: 0;
@@ -71,7 +72,7 @@
 		}
 
 		&--last-page {
-			height: 20rem;
+			min-height: 20rem;
 
 			#{$parent}__logo {
 				display: none;
