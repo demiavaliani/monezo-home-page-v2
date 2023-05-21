@@ -54,6 +54,7 @@
 		justify-content: space-between;
 		width: 100%;
 		min-height: var(--min-height);
+		height: var(--min-height);
 		padding: 0 3.9rem 0 2.5rem;
 		border: 2px solid $monezo-night-black;
 		border-top: 0;
