@@ -477,15 +477,5 @@
 				}
 			}
 		}
-
-		.pixelated-background {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			pointer-events: none;
-			background: url('@/assets/images/pixelated-background.svg');
-			mix-blend-mode: overlay;
-			opacity: 1;
-		}
 	}
 </style>
