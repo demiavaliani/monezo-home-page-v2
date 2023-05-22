@@ -108,12 +108,12 @@
 
 				<div class="right-side__row-middle">
 					<div class="right-side__row-middle__profit">
-						<img src="@/assets/images/yieldful-nft-cube-arrow.svg" />
+						<img src="@/assets/images/arrow-icon.svg" />
 						<p>Profit</p>
 					</div>
 
 					<div class="right-side__row-middle__liquidity">
-						<img src="@/assets/images/yieldful-nft-cube-arrow.svg" />
+						<img src="@/assets/images/arrow-icon.svg" />
 						<p>Liquidity Supply</p>
 					</div>
 
@@ -127,7 +127,7 @@
 					</div>
 
 					<div class="right-side__row-middle__launchpad">
-						<img src="@/assets/images/yieldful-nft-cube-arrow.svg" />
+						<img src="@/assets/images/arrow-icon.svg" />
 						<p>Launchpad</p>
 					</div>
 				</div>

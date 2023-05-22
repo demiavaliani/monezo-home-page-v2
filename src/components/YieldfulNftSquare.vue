@@ -14,7 +14,7 @@
 
 		<div class="yieldful-nft-square__double-border" v-if="doubleBorder">
 			<div :class="['arrow', `arrow-${arrowSingle}`]">
-				<img src="@/assets/images/yieldful-nft-cube-arrow.svg" />
+				<img src="@/assets/images/arrow-icon.svg" />
 			</div>
 
 			<div class="content">
@@ -27,15 +27,12 @@
 			v-else-if="doubleBorderDivided"
 		>
 			<div class="top">
-				<img
-					src="@/assets/images/yieldful-nft-cube-arrow.svg"
-					:class="['arrow', `arrow-${arrowDoubleTop}`]"
-				/>
+				<img src="@/assets/images/arrow-icon.svg" :class="['arrow', `arrow-${arrowDoubleTop}`]" />
 				<p>{{ doubleBorderDividedTextTop }}</p>
 			</div>
 			<div class="bottom">
 				<img
-					src="@/assets/images/yieldful-nft-cube-arrow.svg"
+					src="@/assets/images/arrow-icon.svg"
 					:class="['arrow', `arrow-${arrowDoubleBottom}`]"
 				/>
 				<p>{{ doubleBorderDividedTextBottom }}</p>
