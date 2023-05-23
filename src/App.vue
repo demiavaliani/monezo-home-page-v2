@@ -6,6 +6,8 @@
 		<FourthSection></FourthSection>
 		<FifthSection></FifthSection>
 		<SixthSection></SixthSection>
+		<SeventhSection></SeventhSection>
+		<SeventhSectionQuarters></SeventhSectionQuarters>
 	</div>
 </template>
 
@@ -17,6 +19,8 @@
 	import FourthSection from './views/FourthSection.vue';
 	import FifthSection from './views/FifthSection.vue';
 	import SixthSection from './views/SixthSection.vue';
+	import SeventhSection from './views/SeventhSection.vue';
+	import SeventhSectionQuarters from './views/SeventhSectionQuarters.vue';
 
 	export default defineComponent({
 		components: {
@@ -26,6 +30,8 @@
 			FourthSection,
 			FifthSection,
 			SixthSection,
+			SeventhSection,
+			SeventhSectionQuarters,
 		},
 	});
 </script>
