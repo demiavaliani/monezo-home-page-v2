@@ -28,7 +28,7 @@
 			</div>
 
 			<div class="first-section__body__buttons">
-				<Button
+				<MonezoButton
 					class="first-section__body__buttons--first"
 					:text="'Start Earnings'"
 					:background="'filled'"
@@ -36,7 +36,7 @@
 					:hover-width="28.2"
 				/>
 
-				<Button
+				<MonezoButton
 					:text="'All-In-One App'"
 					:background="'transparent'"
 					:initial-width="25.8"
@@ -98,13 +98,13 @@
 	import { defineComponent, ref, computed, onMounted } from 'vue';
 	import { gsap, Power1 } from 'gsap';
 	import NavBar from '@/components/NavBar.vue';
-	import Button from '@/components/Button.vue';
+	import MonezoButton from '@/components/MonezoButton.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import RunningTextCircle from '@/components/RunningTextCircle.vue';
 	import { useResizeObserver } from '@vueuse/core';
 
 	export default defineComponent({
-		components: { NavBar, Button, RunningTextStraight, RunningTextCircle },
+		components: { NavBar, MonezoButton, RunningTextStraight, RunningTextCircle },
 
 		setup() {
 			const firstSectionMonker1 = ref<HTMLImageElement | null>(null);
