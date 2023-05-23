@@ -269,6 +269,7 @@
 		overflow: hidden;
 		height: 100vh;
 		border: 2px solid $monezo-night-black;
+		border-top: 0;
 		background: linear-gradient(90deg, #dd5e89 0%, #f7bb97 100%);
 
 		.navbar-running-text-wrapper {

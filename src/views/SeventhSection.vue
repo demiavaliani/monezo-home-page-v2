@@ -121,6 +121,7 @@
 		overflow: hidden;
 		height: 100vh;
 		border: 2px solid $monezo-night-black;
+		border-top: 0;
 		background: linear-gradient(90deg, #83a4d4 0%, #b6fbff 100%);
 
 		&__navbar {

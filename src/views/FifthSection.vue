@@ -141,6 +141,7 @@
 		overflow: hidden;
 		height: 100vh;
 		border: 2px solid $monezo-night-black;
+		border-top: 0;
 		background: linear-gradient(90deg, #ffcaac 0%, #84eece 100%);
 
 		&__sides {

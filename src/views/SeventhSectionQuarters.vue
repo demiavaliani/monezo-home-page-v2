@@ -171,16 +171,20 @@
 		flex-direction: column;
 		overflow: hidden;
 		border: 2px solid $monezo-night-black;
+		border-top: 0;
 		background: linear-gradient(90deg, #83a4d4 0%, #b6fbff 100%);
 
 		&__quarter {
+			&:not(:nth-child(10)) {
+				border-bottom: 2px solid $monezo-night-black;
+			}
+
 			.sides {
 				display: flex;
 
 				&__left {
 					width: 60%;
-					border: 2px solid $monezo-night-black;
-					border-top: 0;
+					border-right: 2px solid $monezo-night-black;
 
 					.title {
 						padding: 2.1rem 3.5rem;
@@ -200,7 +204,9 @@
 						}
 
 						&--future {
-							opacity: 0.3;
+							p {
+								opacity: 0.3;
+							}
 						}
 					}
 
@@ -219,12 +225,6 @@
 					justify-content: center;
 					align-items: center;
 					flex-grow: 1;
-					border-bottom: 2px solid $monezo-night-black;
-
-					&--future {
-						opacity: 0.3;
-						border-color: #647d9c;
-					}
 
 					.circle {
 						width: 60rem;
@@ -257,6 +257,16 @@
 						position: absolute;
 						bottom: 0;
 						height: 31.5rem;
+					}
+
+					&--future {
+						.circle-border {
+							border-color: #647d9c;
+						}
+
+						p {
+							opacity: 0.3;
+						}
 					}
 				}
 			}
