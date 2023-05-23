@@ -74,6 +74,7 @@
 
 		&--last-page {
 			min-height: 20rem;
+			padding: 0;
 
 			#{$parent}__logo {
 				display: none;
