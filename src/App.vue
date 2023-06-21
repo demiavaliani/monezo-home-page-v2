@@ -9,6 +9,7 @@
 		<SeventhSection></SeventhSection>
 		<SeventhSectionQuarters></SeventhSectionQuarters>
 		<EighthSection></EighthSection>
+		<NinthSection></NinthSection>
 	</div>
 </template>
 
@@ -23,6 +24,7 @@
 	import SeventhSection from './views/SeventhSection.vue';
 	import SeventhSectionQuarters from './views/SeventhSectionQuarters.vue';
 	import EighthSection from './views/EighthSection.vue';
+	import NinthSection from './views/NinthSection.vue';
 
 	export default defineComponent({
 		components: {
@@ -35,6 +37,7 @@
 			SeventhSection,
 			SeventhSectionQuarters,
 			EighthSection,
+			NinthSection,
 		},
 	});
 </script>

@@ -109,7 +109,7 @@
 						NFT holders can choose best options for everyone from different NFT collections with
 						fixed, flexible or combined yield which depends on asset type and business.
 					</p>
-					<Button
+					<MonezoButton
 						:text="'Get NFT'"
 						:background="'filled'"
 						:initial-width="18.2"
@@ -156,10 +156,10 @@
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import RunningTextVertical from '@/components/RunningTextVertical.vue';
 	import { useResizeObserver } from '@vueuse/core';
-	import Button from '@/components/Button.vue';
+	import MonezoButton from '@/components/MonezoButton.vue';
 
 	export default defineComponent({
-		components: { NavBar, RunningTextStraight, Button, RunningTextVertical },
+		components: { NavBar, RunningTextStraight, MonezoButton, RunningTextVertical },
 		setup() {
 			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const navbarTextGroup = ref<HTMLDivElement | null>(null);

@@ -77,13 +77,13 @@
 						Project by project, Monezo changing the way new ideas come to life
 					</p>
 
-					<Button
+					<MonezoButton
 						:text="'Start Now'"
 						:background="'filled'"
 						:initial-width="20.3"
 						:hover-width="23.2"
 						class="right-side__intro__button"
-					></Button>
+					/>
 				</div>
 
 				<div class="right-side__row-one">
@@ -164,11 +164,17 @@
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import RunningTextVertical from '@/components/RunningTextVertical.vue';
 	import { useResizeObserver } from '@vueuse/core';
-	import Button from '@/components/Button.vue';
+	import MonezoButton from '@/components/MonezoButton.vue';
 	import YieldfulNftSquare from '@/components/YieldfulNftSquare.vue';
 
 	export default defineComponent({
-		components: { NavBar, RunningTextStraight, RunningTextVertical, Button, YieldfulNftSquare },
+		components: {
+			NavBar,
+			RunningTextStraight,
+			RunningTextVertical,
+			MonezoButton,
+			YieldfulNftSquare,
+		},
 		setup() {
 			const dataRowOne = [
 				{
@@ -322,6 +328,7 @@
 		overflow: hidden;
 		height: 100vh;
 		border: 2px solid $monezo-night-black;
+		border-top: 0;
 		background: linear-gradient(90deg, #ffcaac 0%, #84eece 100%);
 
 		&__sides {
@@ -334,9 +341,7 @@
 				&__running-text {
 					width: 100%;
 					height: 100%;
-					border: 2px solid $monezo-night-black;
-					border-top: 0;
-					border-bottom: 0;
+					border-right: 2px solid $monezo-night-black;
 					overflow: hidden;
 
 					&__text-group {

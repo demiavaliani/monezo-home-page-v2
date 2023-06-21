@@ -80,7 +80,7 @@
 							</div>
 						</div>
 
-						<Button
+						<MonezoButton
 							:text="'View Collection'"
 							:background="'filled'"
 							:initial-width="26.2"
@@ -135,11 +135,11 @@
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import RunningTextVertical from '@/components/RunningTextVertical.vue';
 	import { useResizeObserver } from '@vueuse/core';
-	import Button from '@/components/Button.vue';
+	import MonezoButton from '@/components/MonezoButton.vue';
 	import { gsap } from 'gsap';
 
 	export default defineComponent({
-		components: { NavBar, RunningTextStraight, RunningTextVertical, Button },
+		components: { NavBar, RunningTextStraight, RunningTextVertical, MonezoButton },
 		setup() {
 			const thirdSectionMonkers1k = ref<HTMLImageElement | null>(null);
 			const thirdSectionMonkers10k = ref<HTMLImageElement | null>(null);
@@ -269,6 +269,7 @@
 		overflow: hidden;
 		height: 100vh;
 		border: 2px solid $monezo-night-black;
+		border-top: 0;
 		background: linear-gradient(90deg, #dd5e89 0%, #f7bb97 100%);
 
 		.navbar-running-text-wrapper {

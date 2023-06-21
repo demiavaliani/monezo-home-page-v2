@@ -8,7 +8,7 @@
 			id="button"
 		>
 			<p>{{ text }}</p>
-			<img v-if="isHovered" src="@/assets/images/button-arrow-right.svg" />
+			<img v-if="isHovered" src="@/assets/images/monezo-button-arrow-right.svg" />
 		</div>
 	</div>
 </template>
