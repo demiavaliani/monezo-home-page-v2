@@ -8,14 +8,14 @@
 					</div>
 
 					<div
-						:class="['goal', { 'goal--completed': index <= 2, 'goal--future': index >= 4 }]"
+						:class="['goal', { 'goal--completed': index <= 5, 'goal--future': index >= 7 }]"
 						v-for="goal in quarter.quarterGoals"
 					>
 						<p>{{ goal }}</p>
 					</div>
 				</div>
 
-				<div :class="['sides__right', { 'sides__right--future': index >= 4 }]">
+				<div :class="['sides__right', { 'sides__right--future': index >= 7 }]">
 					<div class="circle">
 						<p>
 							{{ quarter.quarterTitle }}
@@ -77,8 +77,14 @@
 						src="@/assets/images/monker-violet-flashlight.png"
 					/>
 					<img class="monker" v-if="index === 1" src="@/assets/images/monker-corner-2.png" />
-					<img class="monker" v-if="index === 2" src="@/assets/images/monker-pink-fur.png" />
-					<img class="monker" v-if="index === 3" src="@/assets/images/monker-blue-flashlight.png" />
+					<img class="monker" v-if="index === 2" src="@/assets/images/monker-roadmap-2.png" />
+					<img class="monker" v-if="index === 3" src="@/assets/images/monker-roadmap-3.png" />
+					<img class="monker" v-if="index === 4" src="@/assets/images/monker-roadmap-4.png" />
+					<img class="monker" v-if="index === 5" src="@/assets/images/monker-roadmap-5.png" />
+					<img class="monker" v-if="index === 6" src="@/assets/images/monker-roadmap-6.png" />
+					<img class="monker" v-if="index === 7" src="@/assets/images/monker-roadmap-7.png" />
+					<img class="monker" v-if="index === 8" src="@/assets/images/monker-roadmap-8.png" />
+					<img class="monker" v-if="index === 9" src="@/assets/images/monker-roadmap-9.png" />
 				</div>
 			</div>
 		</div>
@@ -257,6 +263,7 @@
 						position: absolute;
 						bottom: 0;
 						height: 31.5rem;
+						z-index: 1;
 					}
 
 					&--future {
