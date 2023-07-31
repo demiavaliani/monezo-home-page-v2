@@ -269,7 +269,7 @@
 			}
 
 			@media only screen and (max-width: 1512px) and (max-height: 834px) {
-				padding: 3.5rem 10rem;
+				padding: 2.5rem 10rem;
 
 				.title {
 					margin: 3rem 0 1rem;
