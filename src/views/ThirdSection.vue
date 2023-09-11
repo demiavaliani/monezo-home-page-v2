@@ -41,16 +41,23 @@
 
 		<div class="third-section__sides">
 			<div class="third-section__sides__left-part" id="fade">
-				<img
-					class="1k"
-					ref="thirdSectionMonkers1k"
-					src="@/assets/images/monker-real-estate-1k.png"
-				/>
-				<img
-					class="10k"
-					ref="thirdSectionMonkers10k"
-					src="@/assets/images/monker-real-estate-10k.png"
-				/>
+				<div class="monkers-wrapper">
+					<img
+						class="click-indicator-cursor"
+						src="@/assets/images/third-section-monker-click-indicator-unfilled.png"
+					/>
+
+					<img
+						class="1k"
+						ref="thirdSectionMonkers1k"
+						src="@/assets/images/monker-real-estate-1k.png"
+					/>
+					<img
+						class="10k"
+						ref="thirdSectionMonkers10k"
+						src="@/assets/images/monker-real-estate-10k.png"
+					/>
+				</div>
 			</div>
 
 			<div class="third-section__sides__right-part">
@@ -145,6 +152,7 @@
 			const thirdSectionMonkers10k = ref<HTMLImageElement | null>(null);
 			const monkerTransitionStartWidth = ref('60rem');
 			const monkerFullWidth = ref('80rem');
+			const monkerFullHeight = ref();
 
 			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const navbarTextGroup = ref<HTMLDivElement | null>(null);
@@ -162,12 +170,19 @@
 				rightRunningTextWrapper.value ? rightRunningTextWrapper.value.offsetHeight : 0
 			);
 
+			const monkerFullHeightFormatted = computed(() => `${monkerFullHeight.value}rem`);
+			const monkerClickIndicatorIconWidth = computed(() => `${monkerFullHeight.value / 12}rem`);
+
 			useResizeObserver(navbarTextGroup, (entries) => {
 				navbarTextGroupWidth.value = entries[0].contentRect.width;
 			});
 
 			useResizeObserver(rightTextGroup, (entries) => {
 				rightTextGroupHeight.value = entries[0].contentRect.height;
+			});
+
+			useResizeObserver(thirdSectionMonkers1k, (entries) => {
+				monkerFullHeight.value = entries[0].contentRect.height / 10;
 			});
 
 			const calculateMediaQuery = (width: number, height: number) => {
@@ -254,8 +269,10 @@
 				rightRunningTextWrapperHeight,
 				monkerTransitionStartWidth,
 				monkerFullWidth,
+				monkerFullHeightFormatted,
 				thirdSectionMonkers1k,
 				thirdSectionMonkers10k,
+				monkerClickIndicatorIconWidth,
 			};
 		},
 	});
@@ -316,16 +333,54 @@
 					}
 				}
 
-				img {
-					position: absolute;
-					width: v-bind(monkerFullWidth);
-					max-height: 130rem;
-					z-index: 2;
-					pointer-events: all;
+				@keyframes heartbeat {
+					from {
+						transform: scale(1);
+						transform-origin: center center;
+						animation-timing-function: ease-out;
+					}
+					10% {
+						transform: scale(0.8);
+						animation-timing-function: ease-in;
+					}
+					17% {
+						transform: scale(0.98);
+						animation-timing-function: ease-out;
+					}
+					33% {
+						transform: scale(0.8);
+						animation-timing-function: ease-in;
+					}
+					45% {
+						transform: scale(1);
+						animation-timing-function: ease-out;
+					}
+				}
 
-					&.scale {
-						animation: scale 0.5s;
-						animation-fill-mode: forwards;
+				.monkers-wrapper {
+					position: relative;
+					min-width: v-bind(monkerFullWidth);
+					min-height: v-bind(monkerFullHeightFormatted);
+
+					img {
+						position: absolute;
+						width: v-bind(monkerFullWidth);
+						max-height: 130rem;
+						z-index: 2;
+						pointer-events: all;
+
+						&.scale {
+							animation: scale 0.5s;
+							animation-fill-mode: forwards;
+						}
+					}
+
+					.click-indicator-cursor {
+						top: 2rem;
+						right: 2rem;
+						width: v-bind(monkerClickIndicatorIconWidth);
+						z-index: 3;
+						animation: heartbeat 1.5s ease-in-out infinite both;
 					}
 				}
 			}
