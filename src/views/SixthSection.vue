@@ -106,7 +106,7 @@
 					</div>
 
 					<p class="left__job-position" id="left__job-position">Chief Business Officer</p>
-					<p class="left__job-position" id="left__job-position">Chief Financial Officer</p>
+					<p class="left__job-position" id="left__job-position">Co Founder</p>
 					<p class="left__job-position" id="left__job-position">Chief Executive Officer</p>
 					<p class="left__job-position" id="left__job-position">Chief Technical Officer</p>
 					<p class="left__job-position" id="left__job-position">Chief Marketing Officer</p>
