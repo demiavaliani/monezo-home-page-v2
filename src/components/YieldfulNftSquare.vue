@@ -155,7 +155,7 @@
 					const rotate = gsap.to(elem, {
 						rotation: 360,
 						repeat: -1,
-						duration: 4,
+						duration: 9,
 						ease: 'none',
 						paused: true,
 					});
