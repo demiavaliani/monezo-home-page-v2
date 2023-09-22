@@ -569,12 +569,19 @@
 				--circle-font-size: 1.5rem;
 			}
 
+			@media only screen and (max-width: 1920px) and (max-height: 965px) {
+				--square-height: 20rem;
+				--circle-height: 65%;
+				--circle-font-size: 1.5rem;
+			}
+
 			@media only screen and (max-width: 1680px) and (max-height: 1050px) {
 				--double-border-font-size: 1.5rem;
 			}
 
 			@media only screen and (max-width: 1600px) and (max-height: 900px) {
 				--square-height: 24rem;
+				--circle-height: 50%;
 				--circle-font-size: 1.3rem;
 			}
 
