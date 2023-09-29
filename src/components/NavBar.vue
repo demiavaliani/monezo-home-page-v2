@@ -8,13 +8,14 @@
 		<slot />
 
 		<div class="nav-bar__menu">
-			<img src="@/assets/images/navbar-menu.svg" />
+			<img src="@/assets/images/navbar-menu.svg" @click="store.isHamburgerMenuOpen = true" />
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 	import { defineComponent, computed } from 'vue';
+	import { useGlobalStore } from '../stores/globalStore';
 
 	export default defineComponent({
 		components: {},
@@ -32,6 +33,8 @@
 		},
 
 		setup(props) {
+			const store = useGlobalStore();
+
 			const navbarClassAddons = computed(() => {
 				return {
 					'nav-bar--first-page': props.firstPage,
@@ -39,7 +42,7 @@
 				};
 			});
 
-			return { navbarClassAddons };
+			return { store, navbarClassAddons };
 		},
 	});
 </script>
@@ -60,6 +63,7 @@
 		border-top: 0;
 		border-left: 0;
 		border-right: 0;
+		z-index: 9998;
 
 		&--first-page {
 			padding: 0 6.2rem;
@@ -106,11 +110,15 @@
 
 		&__menu {
 			display: flex;
+			align-items: center;
 			padding-left: 3.9rem;
 			border-left: 2px solid $monezo-night-black;
 
 			img {
 				width: 3rem;
+				height: fit-content;
+				cursor: pointer;
+				pointer-events: all;
 			}
 		}
 	}
