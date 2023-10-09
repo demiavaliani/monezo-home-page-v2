@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, computed } from 'vue';
+	import { defineComponent, ref, computed, VueElement } from 'vue';
 	import NavBar from '@/components/NavBar.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import { useResizeObserver } from '@vueuse/core';
@@ -231,11 +231,7 @@
 						border-right: 0;
 					}
 
-					@media only screen and (max-width: 1600px) and (max-height: 900px) {
-						padding: 3rem 5rem;
-					}
-
-					@media only screen and (max-width: 1440px) and (max-height: 900px) {
+					@media only screen and (max-width: 1710px) and (max-height: 953px) {
 						padding: 3rem 5rem;
 					}
 
@@ -259,7 +255,7 @@
 						line-height: 3.8rem;
 					}
 
-					@media only screen and (max-width: 1600px) and (max-height: 900px) {
+					@media only screen and (max-width: 1710px) and (max-height: 953px) {
 						font-size: 2.2rem;
 						line-height: 3.5rem;
 					}
@@ -274,8 +270,7 @@
 						font-size: 1.5rem;
 						line-height: 2.5rem;
 					}
-
-					@media only screen and (max-width: 1600px) and (max-height: 900px) {
+					@media only screen and (max-width: 1710px) and (max-height: 953px) {
 						font-size: 1.3rem;
 						line-height: 2.3rem;
 					}
