@@ -192,6 +192,10 @@
 					bottomHeight.value = 530;
 				}
 
+				if (calculateMediaQuery(1710, 953).matches) {
+					bottomHeight.value = 456;
+				}
+
 				if (calculateMediaQuery(1600, 900).matches) {
 					bottomHeight.value = 404;
 				}
@@ -357,6 +361,11 @@
 						gap: 5rem;
 					}
 
+					@media only screen and (max-width: 1710px) and (max-height: 953px) {
+						padding-top: 1rem;
+						padding-bottom: 1rem;
+					}
+
 					@media only screen and (max-width: 1600px) and (max-height: 900px) {
 						gap: 3rem;
 						padding-top: 0.8rem;
@@ -415,6 +424,10 @@
 				font-size: 1.8rem;
 				font-weight: 500;
 				line-height: 2.9rem;
+
+				@media only screen and (max-width: 1710px) and (max-height: 953px) {
+					padding: 0 5rem;
+				}
 
 				@media only screen and (max-width: 1680px) and (max-height: 1050px) {
 					padding: 0 3rem;
