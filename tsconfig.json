@@ -13,6 +13,7 @@
 			],
 		},
 		"allowJs": false,
+		"types": ["Vite/client"]
 	},
 	"include": [
 		"src/**/*",

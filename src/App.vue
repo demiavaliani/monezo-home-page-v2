@@ -1,20 +1,20 @@
 <template>
 	<div class="app-wrapper">
-		<FirstSection></FirstSection>
-		<SecondSection></SecondSection>
-		<ThirdSection></ThirdSection>
-		<FourthSection></FourthSection>
-		<FifthSection></FifthSection>
-		<SixthSection></SixthSection>
-		<SeventhSection></SeventhSection>
-		<SeventhSectionQuarters></SeventhSectionQuarters>
-		<EighthSection></EighthSection>
-		<NinthSection></NinthSection>
+		<FirstSection class="section-element"></FirstSection>
+		<SecondSection class="section-element"></SecondSection>
+		<ThirdSection class="section-element"></ThirdSection>
+		<FourthSection class="section-element"></FourthSection>
+		<FifthSection class="section-element"></FifthSection>
+		<SixthSection class="section-element"></SixthSection>
+		<SeventhSection class="section-element"></SeventhSection>
+		<SeventhSectionQuarters class="section-element"></SeventhSectionQuarters>
+		<EighthSection class="section-element"></EighthSection>
+		<NinthSection class="section-element"></NinthSection>
 	</div>
 </template>
 
 <script lang="ts">
-	import { defineComponent } from 'vue';
+	import { defineComponent, onMounted } from 'vue';
 	import FirstSection from './views/FirstSection.vue';
 	import SecondSection from './views/SecondSection.vue';
 	import ThirdSection from './views/ThirdSection.vue';
@@ -38,6 +38,27 @@
 			SeventhSectionQuarters,
 			EighthSection,
 			NinthSection,
+		},
+
+		setup() {
+			const addSectionTitleTagsToViewsInDevMode = () => {
+				const sections = document.querySelectorAll('.section-element');
+				sections.forEach((section) => {
+					const title = document.createElement('p');
+					title.style.position = 'absolute';
+					title.style.fontSize = '3rem';
+					title.style.fontWeight = 'bold';
+					title.style.color = 'yellow';
+					title.innerText = section.classList[0];
+					section.prepend(title);
+				});
+			};
+
+			onMounted(() => {
+				if (import.meta.env.DEV) {
+					addSectionTitleTagsToViewsInDevMode();
+				}
+			});
 		},
 	});
 </script>
