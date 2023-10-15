@@ -5,8 +5,16 @@
 		<ThirdSection class="section-element"></ThirdSection>
 		<FourthSection class="section-element"></FourthSection>
 		<FifthSection class="section-element"></FifthSection>
-		<SixthSection class="section-element"></SixthSection>
-		<SeventhSection class="section-element"></SeventhSection>
+		<SixthSection
+			:is-intersecting="sixthSectionIsIntersecting"
+			class="section-element"
+			ref="sixthSectionIntersectionTarget"
+		></SixthSection>
+		<SeventhSection
+			:is-intersecting="seventhSectionIsIntersecting"
+			class="section-element"
+			ref="seventhSectionIntersectionTarget"
+		></SeventhSection>
 		<SeventhSectionQuarters class="section-element"></SeventhSectionQuarters>
 		<EighthSection class="section-element"></EighthSection>
 		<NinthSection class="section-element"></NinthSection>
@@ -14,7 +22,8 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, onMounted } from 'vue';
+	import { defineComponent, onMounted, ref } from 'vue';
+	import { useIntersectionObserver } from '@vueuse/core';
 	import FirstSection from './views/FirstSection.vue';
 	import SecondSection from './views/SecondSection.vue';
 	import ThirdSection from './views/ThirdSection.vue';
@@ -41,6 +50,12 @@
 		},
 
 		setup() {
+			const sixthSectionIntersectionTarget = ref<HTMLElement | null>();
+			const seventhSectionIntersectionTarget = ref<HTMLElement | null>();
+
+			const sixthSectionIsIntersecting = ref(false);
+			const seventhSectionIsIntersecting = ref(false);
+
 			const addSectionTitleTagsToViewsInDevMode = () => {
 				const sections = document.querySelectorAll('.section-element');
 				sections.forEach((section) => {
@@ -54,11 +69,34 @@
 				});
 			};
 
+			useIntersectionObserver(sixthSectionIntersectionTarget, ([{ isIntersecting }]) => {
+				if (isIntersecting) {
+					sixthSectionIsIntersecting.value = true;
+				}
+			});
+
+			useIntersectionObserver(
+				seventhSectionIntersectionTarget,
+				([{ isIntersecting }]) => {
+					if (isIntersecting) {
+						seventhSectionIsIntersecting.value = true;
+					}
+				},
+				{ threshold: 0.8 }
+			);
+
 			onMounted(() => {
 				if (import.meta.env.DEV) {
 					addSectionTitleTagsToViewsInDevMode();
 				}
 			});
+
+			return {
+				sixthSectionIntersectionTarget,
+				seventhSectionIntersectionTarget,
+				sixthSectionIsIntersecting,
+				seventhSectionIsIntersecting,
+			};
 		},
 	});
 </script>

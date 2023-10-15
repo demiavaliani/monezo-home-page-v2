@@ -135,7 +135,7 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, computed, onMounted } from 'vue';
+	import { defineComponent, ref, computed, watch } from 'vue';
 	import NavBar from '@/components/NavBar.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import { useResizeObserver } from '@vueuse/core';
@@ -143,7 +143,14 @@
 
 	export default defineComponent({
 		components: { NavBar, RunningTextStraight },
-		setup() {
+
+		props: {
+			isIntersecting: {
+				required: true,
+			},
+		},
+
+		setup(props) {
 			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const navbarTextGroup = ref<HTMLDivElement | null>(null);
 			const navbarTextGroupWidth = ref(0);
@@ -156,104 +163,107 @@
 				navbarTextGroupWidth.value = entries[0].contentRect.width;
 			});
 
-			onMounted(() => {
-				const images = gsap.utils.toArray('#executive-image') as HTMLImageElement[];
-				const tlImages = gsap.timeline({ repeat: -1 });
+			watch(
+				() => props.isIntersecting,
+				() => {
+					const images = gsap.utils.toArray('#executive-image') as HTMLImageElement[];
+					const tlImages = gsap.timeline({ repeat: -1 });
 
-				images.forEach((image) => {
-					tlImages.from(
-						image,
-						{
-							xPercent: 120,
+					images.forEach((image) => {
+						tlImages.from(
+							image,
+							{
+								xPercent: 120,
+								scale: 0.7,
+								duration: 2,
+								ease: Power1.easeInOut,
+							},
+							'>-1'
+						);
+						tlImages.from(image, {
+							duration: 2,
+						});
+						tlImages.to(image, {
+							xPercent: -100,
 							scale: 0.7,
 							duration: 2,
 							ease: Power1.easeInOut,
-						},
-						'>-1'
-					);
-					tlImages.from(image, {
-						duration: 2,
+						});
 					});
-					tlImages.to(image, {
-						xPercent: -100,
-						scale: 0.7,
-						duration: 2,
-						ease: Power1.easeInOut,
-					});
-				});
 
-				const descriptionText = gsap.utils.toArray('#left-middle-text') as HTMLElement[];
-				const tlText = gsap.timeline({ repeat: -1 });
+					const descriptionText = gsap.utils.toArray('#left-middle-text') as HTMLElement[];
+					const tlText = gsap.timeline({ repeat: -1 });
 
-				descriptionText.forEach((text) => {
-					tlText.from(
-						text,
-						{
-							xPercent: -110,
+					descriptionText.forEach((text) => {
+						tlText.from(
+							text,
+							{
+								xPercent: -110,
+								duration: 1,
+								ease: Power1.easeInOut,
+							},
+							'>-1'
+						);
+						tlText.from(text, {
+							duration: 4,
+						});
+						tlText.to(text, {
+							xPercent: 120,
 							duration: 1,
+							opacity: 0,
 							ease: Power1.easeInOut,
-						},
-						'>-1'
-					);
-					tlText.from(text, {
-						duration: 4,
+						});
 					});
-					tlText.to(text, {
-						xPercent: 120,
-						duration: 1,
-						opacity: 0,
-						ease: Power1.easeInOut,
-					});
-				});
 
-				const executiveName = gsap.utils.toArray('#executive-name') as HTMLElement[];
-				const tlExecutiveText = gsap.timeline({ repeat: -1 });
+					const executiveName = gsap.utils.toArray('#executive-name') as HTMLElement[];
+					const tlExecutiveText = gsap.timeline({ repeat: -1 });
 
-				executiveName.forEach((text) => {
-					tlExecutiveText.from(
-						text,
-						{
-							xPercent: -110,
+					executiveName.forEach((text) => {
+						tlExecutiveText.from(
+							text,
+							{
+								xPercent: -110,
+								duration: 1,
+								ease: Power1.easeInOut,
+							},
+							'>-1'
+						);
+						tlExecutiveText.from(text, {
+							duration: 4,
+						});
+						tlExecutiveText.to(text, {
+							xPercent: 100,
 							duration: 1,
+							opacity: 0,
 							ease: Power1.easeInOut,
-						},
-						'>-1'
-					);
-					tlExecutiveText.from(text, {
-						duration: 4,
+						});
 					});
-					tlExecutiveText.to(text, {
-						xPercent: 100,
-						duration: 1,
-						opacity: 0,
-						ease: Power1.easeInOut,
-					});
-				});
 
-				const jobPosition = gsap.utils.toArray('#left__job-position') as HTMLElement[];
-				const tlJobPositionText = gsap.timeline({ repeat: -1 });
+					const jobPosition = gsap.utils.toArray('#left__job-position') as HTMLElement[];
+					const tlJobPositionText = gsap.timeline({ repeat: -1 });
 
-				jobPosition.forEach((text) => {
-					tlJobPositionText.from(
-						text,
-						{
-							xPercent: -110,
+					jobPosition.forEach((text) => {
+						tlJobPositionText.from(
+							text,
+							{
+								xPercent: -110,
+								duration: 1,
+								ease: Power1.easeInOut,
+							},
+							'>-1'
+						);
+						tlJobPositionText.from(text, {
+							duration: 4,
+						});
+						tlJobPositionText.to(text, {
+							xPercent: 100,
 							duration: 1,
+							opacity: 0,
 							ease: Power1.easeInOut,
-						},
-						'>-1'
-					);
-					tlJobPositionText.from(text, {
-						duration: 4,
+						});
 					});
-					tlJobPositionText.to(text, {
-						xPercent: 100,
-						duration: 1,
-						opacity: 0,
-						ease: Power1.easeInOut,
-					});
-				});
-			});
+				}
+			);
 
 			return {
 				navbarRunningTextWrapper,
