@@ -80,13 +80,13 @@
 						</p>
 
 						<p id="left-middle-text" class="sergejs">
-							CTO Sergejs Hlusovs has extensive experience in technical process management gained
-							through his work in prominent Latvian companies such as A/s Rigas Siltums and A/s
-							Latvenergo. Since 2017, Sergejs has been actively involved in the crypto industry,
-							increasing his involvement from 2019 onwards. He has made significant investments in
-							various projects, including Moonbeam, Goldfinch, Exorde, Rigor, Silta Finance, and
-							Nym. Sergejs, alongside a dedicated team, has successfully launched over 700 nodes,
-							which allowed him to establish close relationships with multiple projects, providing
+							CTO Sergejs has extensive experience in technical process management gained through
+							his work in prominent Latvian companies such as A/s Rigas Siltums and A/s Latvenergo.
+							Since 2017, Sergejs has been actively involved in the crypto industry, increasing his
+							involvement from 2019 onwards. He has made significant investments in various
+							projects, including Moonbeam, Goldfinch, Exorde, Rigor, Silta Finance, and Nym.
+							Sergejs, alongside a dedicated team, has successfully launched over 700 nodes, which
+							allowed him to establish close relationships with multiple projects, providing
 							invaluable support in testing their networks and developing blockchains such as Aptos,
 							Exorde, Nym, Aleo, IronFish, StarkNet, and MoonBeam, among others. Additionally, he
 							has served as a mainnet validator for projects like Nym, Ethereum, Gnosis, Polkadot,
@@ -94,14 +94,14 @@
 						</p>
 
 						<p id="left-middle-text" class="nick">
-							CMO of Monezo Nick Tretinko worked on several global projects at Webhelp in such
-							positions as Quality Analyst & Team Lead in the Customer Care & Content Moderation
-							field. In 2019, Nick shared his experience and vision to help grow the Binance
-							community as a Binance Angel. Later he was involved in community development and other
-							large projects such as Keep Network, Moonbeam, Biconomy, etc. Before founding the
-							Monezo project with the team, Nick was responsible for the development of communities
-							of various projects, both as a Community Manager and providing a full cycle of
-							outsourcing for working with the media development of the GuildFi project.
+							CMO of Monezo Nick worked on several global projects at Webhelp in such positions as
+							Quality Analyst & Team Lead in the Customer Care & Content Moderation field. In 2019,
+							Nick shared his experience and vision to help grow the Binance community as a Binance
+							Angel. Later he was involved in community development and other large projects such as
+							Keep Network, Moonbeam, Biconomy, etc. Before founding the Monezo project with the
+							team, Nick was responsible for the development of communities of various projects,
+							both as a Community Manager and providing a full cycle of outsourcing for working with
+							the media development of the GuildFi project.
 						</p>
 					</div>
 
@@ -116,8 +116,8 @@
 					<p id="executive-name">VALDEMARS BARETS</p>
 					<p id="executive-name">ALEKSEJS BORODINOVS</p>
 					<p id="executive-name">MAKSIMS KURAJEVS</p>
-					<p id="executive-name">SERGEJS HLUSOVS</p>
-					<p id="executive-name">NICK TRETINKO</p>
+					<p id="executive-name">SERGEJS</p>
+					<p id="executive-name">NICK</p>
 				</div>
 			</div>
 
@@ -125,8 +125,8 @@
 				<img src="@/assets/images/monezo-executive-valdemars.png" id="executive-image" />
 				<img src="@/assets/images/monezo-executive-aleksejs.png" id="executive-image" />
 				<img src="@/assets/images/monezo-executive-maksims.png" id="executive-image" />
-				<img src="@/assets/images/monezo-executive-sergejs.png" id="executive-image" />
-				<img src="@/assets/images/monezo-executive-nick.png" id="executive-image" />
+				<img src="@/assets/images/monezo-exec-1.png" id="executive-image" />
+				<img src="@/assets/images/monezo-exec-2.png" id="executive-image" />
 			</div>
 		</div>
 
@@ -164,7 +164,7 @@
 					tlImages.from(
 						image,
 						{
-							xPercent: 100,
+							xPercent: 120,
 							scale: 0.7,
 							duration: 2,
 							ease: Power1.easeInOut,
@@ -175,7 +175,7 @@
 						duration: 2,
 					});
 					tlImages.to(image, {
-						xPercent: -90,
+						xPercent: -100,
 						scale: 0.7,
 						duration: 2,
 						ease: Power1.easeInOut,
@@ -199,7 +199,7 @@
 						duration: 4,
 					});
 					tlText.to(text, {
-						xPercent: 100,
+						xPercent: 120,
 						duration: 1,
 						opacity: 0,
 						ease: Power1.easeInOut,
@@ -223,7 +223,7 @@
 						duration: 4,
 					});
 					tlExecutiveText.to(text, {
-						xPercent: 200,
+						xPercent: 100,
 						duration: 1,
 						opacity: 0,
 						ease: Power1.easeInOut,
@@ -247,7 +247,7 @@
 						duration: 4,
 					});
 					tlJobPositionText.to(text, {
-						xPercent: 200,
+						xPercent: 100,
 						duration: 1,
 						opacity: 0,
 						ease: Power1.easeInOut,
@@ -351,7 +351,7 @@
 					.left__job-position {
 						position: absolute;
 						bottom: 0;
-						width: 50rem;
+						width: 100%;
 						margin-bottom: 1rem;
 						font-size: 1.7rem;
 						font-weight: 500;
@@ -435,6 +435,7 @@
 
 					p {
 						position: absolute;
+						width: 100%;
 						font-size: 4rem;
 						font-weight: bold;
 						line-height: 6rem;
@@ -468,7 +469,7 @@
 				right: 0;
 				display: flex;
 				justify-content: center;
-				align-items: center;
+				align-items: flex-end;
 				width: 60%;
 				height: 100%;
 				z-index: 1;
@@ -484,7 +485,7 @@
 
 				img {
 					position: absolute;
-					height: 100%;
+					height: 95%;
 					transform-origin: bottom;
 				}
 			}

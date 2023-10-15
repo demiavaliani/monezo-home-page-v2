@@ -97,6 +97,7 @@
 				color: $monezo-night-black;
 				background-color: $monezo-venetian-red;
 				box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.2);
+				z-index: 1;
 			}
 
 			&--filled {
