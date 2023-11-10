@@ -1,7 +1,7 @@
 <template>
 	<div class="yieldful-nft-square">
 		<div class="yieldful-nft-square__circle-wrapper">
-			<div class="circle" @mouseenter="isImageHovered = true" @mouseleave="isImageHovered = false">
+			<div class="circle">
 				<p>
 					{{ title }}
 				</p>
@@ -133,7 +133,6 @@
 
 		setup(props) {
 			const bodyWidth = ref(0);
-			const isImageHovered = ref(false);
 
 			const squareWidth = computed(() => `${bodyWidth.value / 4 / 10}rem`);
 
@@ -147,12 +146,10 @@
 
 				gsap.registerPlugin(CSSPlugin);
 
-				const circleWrappers = gsap.utils.toArray(
-					'.yieldful-nft-square__circle-wrapper .circle .circle__animation'
-				);
+				const circleWrappers = gsap.utils.toArray('.yieldful-nft-square__circle-wrapper .circle');
 
 				circleWrappers.forEach((elem: HTMLElement) => {
-					const rotate = gsap.to(elem, {
+					const rotate = gsap.to(elem.lastChild, {
 						rotation: 360,
 						repeat: -1,
 						duration: 9,
@@ -160,7 +157,7 @@
 						paused: true,
 					});
 
-					const grow = gsap.to(elem, { width: '150%', height: '150%', paused: true });
+					const grow = gsap.to(elem.lastChild, { width: '150%', height: '150%', paused: true });
 
 					elem.addEventListener('mouseenter', () => {
 						rotate.play();
@@ -173,7 +170,7 @@
 				});
 			});
 
-			return { squareWidth, isImageHovered, getImageUrl };
+			return { squareWidth, getImageUrl };
 		},
 	});
 </script>
@@ -290,11 +287,11 @@
 
 			&-single {
 				&--right {
-					right: -2.2rem;
+					right: -2.3rem;
 				}
 
 				&--left {
-					left: -2.2rem;
+					left: -2.3rem;
 					transform: rotate(180deg);
 				}
 			}
