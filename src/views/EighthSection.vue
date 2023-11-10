@@ -365,6 +365,11 @@
 						font-size: 1.3rem;
 					}
 
+					@media only screen and (max-width: 1470px) and (max-height: 754px) {
+						padding-top: 0.5rem;
+						padding-bottom: 0.5rem;
+					}
+
 					svg {
 						min-width: 2.2rem;
 						height: 2.5rem;
