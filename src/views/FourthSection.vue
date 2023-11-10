@@ -296,12 +296,6 @@
 				leftTextGroupHeight.value = entries[0].contentRect.height;
 			});
 
-			const calculateMediaQuery = (width: number, height: number) => {
-				return window.matchMedia(
-					`screen and (max-width: ${width}px) and (max-height: ${height}px)`
-				);
-			};
-
 			onMounted(() => {});
 
 			return {
