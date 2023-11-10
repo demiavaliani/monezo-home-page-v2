@@ -247,7 +247,7 @@
 					monkerFullWidth.value = '50rem';
 				}
 
-				if (calculateMediaQuery(1366, 768).matches) {
+				if (calculateMediaQuery(1470, 768).matches) {
 					monkerTransitionStartWidth.value = '25rem';
 					monkerFullWidth.value = '45rem';
 				}
@@ -414,7 +414,7 @@
 							font-weight: bold;
 							line-height: 6rem;
 
-							@media only screen and (max-width: 1366px) and (max-height: 768px) {
+							@media only screen and (max-width: 1470px) and (max-height: 768px) {
 								margin-bottom: 2rem;
 								font-size: 4.5rem;
 							}
@@ -429,7 +429,7 @@
 							width: 45rem;
 							margin-bottom: 6rem;
 
-							@media only screen and (max-width: 1366px) and (max-height: 768px) {
+							@media only screen and (max-width: 1470px) and (max-height: 768px) {
 								margin-bottom: 3rem;
 							}
 
@@ -445,7 +445,7 @@
 								&:first-child {
 									margin-bottom: 3.8rem;
 
-									@media only screen and (max-width: 1366px) and (max-height: 768px) {
+									@media only screen and (max-width: 1470px) and (max-height: 768px) {
 										margin-bottom: 2rem;
 									}
 
@@ -468,7 +468,7 @@
 									line-height: 6rem;
 									white-space: nowrap;
 
-									@media only screen and (max-width: 1366px) and (max-height: 768px) {
+									@media only screen and (max-width: 1470px) and (max-height: 768px) {
 										font-size: 4.5rem;
 									}
 
