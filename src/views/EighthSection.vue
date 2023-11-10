@@ -53,7 +53,12 @@
 
 		<div class="eighth-section__bottom" ref="questions">
 			<div class="questions">
-				<div class="question" id="question" v-for="{ question, answer } in questionsAndAnswers">
+				<div
+					class="question"
+					id="question"
+					v-for="{ id, question } in questionsAndAnswers"
+					@click="currentQuestionId = id"
+				>
 					<p>{{ question }}</p>
 
 					<svg viewBox="0 0 22 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,9 +68,11 @@
 			</div>
 
 			<div class="answer">
-				<p class="answer__text" v-for="{ answer } in questionsAndAnswers">
-					{{ answer }}
-				</p>
+				<div class="answer__text" v-for="{ id, answer } in questionsAndAnswers">
+					<Transition name="answers-transition">
+						<p v-if="currentQuestionId === id">{{ answer }}</p>
+					</Transition>
+				</div>
 			</div>
 		</div>
 
@@ -88,46 +95,55 @@
 			const navbarTextGroupWidth = ref(0);
 			const questionsAndAnswers = [
 				{
+					id: 1,
 					question: 'Has the Monezo Platform been audited?',
 					answer:
 						'Unique feature of Monezo platform is that it cannot be hacked same way as DeFi protocols,so customers deposit cannot be affected. Nevertheless, in upcoming future after integrating new features Monezo platform will be audited to ensure system safety and provide best user experience.',
 				},
 				{
+					id: 2,
 					question: 'Is Monezo a blockchain?',
 					answer:
 						'No, it is not. In case of token issuance it will be built on top of the EVM-compatible blockchains, as it shares vision of Monezo.',
 				},
 				{
+					id: 3,
 					question: 'Where can I find the updates of the Monezo Platform?',
 					answer:
 						'Follow along live on Twitter and Medium or connect with the community to stay connected with what’s going on in the Monezo Discord server and Telegram. Later you could sign up for Monezo Updates on the website and on mobile app',
 				},
 				{
+					id: 4,
 					question: 'What is minimum and maximum amount I can invest on Monezo Platform?',
 					answer:
 						'You can start investing from as little amount as 100$ and the maximum amount depends on Monezo NFT collection type.',
 				},
 				{
+					id: 5,
 					question: 'Why the price of Monezo NFT is independent of the crypto market?',
 					answer:
 						'Each NFT has a nominal value set by Monezo, therefore all the rewards are based on nominal value of NFT. At any time NFT holders can sell Monezo NFT on Monezo’s and third-parties platforms. In addition to that, prices of all NFT are protected with instantly liquidity buyout program, so the company guarantee that will use instant liquidity fund to purchase NFT using its nominal value with deduction of special fee. NFT are connected to income from real world assets and businesses. In this regard, Monezo NFT is an excellent solution for diversification and stable, predictable income.',
 				},
 				{
+					id: 6,
 					question: 'Where can I buy Monezo NFT?',
 					answer:
 						'You will be able to choose all Monezo NFT collections on branded Monezo marketplace to enjoy best commission of only 0,5% and get access to exclusive collections and pre-mint events. Also you will be able instantly stake NFT and earn daily rewards. Monezo cannot be responsible for errors on third-parties markets, however you are not limited to purchase Monezo NFT on the leading marketplaces such as MagicEden, OpenSea, Rarible, Binance and CoinBase.',
 				},
 				{
+					id: 7,
 					question: 'What should I check before purchase Monezo NFT on third-parties marketplaces?',
 					answer:
 						'Make sure that you use marketplaces authorized by Monezo and check that you are purchasing from official Monezo account. (Please check, that this account is verified, where this is applied.) Authorized marketplaces:MagicEden, OpenSea, Rarible, Binance and CoinBase.',
 				},
 				{
+					id: 8,
 					question: 'Purchasing Monezo NFT do I get share in associated business?',
 					answer:
 						'Monezo NFT gives you ability to receive income generated from associated business, but ownership of NFT does not represent any ownership of share in businesses.',
 				},
 				{
+					id: 9,
 					question:
 						'Should I take care about management and legal issues related to real estate assets (or other businesses linked to NFT collections)?',
 					answer:
@@ -136,6 +152,8 @@
 			];
 			const bottomHeight = ref(510);
 			const bottomHeightCSS = computed(() => `${bottomHeight.value}px`);
+			const bottomHeightCSSNegative = computed(() => `-${bottomHeight.value}px`);
+			const currentQuestionId = ref(1);
 
 			const navbarRunningTextWrapperWidth = computed(() =>
 				navbarRunningTextWrapper.value ? navbarRunningTextWrapper.value.offsetWidth : 0
@@ -152,42 +170,6 @@
 			};
 
 			onMounted(() => {
-				const questions = gsap.utils.toArray('#question') as HTMLElement[];
-				let active = 0;
-				const tl = gsap.timeline();
-
-				const playNext = (index = 1) => {
-					tl.to('.answer', {
-						y: `-=${index * bottomHeight.value}`,
-					});
-				};
-
-				const playPrevious = (index = 1) => {
-					tl.to('.answer', {
-						y: `+=${index * bottomHeight.value}`,
-					});
-				};
-
-				questions.forEach((question, index) => {
-					question.onclick = () => {
-						if (index > active) {
-							if (index - active > 1) {
-								playNext(index - active);
-							} else playNext();
-
-							active = index;
-						}
-
-						if (index < active) {
-							if (active - index > 1) {
-								playPrevious(active - index);
-							} else playPrevious();
-
-							active = index;
-						}
-					};
-				});
-
 				if (calculateMediaQuery(2560, 1700).matches) {
 					bottomHeight.value = 530;
 				}
@@ -212,6 +194,8 @@
 				navbarTextGroupWidth,
 				questionsAndAnswers,
 				bottomHeightCSS,
+				bottomHeightCSSNegative,
+				currentQuestionId,
 			};
 		},
 	});
@@ -419,38 +403,39 @@
 			}
 
 			.answer {
+				position: relative;
+				display: flex;
+				align-items: center;
 				width: 100%;
-				padding: 0 10rem;
 				font-size: 1.8rem;
 				font-weight: 500;
 				line-height: 2.9rem;
 
-				@media only screen and (max-width: 1710px) and (max-height: 953px) {
-					padding: 0 5rem;
-				}
-
-				@media only screen and (max-width: 1680px) and (max-height: 1050px) {
-					padding: 0 3rem;
-				}
-
-				@media only screen and (max-width: 1600px) and (max-height: 900px) {
-					font-size: 1.5rem;
-				}
-
-				@media only screen and (max-width: 1512px) and (max-height: 834px) {
-					padding: 0 3rem;
-					font-size: 1.3rem;
-				}
-
-				@media only screen and (max-width: 1440px) and (max-height: 900px) {
-					padding: 0 3rem;
-					font-size: 1.3rem;
-				}
-
 				&__text {
-					display: flex;
-					align-items: center;
-					height: 100%;
+					position: absolute;
+					padding: 0 10rem;
+
+					@media only screen and (max-width: 1710px) and (max-height: 953px) {
+						padding: 0 5rem;
+					}
+
+					@media only screen and (max-width: 1680px) and (max-height: 1050px) {
+						padding: 0 3rem;
+					}
+
+					@media only screen and (max-width: 1600px) and (max-height: 900px) {
+						font-size: 1.5rem;
+					}
+
+					@media only screen and (max-width: 1512px) and (max-height: 834px) {
+						padding: 0 3rem;
+						font-size: 1.3rem;
+					}
+
+					@media only screen and (max-width: 1440px) and (max-height: 900px) {
+						padding: 0 3rem;
+						font-size: 1.3rem;
+					}
 				}
 			}
 		}
@@ -473,6 +458,21 @@
 					width: 4.134rem;
 				}
 			}
+		}
+
+		.answers-transition-enter-active,
+		.answers-transition-leave-active {
+			transition: all 0.5s ease-out;
+		}
+
+		.answers-transition-enter-from {
+			opacity: 0;
+			transform: translateY(v-bind(bottomHeightCSS));
+		}
+
+		.answers-transition-leave-to {
+			opacity: 0;
+			transform: translateY(v-bind(bottomHeightCSSNegative));
 		}
 	}
 </style>
