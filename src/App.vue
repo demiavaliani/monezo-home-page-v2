@@ -1,29 +1,31 @@
 <template>
 	<div class="app-wrapper">
-		<FirstSection class="section-element"></FirstSection>
-		<SecondSection class="section-element"></SecondSection>
-		<ThirdSection class="section-element"></ThirdSection>
-		<FourthSection class="section-element"></FourthSection>
-		<FifthSection class="section-element"></FifthSection>
+		<HamburgerMenu class="section-element" />
+		<FirstSection class="section-element" />
+		<SecondSection class="section-element" />
+		<ThirdSection class="section-element" />
+		<FourthSection class="section-element" />
+		<FifthSection class="section-element" />
 		<SixthSection
 			:is-intersecting="sixthSectionIsIntersecting"
 			class="section-element"
 			ref="sixthSectionIntersectionTarget"
-		></SixthSection>
+		/>
 		<SeventhSection
 			:is-intersecting="seventhSectionIsIntersecting"
 			class="section-element"
 			ref="seventhSectionIntersectionTarget"
-		></SeventhSection>
-		<SeventhSectionQuarters class="section-element"></SeventhSectionQuarters>
-		<EighthSection class="section-element"></EighthSection>
-		<NinthSection class="section-element"></NinthSection>
+		/>
+		<SeventhSectionQuarters class="section-element" />
+		<EighthSection class="section-element" />
+		<NinthSection class="section-element" />
 	</div>
 </template>
 
 <script lang="ts">
 	import { defineComponent, onMounted, ref } from 'vue';
 	import { useIntersectionObserver } from '@vueuse/core';
+	import HamburgerMenu from './components/HamburgerMenu.vue';
 	import FirstSection from './views/FirstSection.vue';
 	import SecondSection from './views/SecondSection.vue';
 	import ThirdSection from './views/ThirdSection.vue';
@@ -37,6 +39,7 @@
 
 	export default defineComponent({
 		components: {
+			HamburgerMenu,
 			FirstSection,
 			SecondSection,
 			ThirdSection,
