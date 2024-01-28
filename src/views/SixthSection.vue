@@ -52,35 +52,72 @@
 					<img src="@/assets/images/monezo-logo-colorful.png" />
 
 					<div class="wrapper">
-						<p id="left-middle-text">
-							<!-- incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud -->
-							exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						<p id="left-middle-text" class="valdemars">
+							Our CBO Valdemars Barets has huge experience working for well-known companies in Dubai
+							(Dubai Properties, Engel & Völkers Dubai). Valdemars holding senior positions in
+							business development In the real estate sector. His strong points include establishing
+							business processes and creating new products, as well asexperience in attracting new
+							partners for business visibility. With experience and connections in the industry, my
+							team and I are focused on delivering our first tight project in Dubai.
 						</p>
 
-						<p id="left-middle-text">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+						<p id="left-middle-text" class="aleksejs">
+							Co-Founder, Aleksejs, with over 20 years of experience in high-ranking positions
+							focused on construction companies. With experience in the crypto industry spanning
+							over 6 years, he brings a unique blend of traditional sector knowledge and a
+							comprehensive understanding of the digital asset landscape. Aleksejs' real sector
+							connections and experience in the European market further enhance his ability to drive
+							the project's success. With his extensive experience and connections, Aleksejs is
+							committed to driving the project's growth and ensuring long-term success in the
+							dynamic and competitive crypto industry.
 						</p>
 
-						<p id="left-middle-text">
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-							exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						<p id="left-middle-text" class="maksims">
+							Crypto veteran with 6 years experience working with industry leaders. Binance Angel
+							and community manager & representative for 3 years. Community leader for cumulative
+							150k+ member in 4 WEB3.0 projects. Angel investor in 20+ WEB3.0 startups. CEO,
+							Co-founder for revolutionary NFT platform.Crypto Blogger, guest speaker.
 						</p>
 
-						<p id="left-middle-text">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+						<p id="left-middle-text" class="sergejs">
+							CTO Sergejs has extensive experience in technical process management gained through
+							his work in prominent Latvian companies such as A/s Rigas Siltums and A/s Latvenergo.
+							Since 2017, Sergejs has been actively involved in the crypto industry, increasing his
+							involvement from 2019 onwards. He has made significant investments in various
+							projects, including Moonbeam, Goldfinch, Exorde, Rigor, Silta Finance, and Nym.
+							Sergejs, alongside a dedicated team, has successfully launched over 700 nodes, which
+							allowed him to establish close relationships with multiple projects, providing
+							invaluable support in testing their networks and developing blockchains such as Aptos,
+							Exorde, Nym, Aleo, IronFish, StarkNet, and MoonBeam, among others. Additionally, he
+							has served as a mainnet validator for projects like Nym, Ethereum, Gnosis, Polkadot,
+							and Cosmos.
 						</p>
 
-						<p id="left-middle-text">
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-							exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						<p id="left-middle-text" class="nick">
+							CMO of Monezo Nick worked on several global projects at Webhelp in such positions as
+							Quality Analyst & Team Lead in the Customer Care & Content Moderation field. In 2019,
+							Nick shared his experience and vision to help grow the Binance community as a Binance
+							Angel. Later he was involved in community development and other large projects such as
+							Keep Network, Moonbeam, Biconomy, etc. Before founding the Monezo project with the
+							team, Nick was responsible for the development of communities of various projects,
+							both as a Community Manager and providing a full cycle of outsourcing for working with
+							the media development of the GuildFi project.
 						</p>
 					</div>
 
-					<p class="left__job-position">Chief Business Officer</p>
+					<p class="left__job-position" id="left__job-position">Chief Business Officer</p>
+					<p class="left__job-position" id="left__job-position">Co Founder</p>
+					<p class="left__job-position" id="left__job-position">Chief Executive Officer</p>
+					<p class="left__job-position" id="left__job-position">Chief Technical Officer</p>
+					<p class="left__job-position" id="left__job-position">Chief Marketing Officer</p>
 				</div>
 
 				<div class="left__bottom">
-					<p>VALDEMARS BARETS</p>
+					<p id="executive-name">VALDEMARS BARETS</p>
+					<p id="executive-name">ALEKSEJS BORODINOVS</p>
+					<p id="executive-name">MAKSIMS KURAJEVS</p>
+					<p id="executive-name">SERGEJS</p>
+					<p id="executive-name">NICK</p>
 				</div>
 			</div>
 
@@ -88,8 +125,8 @@
 				<img src="@/assets/images/monezo-executive-valdemars.png" id="executive-image" />
 				<img src="@/assets/images/monezo-executive-aleksejs.png" id="executive-image" />
 				<img src="@/assets/images/monezo-executive-maksims.png" id="executive-image" />
-				<img src="@/assets/images/monezo-executive-sergejs.png" id="executive-image" />
-				<img src="@/assets/images/monezo-executive-nick.png" id="executive-image" />
+				<img src="@/assets/images/monezo-exec-1.png" id="executive-image" />
+				<img src="@/assets/images/monezo-exec-2.png" id="executive-image" />
 			</div>
 		</div>
 
@@ -98,7 +135,7 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, computed, onMounted } from 'vue';
+	import { defineComponent, ref, computed, watch } from 'vue';
 	import NavBar from '@/components/NavBar.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import { useResizeObserver } from '@vueuse/core';
@@ -106,7 +143,14 @@
 
 	export default defineComponent({
 		components: { NavBar, RunningTextStraight },
-		setup() {
+
+		props: {
+			isIntersecting: {
+				required: true,
+			},
+		},
+
+		setup(props) {
 			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const navbarTextGroup = ref<HTMLDivElement | null>(null);
 			const navbarTextGroupWidth = ref(0);
@@ -119,61 +163,107 @@
 				navbarTextGroupWidth.value = entries[0].contentRect.width;
 			});
 
-			onMounted(() => {
-				const images = gsap.utils.toArray('#executive-image') as HTMLImageElement[];
-				const tlImages = gsap.timeline({ repeat: -1 });
+			watch(
+				() => props.isIntersecting,
+				() => {
+					const images = gsap.utils.toArray('#executive-image') as HTMLImageElement[];
+					const tlImages = gsap.timeline({ repeat: -1 });
 
-				images.forEach((image) => {
-					tlImages.from(
-						image,
-						{
-							xPercent: 100,
+					images.forEach((image) => {
+						tlImages.from(
+							image,
+							{
+								xPercent: 120,
+								scale: 0.7,
+								duration: 2,
+								ease: Power1.easeInOut,
+							},
+							'>-1'
+						);
+						tlImages.from(image, {
+							duration: 2,
+						});
+						tlImages.to(image, {
+							xPercent: -100,
 							scale: 0.7,
 							duration: 2,
 							ease: Power1.easeInOut,
-						},
-						'>-1'
-					);
-					tlImages.from(image, {
-						duration: 2,
+						});
 					});
-					tlImages.to(image, {
-						xPercent: -90,
-						scale: 0.7,
-						duration: 2,
-						ease: Power1.easeInOut,
-					});
-				});
 
-				console.log(tlImages);
+					const descriptionText = gsap.utils.toArray('#left-middle-text') as HTMLElement[];
+					const tlText = gsap.timeline({ repeat: -1 });
 
-				const descriptionText = gsap.utils.toArray('#left-middle-text') as HTMLElement[];
-				const tlText = gsap.timeline({ repeat: -1 });
-
-				descriptionText.forEach((text) => {
-					tlText.from(
-						text,
-						{
-							xPercent: -110,
+					descriptionText.forEach((text) => {
+						tlText.from(
+							text,
+							{
+								xPercent: -110,
+								duration: 1,
+								ease: Power1.easeInOut,
+							},
+							'>-1'
+						);
+						tlText.from(text, {
+							duration: 4,
+						});
+						tlText.to(text, {
+							xPercent: 120,
 							duration: 1,
+							opacity: 0,
 							ease: Power1.easeInOut,
-						},
-						'>-1'
-					);
-					tlText.from(text, {
-						duration: 4,
+						});
 					});
-					tlText.to(text, {
-						xPercent: 100,
 
-						duration: 1,
-						opacity: 0,
-						ease: Power1.easeInOut,
+					const executiveName = gsap.utils.toArray('#executive-name') as HTMLElement[];
+					const tlExecutiveText = gsap.timeline({ repeat: -1 });
+
+					executiveName.forEach((text) => {
+						tlExecutiveText.from(
+							text,
+							{
+								xPercent: -110,
+								duration: 1,
+								ease: Power1.easeInOut,
+							},
+							'>-1'
+						);
+						tlExecutiveText.from(text, {
+							duration: 4,
+						});
+						tlExecutiveText.to(text, {
+							xPercent: 100,
+							duration: 1,
+							opacity: 0,
+							ease: Power1.easeInOut,
+						});
 					});
-				});
 
-				console.log(tlText);
-			});
+					const jobPosition = gsap.utils.toArray('#left__job-position') as HTMLElement[];
+					const tlJobPositionText = gsap.timeline({ repeat: -1 });
+
+					jobPosition.forEach((text) => {
+						tlJobPositionText.from(
+							text,
+							{
+								xPercent: -110,
+								duration: 1,
+								ease: Power1.easeInOut,
+							},
+							'>-1'
+						);
+						tlJobPositionText.from(text, {
+							duration: 4,
+						});
+						tlJobPositionText.to(text, {
+							xPercent: 100,
+							duration: 1,
+							opacity: 0,
+							ease: Power1.easeInOut,
+						});
+					});
+				}
+			);
 
 			return {
 				navbarRunningTextWrapper,
@@ -208,6 +298,14 @@
 				border-right: 2px solid $monezo-night-black;
 				overflow: hidden;
 
+				@media only screen and (max-width: 1920px) and (max-height: 1200px) {
+					width: 50%;
+				}
+
+				@media only screen and (max-width: 1920px) and (max-height: 945px) {
+					width: 60%;
+				}
+
 				&__top {
 					width: 70%;
 					padding: 1.5rem 0 1.5rem 2.5rem;
@@ -217,16 +315,24 @@
 						font-weight: 500;
 						line-height: 2.87rem;
 					}
+
+					@media only screen and (max-width: 1920px) and (max-height: 1200px) {
+						padding: 1rem 0 1rem 2.5rem;
+
+						p {
+							font-size: 1.5rem;
+						}
+					}
 				}
 
 				&__middle {
 					position: relative;
 					display: flex;
 					flex-direction: column;
-					justify-content: center;
+					justify-content: flex-start;
 					flex-grow: 1;
 					gap: 5rem;
-					padding: 5rem 10% 0 2.5rem;
+					padding: 5rem 5rem 0 2.5rem;
 					border: solid $monezo-night-black;
 					border-width: 2px 0;
 
@@ -239,7 +345,11 @@
 					}
 
 					img {
-						width: 30%;
+						width: 18rem;
+
+						@media only screen and (max-width: 1366px) and (max-height: 800px) {
+							width: 13rem;
+						}
 					}
 
 					p {
@@ -251,31 +361,112 @@
 					.left__job-position {
 						position: absolute;
 						bottom: 0;
-						width: 50rem;
+						width: 100%;
 						margin-bottom: 1rem;
 						font-size: 1.7rem;
 						font-weight: 500;
 						line-height: 2.9rem;
 					}
+
+					@media only screen and (max-width: 3440px) and (max-height: 1440px) {
+						padding-top: 25rem;
+						padding-right: 40rem;
+					}
+
+					@media only screen and (max-width: 2560px) and (max-height: 1700px) {
+						padding-top: 25rem;
+						padding-right: 20rem;
+					}
+
+					@media only screen and (max-width: 2560px) and (max-height: 1440px) {
+						padding-top: 15rem;
+						padding-right: 15rem;
+					}
+
+					@media only screen and (max-width: 2304px) and (max-height: 1440px) {
+						padding-top: 10rem;
+						padding-right: 10rem;
+					}
+
+					@media only screen and (max-width: 1920px) and (max-height: 1200px) {
+						padding-top: 5rem;
+						padding-right: 7rem;
+
+						p {
+							font-size: 1.5rem;
+						}
+					}
+
+					@media only screen and (max-width: 1920px) and (max-height: 945px) {
+						gap: 3rem;
+						padding-top: 3rem;
+						padding-right: 7rem;
+
+						p {
+							font-size: 1.5rem;
+						}
+					}
+
+					@media only screen and (max-width: 1680px) and (max-height: 1050px) {
+						gap: 3rem;
+						padding-top: 3rem;
+						padding-right: 7rem;
+
+						p {
+							font-size: 1.3rem;
+						}
+					}
+
+					@media only screen and (max-width: 1600px) and (max-height: 900px) {
+						gap: 3rem;
+						padding-top: 3rem;
+						padding-right: 7rem;
+
+						p {
+							font-size: 1.3rem;
+						}
+					}
+
+					@media only screen and (max-width: 1366px) and (max-height: 800px) {
+						gap: 1rem;
+						padding-top: 1rem;
+						padding-right: 7rem;
+
+						p {
+							font-size: 1.3rem;
+						}
+					}
 				}
 
 				&__bottom {
+					position: relative;
+					height: 8rem;
 					padding: 1.5rem 0 1.5rem 2.5rem;
 
 					p {
+						position: absolute;
+						width: 100%;
 						font-size: 4rem;
 						font-weight: bold;
 						line-height: 6rem;
+					}
 
-						@media only screen and (max-width: 1440px) and (max-height: 900px) {
+					@media only screen and (max-width: 1920px) and (max-height: 1200px) {
+						padding: 1rem 0 1rem 2.5rem;
+
+						p {
 							font-size: 3.5rem;
 						}
+					}
 
-						@media only screen and (max-width: 1366px) and (max-height: 768px) {
+					@media only screen and (max-width: 1366px) and (max-height: 768px) {
+						p {
 							line-height: 4rem;
 						}
+					}
 
-						@media only screen and (max-width: 1280px) and (max-height: 800px) {
+					@media only screen and (max-width: 1280px) and (max-height: 800px) {
+						p {
 							font-size: 3rem;
 							line-height: 4rem;
 						}
@@ -288,15 +479,23 @@
 				right: 0;
 				display: flex;
 				justify-content: center;
-				align-items: center;
+				align-items: flex-end;
 				width: 60%;
 				height: 100%;
 				z-index: 1;
 				overflow: hidden;
 
+				@media only screen and (max-width: 1920px) and (max-height: 1200px) {
+					width: 50%;
+				}
+
+				@media only screen and (max-width: 1920px) and (max-height: 945px) {
+					width: 40%;
+				}
+
 				img {
 					position: absolute;
-					height: 100%;
+					height: 95%;
 					transform-origin: bottom;
 				}
 			}

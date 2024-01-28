@@ -62,50 +62,59 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, onMounted } from 'vue';
+	import { defineComponent, watch } from 'vue';
 	import NavBar from '@/components/NavBar.vue';
 	import { gsap, Power1 } from 'gsap';
 
 	export default defineComponent({
 		components: { NavBar },
 
-		setup() {
-			onMounted(() => {
-				gsap.from('#seventh-section-monker-yellow', {
-					scale: 0.7,
-					rotation: -150,
-					duration: 0.5,
-				});
-				gsap.to('#seventh-section-monker-yellow', {
-					scale: 1,
-					opacity: 1,
-					duration: 0.5,
-					delay: 0.1,
-				});
+		props: {
+			isIntersecting: {
+				required: true,
+			},
+		},
 
-				gsap.from('#seventh-section-monker-white', {
-					scale: 0.3,
-					duration: 0.5,
-				});
-				gsap.to('#seventh-section-monker-white', {
-					scale: 1,
-					opacity: 1,
-					duration: 0.5,
-					delay: 0.1,
-				});
+		setup(props) {
+			watch(
+				() => props.isIntersecting,
+				() => {
+					gsap.from('#seventh-section-monker-yellow', {
+						scale: 0.7,
+						rotation: -150,
+						duration: 0.5,
+					});
+					gsap.to('#seventh-section-monker-yellow', {
+						scale: 1,
+						opacity: 1,
+						duration: 0.5,
+						delay: 0.1,
+					});
 
-				gsap.from('#seventh-section-monker-suite', {
-					scale: 0.7,
-					rotation: 150,
-					duration: 0.5,
-				});
-				gsap.to('#seventh-section-monker-suite', {
-					scale: 1,
-					opacity: 1,
-					duration: 0.5,
-					delay: 0.1,
-				});
-			});
+					gsap.from('#seventh-section-monker-white', {
+						scale: 0.3,
+						duration: 0.5,
+					});
+					gsap.to('#seventh-section-monker-white', {
+						scale: 1,
+						opacity: 1,
+						duration: 0.5,
+						delay: 0.1,
+					});
+
+					gsap.from('#seventh-section-monker-suite', {
+						scale: 0.7,
+						rotation: 150,
+						duration: 0.5,
+					});
+					gsap.to('#seventh-section-monker-suite', {
+						scale: 1,
+						opacity: 1,
+						duration: 0.5,
+						delay: 0.1,
+					});
+				}
+			);
 
 			return {};
 		},

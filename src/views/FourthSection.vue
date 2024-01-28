@@ -296,12 +296,6 @@
 				leftTextGroupHeight.value = entries[0].contentRect.height;
 			});
 
-			const calculateMediaQuery = (width: number, height: number) => {
-				return window.matchMedia(
-					`screen and (max-width: ${width}px) and (max-height: ${height}px)`
-				);
-			};
-
 			onMounted(() => {});
 
 			return {
@@ -569,12 +563,19 @@
 				--circle-font-size: 1.5rem;
 			}
 
+			@media only screen and (max-width: 1920px) and (max-height: 965px) {
+				--square-height: 20rem;
+				--circle-height: 65%;
+				--circle-font-size: 1.5rem;
+			}
+
 			@media only screen and (max-width: 1680px) and (max-height: 1050px) {
 				--double-border-font-size: 1.5rem;
 			}
 
 			@media only screen and (max-width: 1600px) and (max-height: 900px) {
 				--square-height: 24rem;
+				--circle-height: 50%;
 				--circle-font-size: 1.3rem;
 			}
 
@@ -584,7 +585,7 @@
 				--double-border-font-size: 1.4rem;
 			}
 
-			@media only screen and (max-width: 1366px) and (max-height: 768px) {
+			@media only screen and (max-width: 1470px) and (max-height: 768px) {
 				--square-height: 17rem;
 				--double-border-font-size: 1.2rem;
 				--circle-font-size: 1.1rem;
