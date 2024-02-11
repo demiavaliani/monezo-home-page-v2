@@ -1,7 +1,7 @@
 <template>
 	<div class="yieldful-nft-square">
 		<div class="yieldful-nft-square__circle-wrapper">
-			<div class="circle">
+			<div class="circle" @mouseenter="$emit('circleHover', categoryDescription)">
 				<p>
 					{{ title }}
 				</p>
@@ -129,7 +129,14 @@
 				default: '2px solid #111111',
 				validator: (value: string) => ['none', '2px solid #111111'].includes(value),
 			},
+
+			categoryDescription: {
+				type: String,
+				required: true,
+			},
 		},
+
+		emits: ['circleHover'],
 
 		setup(props) {
 			const bodyWidth = ref(0);

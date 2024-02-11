@@ -91,18 +91,20 @@
 						v-for="item in dataRowOne"
 						:key="item.title"
 						:title="item.title"
-						:circle-animation-name="item.circleAnimationName"
-						:double-border="item.doubleBorder"
-						:double-border-divided="item.doubleBorderDivided"
-						:double-border-title="item.doubleBorderTitle"
-						:double-border-divided-text-top="item.doubleBorderDividedTextTop"
-						:double-border-divided-text-bottom="item.doubleBorderDividedTextBottom"
+						:circleAnimationName="item.circleAnimationName"
+						:doubleBorder="item.doubleBorder"
+						:doubleBorderDivided="item.doubleBorderDivided"
+						:doubleBorderTitle="item.doubleBorderTitle"
+						:doubleBorderDividedTextTop="item.doubleBorderDividedTextTop"
+						:doubleBorderDividedTextBottom="item.doubleBorderDividedTextBottom"
 						:arrowSingle="item.arrowSingle"
 						:arrowDoubleTop="item.arrowDoubleTop"
 						:arrowDoubleBottom="item.arrowDoubleBottom"
-						:border-top="item.borderTop"
-						:border-right="item.borderRight"
-						:border-left="item.borderLeft"
+						:borderTop="item.borderTop"
+						:borderRight="item.borderRight"
+						:borderLeft="item.borderLeft"
+						:categoryDescription="item.categoryDescription"
+						@circleHover="(text) => (middleDescriptionText = text)"
 					/>
 				</div>
 
@@ -119,10 +121,7 @@
 
 					<div class="right-side__row-middle__description">
 						<p>
-							Monezo Escrow is a security system dedicated to ensuring liquidity funds safety. It
-							acts as a bridge between businesses & NFT holders. Its primary purpose is to transfer
-							liquidity to businesses and store revenue from business activities to distribute
-							rewards to NFT holders.
+							{{ middleDescriptionText }}
 						</p>
 					</div>
 
@@ -137,18 +136,20 @@
 						v-for="item in dataRowTwo"
 						:key="item.title"
 						:title="item.title"
-						:circle-animation-name="item.circneAnimationName"
-						:double-border="item.doubleBorder"
-						:double-border-divided="item.doubleBorderDivided"
-						:double-border-title="item.doubleBorderTitle"
-						:double-border-divided-text-top="item.doubleBorderDividedTextTop"
-						:double-border-divided-text-bottom="item.doubleBorderDividedTextBottom"
+						:circleAnimationName="item.circneAnimationName"
+						:doubleBorder="item.doubleBorder"
+						:doubleBorderDivided="item.doubleBorderDivided"
+						:doubleBorderTitle="item.doubleBorderTitle"
+						:doubleBorderDividedTextTop="item.doubleBorderDividedTextTop"
+						:doubleBorderDividedTextBottom="item.doubleBorderDividedTextBottom"
 						:arrowSingle="item.arrowSingle"
 						:arrowDoubleTop="item.arrowDoubleTop"
 						:arrowDoubleBottom="item.arrowDoubleBottom"
-						:border-right="item.borderRight"
-						:border-bottom="item.borderBottom"
-						:border-left="item.borderLeft"
+						:borderRight="item.borderRight"
+						:borderBottom="item.borderBottom"
+						:borderLeft="item.borderLeft"
+						:categoryDescription="item.categoryDescription"
+						@circleHover="(text) => (middleDescriptionText = text)"
 					/>
 				</div>
 			</div>
@@ -190,6 +191,8 @@
 					arrowDoubleBottom: '',
 					borderTop: 'none',
 					borderLeft: 'none',
+					categoryDescription:
+						"Navigate your business to success with Monezo's personalized incubation process, offering meticulous project evaluations to ensure our partners and investors thrive in the NFT space.",
 				},
 				{
 					title: 'INCUBATOR',
@@ -200,6 +203,8 @@
 					arrowSingle: 'single--right',
 					borderTop: 'none',
 					borderLeft: 'none',
+					categoryDescription:
+						'Monezo Incubator empowers both emerging startups and established enterprises with targeted financial support, driving innovation and amplifying your financial growth.',
 				},
 				{
 					title: 'Score',
@@ -210,6 +215,8 @@
 					arrowSingle: 'single--right',
 					borderTop: 'none',
 					borderLeft: 'none',
+					categoryDescription:
+						"Trust and security are paramount. Monezo Score provides comprehensive evaluations to protect your investments and build confidence in the Yieldful NFT's & LP market.",
 				},
 				{
 					title: 'YIELDFUL NFT',
@@ -219,6 +226,8 @@
 					borderTop: 'none',
 					borderRight: 'none',
 					borderLeft: 'none',
+					categoryDescription:
+						'Experience the future of investment with Yieldful NFTs, offering diverse, asset-backed collections that adapt to the unique nature of your business.',
 				},
 			];
 
@@ -236,6 +245,8 @@
 					arrowDoubleBottom: 'double--right',
 					borderBottom: 'none',
 					borderLeft: 'none',
+					categoryDescription:
+						'With Monezo Escrow, experience seamless liquidity management and secure profit distribution, forging a robust link between businesses and NFT holders.',
 				},
 				{
 					title: 'WALLET',
@@ -250,6 +261,8 @@
 					arrowDoubleBottom: 'double--right',
 					borderBottom: 'none',
 					borderLeft: 'none',
+					categoryDescription:
+						'Revolutionize your digital asset experience with Monezo Wallet, the keyless, non-custodial solution integrated into a versatile All-In-One App.',
 				},
 				{
 					title: 'NFT INVESTORS',
@@ -260,6 +273,8 @@
 					arrowSingle: 'single--left',
 					borderBottom: 'none',
 					borderLeft: 'none',
+					categoryDescription:
+						"Access an exclusive array of Yieldful NFTs through Monezo's branded marketplace or get access & authenticate through top-tier third-party marketplaces.",
 				},
 				{
 					title: 'MARKET PLACE',
@@ -269,6 +284,8 @@
 					borderRight: 'none',
 					borderBottom: 'none',
 					borderLeft: 'none',
+					categoryDescription:
+						'Explore the latest Monezo NFT collections with the finest conditions and exclusive campaigns showcased on our branded marketplace and find collections that are listed across leading NFT platforms for unparalleled exposure.',
 				},
 			];
 
@@ -279,6 +296,12 @@
 			const leftRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const leftTextGroup = ref<HTMLDivElement | null>(null);
 			const leftTextGroupHeight = ref(0);
+
+			const middleDescriptionText =
+				ref(`Monezo Escrow is a security system dedicated to ensuring liquidity funds safety. It
+							acts as a bridge between businesses & NFT holders. Its primary purpose is to transfer
+							liquidity to businesses and store revenue from business activities to distribute
+							rewards to NFT holders.`);
 
 			const navbarRunningTextWrapperWidth = computed(() =>
 				navbarRunningTextWrapper.value ? navbarRunningTextWrapper.value.offsetWidth : 0
@@ -309,6 +332,7 @@
 				leftTextGroupHeight,
 				dataRowOne,
 				dataRowTwo,
+				middleDescriptionText,
 			};
 		},
 	});
