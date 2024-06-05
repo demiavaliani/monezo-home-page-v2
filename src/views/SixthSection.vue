@@ -76,48 +76,19 @@
 							Crypto veteran with 6 years experience working with industry leaders. Binance Angel
 							and community manager & representative for 3 years. Community leader for cumulative
 							150k+ member in 4 WEB3.0 projects. Angel investor in 20+ WEB3.0 startups. CEO,
-							Co-founder for revolutionary NFT platform.Crypto Blogger, guest speaker.
-						</p>
-
-						<p id="left-middle-text" class="sergejs">
-							CTO Sergejs has extensive experience in technical process management gained through
-							his work in prominent Latvian companies such as A/s Rigas Siltums and A/s Latvenergo.
-							Since 2017, Sergejs has been actively involved in the crypto industry, increasing his
-							involvement from 2019 onwards. He has made significant investments in various
-							projects, including Moonbeam, Goldfinch, Exorde, Rigor, Silta Finance, and Nym.
-							Sergejs, alongside a dedicated team, has successfully launched over 700 nodes, which
-							allowed him to establish close relationships with multiple projects, providing
-							invaluable support in testing their networks and developing blockchains such as Aptos,
-							Exorde, Nym, Aleo, IronFish, StarkNet, and MoonBeam, among others. Additionally, he
-							has served as a mainnet validator for projects like Nym, Ethereum, Gnosis, Polkadot,
-							and Cosmos.
-						</p>
-
-						<p id="left-middle-text" class="nick">
-							CMO of Monezo Nick worked on several global projects at Webhelp in such positions as
-							Quality Analyst & Team Lead in the Customer Care & Content Moderation field. In 2019,
-							Nick shared his experience and vision to help grow the Binance community as a Binance
-							Angel. Later he was involved in community development and other large projects such as
-							Keep Network, Moonbeam, Biconomy, etc. Before founding the Monezo project with the
-							team, Nick was responsible for the development of communities of various projects,
-							both as a Community Manager and providing a full cycle of outsourcing for working with
-							the media development of the GuildFi project.
+							Co-founder for revolutionary NFT platform. Crypto Blogger, guest speaker.
 						</p>
 					</div>
 
 					<p class="left__job-position" id="left__job-position">Chief Business Officer</p>
 					<p class="left__job-position" id="left__job-position">Co Founder</p>
 					<p class="left__job-position" id="left__job-position">Chief Executive Officer</p>
-					<p class="left__job-position" id="left__job-position">Chief Technical Officer</p>
-					<p class="left__job-position" id="left__job-position">Chief Marketing Officer</p>
 				</div>
 
 				<div class="left__bottom">
 					<p id="executive-name">VALDEMARS BARETS</p>
 					<p id="executive-name">ALEKSEJS BORODINOVS</p>
 					<p id="executive-name">MAKSIMS KURAJEVS</p>
-					<p id="executive-name">SERGEJS</p>
-					<p id="executive-name">NICK</p>
 				</div>
 			</div>
 
@@ -125,8 +96,6 @@
 				<img src="@/assets/images/monezo-executive-valdemars.png" id="executive-image" />
 				<img src="@/assets/images/monezo-executive-aleksejs.png" id="executive-image" />
 				<img src="@/assets/images/monezo-executive-maksims.png" id="executive-image" />
-				<img src="@/assets/images/monezo-exec-1.png" id="executive-image" />
-				<img src="@/assets/images/monezo-exec-2.png" id="executive-image" />
 			</div>
 		</div>
 

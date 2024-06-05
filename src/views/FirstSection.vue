@@ -22,8 +22,8 @@
 
 			<div class="first-section__body__description">
 				<p>
-					Revolutionary platform that connects traditional real world assets & businesses revenue
-					with NFT holders
+					Revolutionary RWA platform that connects traditional real world assets & businesses
+					revenue with NFT holders
 				</p>
 			</div>
 
