@@ -8,14 +8,14 @@
 					</div>
 
 					<div
-						:class="['goal', { 'goal--completed': index <= 5, 'goal--future': index >= 7 }]"
+						:class="['goal', { 'goal--completed': index <= 3, 'goal--future': index >= 5 }]"
 						v-for="goal in quarter.quarterGoals"
 					>
-						<p>{{ goal }}</p>
+						<p :class="{ 'goal__partially-completed': goal === 'Website Launch' }">{{ goal }}</p>
 					</div>
 				</div>
 
-				<div :class="['sides__right', { 'sides__right--future': index >= 7 }]">
+				<div :class="['sides__right', { 'sides__right--future': index >= 4 }]">
 					<div class="circle">
 						<p>
 							{{ quarter.quarterTitle }}
@@ -101,67 +101,56 @@
 		setup() {
 			const quarterData = [
 				{
-					quarterTitle: '[Q1] 2022',
-					quarterGoals: ['Idea Generation', 'Team Setting', 'Market Research & Project Planning'],
+					quarterTitle: '[Q1-Q2] 2022',
+					quarterGoals: ['Idea Generation', 'Team Setting'],
 				},
 				{
-					quarterTitle: '[Q2] 2022',
-					quarterGoals: ['Team Expansion', 'Concept Design', 'Website Draft'],
+					quarterTitle: '[Q3-Q4] 2022',
+					quarterGoals: ['Market Research & Project Planning', 'Team Expansion'],
 				},
 				{
-					quarterTitle: '[Q3] 2022',
-					quarterGoals: ['Litepaper & Pitchdeck Draft', 'Project Idea POC Design & Prototyping'],
+					quarterTitle: '[Q1-Q2] 2023',
+					quarterGoals: ['Litepaper & Pitchdeck Draft', 'Concept Design', 'Website Draft'],
 				},
 				{
-					quarterTitle: '[Q4] 2022',
+					quarterTitle: '[Q3-Q4] 2023',
 					quarterGoals: [
-						'Seed Sale',
-						'Community Creation',
 						'Developing Partnerships',
 						'Developing Market Strategy',
+						'Community Creation',
+						'Project Idea POC Design & Prototyping',
 					],
 				},
 				{
-					quarterTitle: '[Q1] 2023',
-					quarterGoals: [
-						'Private & Strategic Sale',
-						'Ambassador & Community',
-						'Program Creation',
-						'Community Expansion & Engagement',
-					],
+					quarterTitle: '[Q1-Q2] 2024',
+					quarterGoals: ['Ambassador & Community Program', 'Website Launch'],
 				},
 				{
-					quarterTitle: '[Q2] 2023',
-					quarterGoals: [
-						'Public Sale & TGE',
-						'1st CEX & DEX Listing',
-						'Platform & Marketplace Launch',
-					],
+					quarterTitle: '[Q3-Q4] 2024',
+					quarterGoals: ['Public Sale & TGE', '1st CEX & DEX Listing', 'MVP Creation'],
 				},
 				{
-					quarterTitle: '[Q3] 2023',
+					quarterTitle: '[Q1-Q2] 2025',
+					quarterGoals: ['Platform Launch', 'Marketplace Launch'],
+				},
+				{
+					quarterTitle: '[Q3-Q4] 2025',
 					quarterGoals: [
-						'Monezo Incubator',
-						'New Investment Pools (NFT Collection)',
+						'Additional RWA pools',
 						'Dashboard & Portfolio Multichain Deployments of NFT Collection',
 					],
 				},
 				{
-					quarterTitle: '[Q4] 2023',
+					quarterTitle: '[Q1-Q2] 2026',
 					quarterGoals: [
 						'Monezo Wallet',
-						'Monezo Care',
 						'Monezo Institutional Services',
 						'Tracking & Analytics Tools',
 					],
 				},
 				{
-					quarterTitle: '[Q1] 2024',
-					quarterGoals: ['Monezo Crypto Card', 'All-in-One App'],
-				},
-				{
-					quarterTitle: '[Q2] 2024',
-					quarterGoals: ['Metaverse Support', 'Monezo Credit Program'],
+					quarterTitle: '[Q3-Q4] 2026',
+					quarterGoals: ['All-in-One App'],
 				},
 			];
 
@@ -207,12 +196,18 @@
 
 						&--completed {
 							text-decoration: line-through;
+							text-decoration-thickness: 0.2rem;
 						}
 
 						&--future {
 							p {
 								opacity: 0.3;
 							}
+						}
+
+						&__partially-completed {
+							text-decoration: line-through;
+							text-decoration-thickness: 0.2rem;
 						}
 					}
 

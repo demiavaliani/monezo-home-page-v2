@@ -88,37 +88,15 @@
 			});
 
 			const data = [
-				{
-					title: 'Monezo Credit',
-					description: 'Get access to loans and enjoy benefits for staking Monezo NFT ',
-				},
 				{ title: 'Yieldful NFT', description: 'NFT that generates you income ' },
-				{
-					title: 'Metaverse Support',
-					description:
-						'Get access to VIP events, proof your NFT ownership interact with other NFT holders in leading metaverse supported by Monezo ',
-				},
-				{
-					title: 'Monezo Care',
-					description: 'User-oriented care system provide excellent experience for users',
-				},
 				{
 					title: 'Monezo Incubator',
 					description:
 						'Promising startups and large enterprises get access to fund-raise by pitching business plan or current business model. Investors can choose projects selected by Monezo by purchasing NFT and share revenue from business activities ',
 				},
 				{
-					title: 'Monezo Academy',
-					description:
-						'Community-oriented program aimed to teach users about crypto and how finance works ',
-				},
-				{
 					title: 'All-in-One App',
 					description: 'Assists you in every step interacting with Monezo ecosystem ',
-				},
-				{
-					title: 'Monezo Charity',
-					description: 'Transformative Crypto-Giving to support People in Need ',
 				},
 			];
 
@@ -210,7 +188,7 @@
 			.bottom {
 				display: grid;
 				grid-auto-flow: column;
-				grid-auto-columns: calc(100% / 4);
+				grid-auto-columns: calc(100% / 3);
 				max-height: 45%;
 				overflow-x: auto;
 				border: solid $monezo-night-black;

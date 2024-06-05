@@ -34,11 +34,9 @@
 
 			const menuItems = [
 				{ number: '01', title: 'MARKETPLACE' },
-				{ number: '02', title: 'INCUBATOR' },
 				{ number: '03', title: 'INSTITUTIONAL' },
 				{ number: '04', title: 'HOW IT WORKS' },
 				{ number: '05', title: 'ABOUT US' },
-				{ number: '06', title: 'ACADEMY' },
 				{ number: '07', title: 'BLOG' },
 			];
 

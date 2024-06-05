@@ -57,12 +57,12 @@
 							class="left-side__running-text__text-group"
 							ref="leftTextGroup"
 						>
-							<p class="text">HOW YIELDFUL NFT WORKS</p>
+							<p class="text">HOW RWA NFT WORKS</p>
 							<img src="../assets/images/yieldful-nft-text-divider-icon.svg" />
 						</div>
 
 						<div id="left-running-text-group" class="left-side__running-text__text-group">
-							<p class="text">HOW YIELDFUL NFT WORKS</p>
+							<p class="text">HOW RWA NFT WORKS</p>
 							<img src="../assets/images/yieldful-nft-text-divider-icon.svg" />
 						</div>
 					</RunningTextVertical>
@@ -71,7 +71,7 @@
 
 			<div class="right-side" id="fourth-section-right-side">
 				<div class="right-side__intro">
-					<p class="right-side__intro__title">HOW YIELDFUL NFT WORKS</p>
+					<p class="right-side__intro__title">HOW RWA NFT WORKS</p>
 
 					<p class="right-side__intro__description">
 						Project by project, Monezo changing the way new ideas come to life
@@ -111,7 +111,7 @@
 				<div class="right-side__row-middle">
 					<div class="right-side__row-middle__profit">
 						<img src="@/assets/images/arrow-icon.svg" />
-						<p>Profit</p>
+						<p>Profit Generation</p>
 					</div>
 
 					<div class="right-side__row-middle__liquidity">
@@ -195,8 +195,8 @@
 						"Navigate your business to success with Monezo's personalized incubation process, offering meticulous project evaluations to ensure our partners and investors thrive in the NFT space.",
 				},
 				{
-					title: 'INCUBATOR',
-					circleAnimationName: 'incubator',
+					title: 'MONEZO TEAM',
+					circleAnimationName: 'monezo-team',
 					doubleBorder: true,
 					doubleBorderTitle: 'Audit',
 					doubleBorderDivided: false,
@@ -204,42 +204,42 @@
 					borderTop: 'none',
 					borderLeft: 'none',
 					categoryDescription:
-						'Monezo Incubator empowers both emerging startups and established enterprises with targeted financial support, driving innovation and amplifying your financial growth.',
+						'Monezo Team empowers both emerging startups and established enterprises with targeted financial support, driving innovation and amplifying your financial growth.',
 				},
 				{
-					title: 'Score',
+					title: 'MONEZO SCORE',
 					circleAnimationName: 'score',
 					doubleBorder: true,
-					doubleBorderTitle: 'NFT Collection & Sale Model Develop',
+					doubleBorderTitle: 'NFT Collection & Sale Model Development',
 					doubleBorderDivided: false,
 					arrowSingle: 'single--right',
 					borderTop: 'none',
 					borderLeft: 'none',
 					categoryDescription:
-						"Trust and security are paramount. Monezo Score provides comprehensive evaluations to protect your investments and build confidence in the Yieldful NFT's & LP market.",
+						"Trust and security are paramount. Monezo Score provides comprehensive evaluations to protect your investments and build confidence in the RWA NFT's & LP market.",
 				},
 				{
-					title: 'YIELDFUL NFT',
-					circleAnimationName: 'yieldful-nft',
+					title: 'RWA NFT',
+					circleAnimationName: 'rwa-nft',
 					doubleBorder: false,
 					doubleBorderDivided: false,
 					borderTop: 'none',
 					borderRight: 'none',
 					borderLeft: 'none',
 					categoryDescription:
-						'Experience the future of investment with Yieldful NFTs, offering diverse, asset-backed collections that adapt to the unique nature of your business.',
+						'Experience the future of investment with RWA NFTs, offering diverse, asset-backed collections that adapt to the unique nature of your business.',
 				},
 			];
 
 			const dataRowTwo = [
 				{
-					title: 'ESCROW',
+					title: 'MONEZO ESCROW',
 					circneAnimationName: 'escrow',
 					doubleBorder: false,
 					doubleBorderTitle: '',
 					doubleBorderDivided: true,
 					doubleBorderDividedTextTop: 'Money Transfer',
-					doubleBorderDividedTextBottom: 'Profit',
+					doubleBorderDividedTextBottom: 'Profit Distribution',
 					arrowSingle: '',
 					arrowDoubleTop: 'double--left',
 					arrowDoubleBottom: 'double--right',
@@ -249,13 +249,13 @@
 						'With Monezo Escrow, experience seamless liquidity management and secure profit distribution, forging a robust link between businesses and NFT holders.',
 				},
 				{
-					title: 'WALLET',
+					title: 'MONEZO WALLET',
 					circneAnimationName: 'wallet',
 					doubleBorder: false,
 					doubleBorderTitle: '',
 					doubleBorderDivided: true,
 					doubleBorderDividedTextTop: 'Stacking',
-					doubleBorderDividedTextBottom: 'Profit',
+					doubleBorderDividedTextBottom: 'Profit Distribution',
 					arrowSingle: '',
 					arrowDoubleTop: 'double--left',
 					arrowDoubleBottom: 'double--right',
@@ -274,10 +274,10 @@
 					borderBottom: 'none',
 					borderLeft: 'none',
 					categoryDescription:
-						"Access an exclusive array of Yieldful NFTs through Monezo's branded marketplace or get access & authenticate through top-tier third-party marketplaces.",
+						"Access an exclusive array of RWA NFTs through Monezo's branded marketplace or get access & authenticate through top-tier third-party marketplaces.",
 				},
 				{
-					title: 'MARKET PLACE',
+					title: 'MONEZO MARKET PLACE',
 					circneAnimationName: 'marketplace',
 					doubleBorder: false,
 					doubleBorderDivided: false,
@@ -487,7 +487,7 @@
 							font-size: 1.7rem;
 						}
 
-						@media only screen and (max-width: 1600px) and (max-height: 900px) {
+						@media only screen and (max-width: 1600px) and (max-height: 925px) {
 							font-size: 1.4rem;
 						}
 
@@ -543,7 +543,7 @@
 							line-height: 2.7rem;
 						}
 
-						@media only screen and (max-width: 1600px) and (max-height: 900px) {
+						@media only screen and (max-width: 1600px) and (max-height: 925px) {
 							font-size: 1.4rem;
 							line-height: 2.4rem;
 						}
@@ -587,23 +587,17 @@
 				--circle-font-size: 1.5rem;
 			}
 
-			@media only screen and (max-width: 1920px) and (max-height: 965px) {
-				--square-height: 20rem;
-				--circle-height: 65%;
-				--circle-font-size: 1.5rem;
-			}
-
 			@media only screen and (max-width: 1680px) and (max-height: 1050px) {
 				--double-border-font-size: 1.5rem;
 			}
 
-			@media only screen and (max-width: 1600px) and (max-height: 900px) {
+			@media only screen and (max-width: 1920px) and (max-height: 980px) {
 				--square-height: 24rem;
 				--circle-height: 50%;
 				--circle-font-size: 1.3rem;
 			}
 
-			@media only screen and (max-width: 1512px) and (max-height: 834px) {
+			@media only screen and (max-width: 1512px) and (max-height: 900px) {
 				--square-height: 20rem;
 				--circle-height: 60%;
 				--double-border-font-size: 1.4rem;

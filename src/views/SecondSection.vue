@@ -17,17 +17,17 @@
 						class="navbar-text-wrapper"
 						ref="navbarTextGroup"
 					>
-						<p class="running-text">Start your passive income Journey with Monezo NFT</p>
+						<p class="running-text">Start your passive income Journey with Monezo RWA NFT</p>
 						<img src="../assets/images/start-your-journey-text-divider-icon.svg" />
 					</div>
 
 					<div id="second-section-navbar-running-text-group" class="navbar-text-wrapper">
-						<p class="running-text">Start your passive income Journey with Monezo NFT</p>
+						<p class="running-text">Start your passive income Journey with Monezo RWA NFT</p>
 						<img src="../assets/images/start-your-journey-text-divider-icon.svg" />
 					</div>
 
 					<div id="second-section-navbar-running-text-group" class="navbar-text-wrapper">
-						<p class="running-text">Start your passive income Journey with Monezo NFT</p>
+						<p class="running-text">Start your passive income Journey with Monezo RWA NFT</p>
 						<img src="../assets/images/start-your-journey-text-divider-icon.svg" />
 					</div>
 				</RunningTextStraight>
@@ -102,8 +102,8 @@
 
 				<div class="second-section__sides__right-part__middle">
 					<p>
-						With Monezo platform you get access to Monezo Yieldful NFT, which are backed by stable
-						income from real world assets and business revenue.
+						With Monezo platform you get access to Monezo RWA NFT, which are backed by stable income
+						from real world assets and business revenue.
 					</p>
 					<p>
 						NFT holders can choose best options for everyone from different NFT collections with

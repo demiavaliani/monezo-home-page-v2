@@ -52,7 +52,7 @@
 		</NavBar>
 
 		<div class="ninth-section__body">
-			<p class="ninth-section__description">Stake your NFT and track your earnings</p>
+			<p class="ninth-section__description">Stake your RWA NFT and track your earnings</p>
 			<MonezoButton
 				text="Access Dashboard"
 				background="filled"
@@ -105,11 +105,9 @@
 
 				<div class="bottom__right">
 					<p>Marketplace</p>
-					<p>Incubator</p>
 					<p>Institutional</p>
 					<p>How it Works</p>
 					<p>About Us</p>
-					<p>Academy</p>
 					<p>Blog</p>
 				</div>
 			</div>

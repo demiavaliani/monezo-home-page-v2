@@ -68,7 +68,7 @@
 						<div class="description-wrapper">
 							<p>
 								This collection suits best conservative investors, which prefer stable and
-								predictable Yield. Stake NFT and get as much as 12% APY Yield return paid daily.
+								predictable Yield. Stake RWA NFT and get as much as 12% APY Yield return paid daily.
 							</p>
 							<p>
 								Real Estate Monker collection is fully backed by income from real estate business.
