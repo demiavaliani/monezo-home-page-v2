@@ -1,5 +1,5 @@
 <template>
-	<div class="first-section" id="snap-section">
+	<div v-if="!store.isMobile" class="first-section" id="snap-section">
 		<NavBar :first-page="true" :last-page="false" />
 
 		<img
@@ -92,24 +92,87 @@
 
 		<div class="pixelated-background"></div>
 	</div>
+
+	<div v-else class="first-section-mobile">
+		<NavBar :first-page="true" :last-page="false" />
+
+		<div class="first-section-mobile__monkers">
+			<img
+				class="first-section-mobile__monker-img"
+				src="../assets/images/monker-corner-1.png"
+				ref="firstSectionMonkerMobile1"
+			/>
+			<img
+				class="first-section-mobile__monker-img"
+				src="../assets/images/monker-corner-2.png"
+				ref="firstSectionMonkerMobile2"
+			/>
+			<img
+				class="first-section-mobile__monker-img"
+				src="../assets/images/monker-corner-3.png"
+				ref="firstSectionMonkerMobile3"
+			/>
+		</div>
+
+		<div class="first-section-mobile__title">
+			<div class="first-section-mobile__title--small">One platform,</div>
+			<div class="first-section-mobile__title--big">TWO WORLDS</div>
+		</div>
+
+		<div class="first-section-mobile__body-text">
+			Revolutionary platform that connects traditional real world assets & businesses revenue with
+			NFT holders
+		</div>
+
+		<MonezoButton
+			class="first-section-mobile__button first-section-mobile__button--first"
+			:text="'Start Earnings'"
+			:background="'filled'"
+			:initial-width="40"
+			:hover-width="40"
+		/>
+
+		<MonezoButton
+			class="first-section-mobile__button first-section-mobile__button--second"
+			:text="'All-In-One App'"
+			:background="'transparent'"
+			:initial-width="40"
+			:hover-width="40"
+		/>
+
+		<div class="first-section-mobile__partners">Partners</div>
+
+		<div class="first-section-mobile__partner-logos">
+			<img src="@/assets/images/multibank-logo.png" />
+			<img src="@/assets/images/megogo-logo.png" />
+			<img src="@/assets/images/castles-logo.png" />
+			<img src="@/assets/images/pion-logo.png" />
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, computed, onMounted } from 'vue';
+	import { defineComponent, ref, computed, onMounted, nextTick, watch } from 'vue';
 	import { gsap, Power1 } from 'gsap';
 	import NavBar from '@/components/NavBar.vue';
 	import MonezoButton from '@/components/MonezoButton.vue';
 	import RunningTextStraight from '@/components/RunningTextStraight.vue';
 	import RunningTextCircle from '@/components/RunningTextCircle.vue';
 	import { useResizeObserver } from '@vueuse/core';
+	import { useGlobalStore } from '@/stores/globalStore.js';
 
 	export default defineComponent({
 		components: { NavBar, MonezoButton, RunningTextStraight, RunningTextCircle },
 
 		setup() {
+			const store = useGlobalStore();
+
 			const firstSectionMonker1 = ref<HTMLImageElement | null>(null);
 			const firstSectionMonker2 = ref<HTMLImageElement | null>(null);
 			const firstSectionMonker3 = ref<HTMLImageElement | null>(null);
+			const firstSectionMonkerMobile1 = ref<HTMLImageElement | null>(null);
+			const firstSectionMonkerMobile2 = ref<HTMLImageElement | null>(null);
+			const firstSectionMonkerMobile3 = ref<HTMLImageElement | null>(null);
 			const runningText = ref<HTMLDivElement | null>(null);
 			const imageGroup = ref<HTMLDivElement | null>(null);
 			const imageGroupWidth = ref(0);
@@ -127,42 +190,54 @@
 				);
 			};
 
+			watch(
+				() => store.isMobile,
+				() => {
+					nextTick(() => {
+						const monkers = gsap.utils.toArray(
+							store.isMobile
+								? [
+										firstSectionMonkerMobile1.value,
+										firstSectionMonkerMobile2.value,
+										firstSectionMonkerMobile3.value,
+								  ]
+								: [firstSectionMonker1.value, firstSectionMonker2.value, firstSectionMonker3.value]
+						) as HTMLImageElement[];
+
+						const tl = gsap.timeline({ repeat: -1 });
+
+						monkers.forEach((monker) => {
+							tl.from(
+								monker,
+								{
+									xPercent: 110,
+									yPercent: 30,
+									rotation: 30,
+									opacity: 0,
+									scale: 0.7,
+									duration: 1,
+									ease: Power1.easeInOut,
+								},
+								'>-1'
+							);
+							tl.from(monker, {
+								duration: 4,
+							});
+							tl.to(monker, {
+								xPercent: -75,
+								yPercent: 60,
+								rotation: -55,
+								opacity: 0,
+								scale: 0.6,
+								duration: 1,
+								ease: Power1.easeInOut,
+							});
+						});
+					});
+				}
+			);
+
 			onMounted(() => {
-				const monkers = gsap.utils.toArray([
-					firstSectionMonker1.value,
-					firstSectionMonker2.value,
-					firstSectionMonker3.value,
-				]) as HTMLImageElement[];
-				const tl = gsap.timeline({ repeat: -1 });
-
-				monkers.forEach((monker) => {
-					tl.from(
-						monker,
-						{
-							xPercent: 110,
-							yPercent: 30,
-							rotation: 30,
-							opacity: 0,
-							scale: 0.7,
-							duration: 1,
-							ease: Power1.easeInOut,
-						},
-						'>-1'
-					);
-					tl.from(monker, {
-						duration: 4,
-					});
-					tl.to(monker, {
-						xPercent: -75,
-						yPercent: 60,
-						rotation: -55,
-						opacity: 0,
-						scale: 0.6,
-						duration: 1,
-						ease: Power1.easeInOut,
-					});
-				});
-
 				if (calculateMediaQuery(1920, 1200).matches) {
 					initialPosition.value = 20;
 					runningTextLogoGap.value = 20;
@@ -194,6 +269,10 @@
 				firstSectionMonker1,
 				firstSectionMonker2,
 				firstSectionMonker3,
+				firstSectionMonkerMobile1,
+				firstSectionMonkerMobile2,
+				firstSectionMonkerMobile3,
+				store,
 			};
 		},
 	});
@@ -579,6 +658,95 @@
 						width: 5.9rem;
 					}
 				}
+			}
+		}
+	}
+
+	.first-section-mobile {
+		overflow: hidden;
+		border: 2px solid #111111;
+		font-family: 'Termina';
+		color: #111111;
+
+		&__monkers {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			height: 50rem;
+			margin-bottom: 8rem;
+			border-bottom: 2px solid #111111;
+		}
+
+		&__monker-img {
+			position: absolute;
+			bottom: 0;
+			max-width: 100%;
+
+			&:nth-child(2),
+			&:nth-child(3) {
+				right: -3rem;
+			}
+		}
+
+		&__title {
+			margin-bottom: 0.8rem;
+			padding: 0 1.6rem;
+			font-weight: 700;
+
+			&--small {
+				font-size: 3.2rem;
+				line-height: 3.8rem;
+			}
+
+			&--big {
+				font-size: 5.4rem;
+				line-height: 6.5rem;
+			}
+		}
+
+		&__body-text {
+			margin-bottom: 3.4rem;
+			padding: 0 1.6rem;
+			font-size: 1.4rem;
+			font-weight: 500;
+			line-height: 2.5rem;
+		}
+
+		&__button {
+			justify-content: center;
+			padding: 0 1.6rem;
+
+			&--first {
+				margin-bottom: 1.2rem;
+			}
+
+			&--second {
+				margin-bottom: 8rem;
+			}
+		}
+
+		&__partners {
+			text-align: center;
+			padding: 2.7rem 1.6rem;
+			border-top: 2px solid #111111;
+			border-bottom: 2px solid #111111;
+			font-size: 3.2rem;
+			font-weight: 700;
+			line-height: 3.8rem;
+		}
+
+		&__partner-logos {
+			display: flex;
+			justify-content: space-around;
+			flex-wrap: wrap;
+			column-gap: 1rem;
+			row-gap: 3rem;
+			margin: 4rem 0;
+			padding: 0 1.6rem;
+
+			img {
+				max-width: 100%;
 			}
 		}
 	}

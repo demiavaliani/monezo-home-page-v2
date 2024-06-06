@@ -215,11 +215,9 @@
 
 		&__footer {
 			display: flex;
-			justify-content: center;
 			align-items: center;
 			gap: 1rem;
-			margin-top: auto;
-			margin-bottom: auto;
+			margin: auto;
 
 			img {
 				width: 5.8rem;

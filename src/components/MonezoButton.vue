@@ -69,10 +69,11 @@
 		.button {
 			display: inline-block;
 			display: flex;
+			justify-content: center;
 			align-items: center;
 			width: v-bind(initialWidthRem);
 			height: 5.4rem;
-			padding: 1.6rem 4.4rem;
+			padding: 1.6rem 0;
 			border: 2px solid $monezo-night-black;
 			border-radius: 1rem;
 			transition: width 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55),

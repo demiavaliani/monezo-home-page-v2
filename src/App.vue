@@ -1,5 +1,5 @@
 <template>
-	<div class="app-wrapper">
+	<div :class="['app-wrapper', { 'app-wrapper--mobile': store.isMobile }]">
 		<HamburgerMenu class="section-element" />
 		<FirstSection class="section-element" />
 		<SecondSection class="section-element" />
@@ -36,6 +36,7 @@
 	import SeventhSectionQuarters from './views/SeventhSectionQuarters.vue';
 	import EighthSection from './views/EighthSection.vue';
 	import NinthSection from './views/NinthSection.vue';
+	import { useGlobalStore } from '@/stores/globalStore.js';
 
 	export default defineComponent({
 		components: {
@@ -53,6 +54,8 @@
 		},
 
 		setup() {
+			const store = useGlobalStore();
+
 			const sixthSectionIntersectionTarget = ref<HTMLElement | null>();
 			const seventhSectionIntersectionTarget = ref<HTMLElement | null>();
 
@@ -99,9 +102,23 @@
 				seventhSectionIntersectionTarget,
 				sixthSectionIsIntersecting,
 				seventhSectionIsIntersecting,
+				store,
 			};
 		},
 	});
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+	.app-wrapper {
+		&--mobile {
+			background: linear-gradient(
+				180deg,
+				#9796f0 0%,
+				#e9bbc9 27.08%,
+				#b6d5a9 50%,
+				#99d4ec 71.35%,
+				#fbc7d4 87.5%
+			);
+		}
+	}
+</style>
