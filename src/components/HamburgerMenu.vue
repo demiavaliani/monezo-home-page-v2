@@ -3,7 +3,7 @@
 		:class="[
 			'hamburger-menu',
 			{
-				['hamburger-menu__mobile hamburger-menu__mobile--open']: store.isMobile,
+				'hamburger-menu__mobile': store.isMobile,
 				'hamburger-menu--open': store.isHamburgerMenuOpen,
 			},
 		]"
@@ -65,7 +65,7 @@
 
 		position: fixed;
 		top: 0;
-		right: -35%;
+		right: -100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -93,7 +93,7 @@
 		&__overlay {
 			position: absolute;
 			right: 100%;
-			width: 100vw;
+			width: 200vw;
 			height: 100vh;
 			background-color: black;
 			opacity: 0;
