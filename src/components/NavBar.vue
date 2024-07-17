@@ -59,10 +59,7 @@
 		min-height: var(--min-height);
 		height: var(--min-height);
 		padding: 0 3.9rem 0 2.5rem;
-		border: 2px solid $monezo-night-black;
-		border-top: 0;
-		border-left: 0;
-		border-right: 0;
+		border-bottom: 2px solid $monezo-night-black;
 		z-index: 9998;
 
 		&--first-page {
