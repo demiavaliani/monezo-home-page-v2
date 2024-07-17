@@ -1,5 +1,13 @@
 <template>
-	<div :class="['hamburger-menu', { 'hamburger-menu--open': store.isHamburgerMenuOpen }]">
+	<div
+		:class="[
+			'hamburger-menu',
+			{
+				'hamburger-menu__mobile': store.isMobile,
+				'hamburger-menu--open': store.isHamburgerMenuOpen,
+			},
+		]"
+	>
 		<div class="hamburger-menu__overlay" @click.self="onMisClick" />
 
 		<div class="hamburger-menu__header">
@@ -29,7 +37,7 @@
 	import { useGlobalStore } from '../stores/globalStore';
 
 	export default defineComponent({
-		setup(props, { emit }) {
+		setup(props) {
 			const store = useGlobalStore();
 
 			const menuItems = [
@@ -57,19 +65,24 @@
 
 		position: fixed;
 		top: 0;
-		left: 100%;
+		right: -100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		width: 35%;
+		max-width: 100%;
 		height: 100%;
 		border: 2px solid $monezo-night-black;
 		background-color: $monezo-venetian-red;
-		transition: left 0.5s ease-in-out;
+		transition: right 0.5s ease-in-out;
 		z-index: 9999;
 
+		&__mobile {
+			right: -100%;
+			min-width: 100%;
+		}
+
 		&--open {
-			left: 65%;
+			right: 0;
 
 			#{$parent}__overlay {
 				opacity: 0.5;
@@ -80,7 +93,7 @@
 		&__overlay {
 			position: absolute;
 			right: 100%;
-			width: 100vw;
+			width: 200vw;
 			height: 100vh;
 			background-color: black;
 			opacity: 0;
@@ -118,7 +131,7 @@
 				position: relative;
 				display: grid;
 				grid-template-columns: 10% 2fr auto;
-				grid-gap: 4.5rem;
+				gap: 4.5rem;
 				align-items: center;
 				padding: 2rem 8rem 2rem 6rem;
 				border: 1px solid $monezo-night-black;
@@ -137,6 +150,18 @@
 				@media only screen and (max-width: 1280px) {
 					padding-left: 4rem;
 					padding-right: 5rem;
+				}
+
+				@media only screen and (max-width: 430px) {
+					gap: 3rem;
+					padding-left: 3rem;
+					padding-right: 3rem;
+				}
+
+				@media only screen and (max-width: 390px) {
+					gap: 2rem;
+					padding-left: 2rem;
+					padding-right: 2rem;
 				}
 
 				&::before {
@@ -215,11 +240,9 @@
 
 		&__footer {
 			display: flex;
-			justify-content: center;
 			align-items: center;
 			gap: 1rem;
-			margin-top: auto;
-			margin-bottom: auto;
+			margin: auto;
 
 			img {
 				width: 5.8rem;
