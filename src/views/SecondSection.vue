@@ -1,6 +1,6 @@
 <template>
-	<div class="second-section" id="snap-section">
-		<NavBar :first-page="false" :last-page="false">
+	<div :class="['second-section', { 'second-section--mobile': store.isMobile }]" id="snap-section">
+		<NavBar v-if="!store.isMobile" :first-page="false" :last-page="false">
 			<div class="navbar-running-text-wrapper" ref="navbarRunningTextWrapper">
 				<RunningTextStraight
 					:group-id="'second-section-navbar-running-text-group'"
@@ -34,7 +34,34 @@
 			</div>
 		</NavBar>
 
-		<div class="second-section__sides">
+		<div v-else class="second-section__running-text-wrapper" ref="mobileRunningTextWrapper">
+			<RunningTextStraight
+				:group-id="'mobile-running-text-group'"
+				:parent-element-width="mobileRunningTextWrapperWidth"
+				:group-width="mobileRunningTextGroupWidth"
+				:initial-position="5"
+				:gap="5"
+				:animation-speed="20"
+				:direction="'right-to-left'"
+				:font-size="mobileRunningTextFontSize"
+			>
+				<div
+					id="mobile-running-text-group"
+					class="mobile-running-text-wrapper"
+					ref="mobileRunningTextGroup"
+				>
+					<p class="running-text">More than an investment platform</p>
+					<img src="../assets/images/platform-text-divider.svg" />
+				</div>
+
+				<div id="mobile-running-text-group" class="mobile-running-text-wrapper">
+					<p class="running-text">More than an investment platform</p>
+					<img src="../assets/images/platform-text-divider.svg" />
+				</div>
+			</RunningTextStraight>
+		</div>
+
+		<div v-if="!store.isMobile" class="second-section__sides">
 			<div class="second-section__sides__left-part">
 				<div class="column__left" ref="runningMonkerWrapper">
 					<RunningTextVertical
@@ -146,7 +173,31 @@
 			</div>
 		</div>
 
-		<div class="pixelated-background"></div>
+		<div v-else class="second-section__body">
+			<p class="second-section__title">Start your passive income Journey with Monezo RWA NFT</p>
+
+			<img class="second-section__monker-img" src="../assets/images/monker-car-rental-5k.png" />
+
+			<p class="second-section__description second-section__description--top">
+				With Monezo platform you get access to Monezo Yieldful NFT, which are backed by stable
+				income from real world assets and business revenue.
+			</p>
+
+			<p class="second-section__description">
+				NFT holders can choose best options for everyone from different NFT collections with fixed,
+				flexible or combined yield which depends on asset type and business.
+			</p>
+
+			<MonezoButton
+				class="second-section__monezo-button"
+				:text="'Get NFT'"
+				:background="'filled'"
+				:initial-width="28.7"
+				:hover-width="28.7"
+			/>
+		</div>
+
+		<div v-if="!store.isMobile" class="pixelated-background"></div>
 	</div>
 </template>
 
@@ -157,10 +208,13 @@
 	import RunningTextVertical from '@/components/RunningTextVertical.vue';
 	import { useResizeObserver } from '@vueuse/core';
 	import MonezoButton from '@/components/MonezoButton.vue';
+	import { useGlobalStore } from '@/stores/globalStore.js';
 
 	export default defineComponent({
 		components: { NavBar, RunningTextStraight, MonezoButton, RunningTextVertical },
 		setup() {
+			const store = useGlobalStore();
+
 			const navbarRunningTextWrapper = ref<HTMLDivElement | null>(null);
 			const navbarTextGroup = ref<HTMLDivElement | null>(null);
 			const navbarTextGroupWidth = ref(0);
@@ -169,6 +223,11 @@
 			const bottomRightTextGroup = ref<HTMLDivElement | null>(null);
 			const bottomRightTextGroupWidth = ref(0);
 			const bottomRightFontSize = ref(5);
+
+			const mobileRunningTextWrapper = ref<HTMLDListElement | null>(null);
+			const mobileRunningTextGroup = ref<HTMLDivElement | null>(null);
+			const mobileRunningTextGroupWidth = ref(0);
+			const mobileRunningTextFontSize = ref(2.4);
 
 			const runningMonkerWrapper = ref<HTMLDListElement | null>(null);
 			const runningMonkerGroup = ref<HTMLDivElement | null>(null);
@@ -181,6 +240,9 @@
 			const bottomRightRunningTextWrapperWidth = computed(() =>
 				bottomRightRunningTextWrapper.value ? bottomRightRunningTextWrapper.value.offsetWidth : 0
 			);
+			const mobileRunningTextWrapperWidth = computed(() =>
+				mobileRunningTextWrapper.value ? mobileRunningTextWrapper.value.offsetWidth : 0
+			);
 
 			const runningMonkerWrapperHeight = computed(() =>
 				runningMonkerWrapper.value ? runningMonkerWrapper.value.offsetHeight : 0
@@ -192,6 +254,10 @@
 
 			useResizeObserver(bottomRightTextGroup, (entries) => {
 				bottomRightTextGroupWidth.value = entries[0].contentRect.width;
+			});
+
+			useResizeObserver(mobileRunningTextGroup, (entries) => {
+				mobileRunningTextGroupWidth.value = entries[0].contentRect.width;
 			});
 
 			useResizeObserver(runningMonkerGroup, (entries) => {
@@ -223,6 +289,7 @@
 			});
 
 			return {
+				store,
 				navbarRunningTextWrapper,
 				navbarRunningTextWrapperWidth,
 				navbarTextGroup,
@@ -232,6 +299,11 @@
 				bottomRightTextGroup,
 				bottomRightTextGroupWidth,
 				bottomRightFontSize,
+				mobileRunningTextWrapper,
+				mobileRunningTextWrapperWidth,
+				mobileRunningTextGroup,
+				mobileRunningTextGroupWidth,
+				mobileRunningTextFontSize,
 				runningMonkerWrapper,
 				runningMonkerWrapperHeight,
 				runningMonkerGroup,
@@ -248,9 +320,53 @@
 		flex-direction: column;
 		overflow: hidden;
 		height: 100vh;
-		border: 2px solid $monezo-night-black;
+		border-bottom: 2px solid $monezo-night-black;
 		border-top: 0;
 		background: linear-gradient(90deg, #ddd6f3 0%, #faaca8 100%);
+
+		.navbar-running-text-wrapper {
+			width: 100%;
+			overflow: hidden;
+
+			.navbar-text-wrapper {
+				position: absolute;
+				display: flex;
+				gap: 5rem;
+				white-space: nowrap;
+
+				.running-text {
+					font-weight: bold;
+				}
+
+				img {
+					width: 4.134rem;
+				}
+			}
+		}
+
+		&__running-text-wrapper {
+			width: 100%;
+			height: 7.7rem;
+			min-height: 7.7rem;
+			border: 2px solid $monezo-night-black;
+			border-left: 0;
+			border-right: 0;
+			overflow: hidden;
+			white-space: nowrap;
+
+			.mobile-running-text-wrapper {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				width: fit-content;
+				gap: 5rem;
+				white-space: nowrap;
+
+				.running-text {
+					font-weight: 700;
+				}
+			}
+		}
 
 		&__sides {
 			display: flex;
@@ -487,22 +603,45 @@
 			}
 		}
 
-		.navbar-running-text-wrapper {
+		&--mobile {
+			height: unset;
+			background: unset;
+		}
+
+		&__body {
+			padding: 0 1.6rem;
+		}
+
+		&__monker-img {
 			width: 100%;
-			overflow: hidden;
+			margin-bottom: 2.4rem;
+		}
 
-			.navbar-text-wrapper {
-				position: absolute;
-				display: flex;
-				gap: 5rem;
-				white-space: nowrap;
+		&__title {
+			margin: 4rem 0 3rem;
+			font-size: 3.2rem;
+			font-weight: 700;
+			line-height: 3.8rem;
+		}
 
-				.running-text {
-					font-weight: bold;
-				}
+		&__description {
+			font-size: 1.4rem;
+			font-weight: 500;
+			line-height: 2.2rem;
 
-				img {
-					width: 4.134rem;
+			&--top {
+				margin-bottom: 1.6rem;
+			}
+		}
+
+		&__monezo-button {
+			margin: 4rem 0 12rem;
+
+			.button {
+				width: 100%;
+
+				&:hover {
+					width: 100%;
 				}
 			}
 		}

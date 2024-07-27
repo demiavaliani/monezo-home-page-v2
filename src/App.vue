@@ -110,6 +110,8 @@
 
 <style lang="scss">
 	.app-wrapper {
+		border: 2px solid $monezo-night-black;
+
 		&--mobile {
 			background: linear-gradient(
 				180deg,

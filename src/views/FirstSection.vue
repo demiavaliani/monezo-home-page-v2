@@ -305,7 +305,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		height: 100vh;
-		border: 2px solid $monezo-night-black;
+		border-bottom: 2px solid $monezo-night-black;
 		background: linear-gradient(90deg, #b1b0fa 0%, #fbc7d4 100%);
 		overflow: hidden;
 
@@ -663,8 +663,9 @@
 	}
 
 	.first-section-mobile {
+		margin-bottom: 8rem;
 		overflow: hidden;
-		border: 2px solid #111111;
+		border-bottom: 2px solid #111111;
 		font-family: 'Termina';
 		color: #111111;
 
