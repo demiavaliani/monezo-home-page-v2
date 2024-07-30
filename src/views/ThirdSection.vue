@@ -1,5 +1,5 @@
 <template>
-	<div class="third-section" id="snap-section">
+	<div v-if="!store.isMobile" class="third-section" id="snap-section">
 		<NavBar :first-page="false" :last-page="false">
 			<div class="navbar-running-text-wrapper" ref="navbarRunningTextWrapper">
 				<RunningTextStraight
@@ -134,6 +134,87 @@
 
 		<div class="pixelated-background"></div>
 	</div>
+
+	<div v-else class="third-section-mobile">
+		<div
+			class="third-section-mobile__running-text-wrapper"
+			ref="thirdSectionMobileRunningTextWrapper"
+		>
+			<RunningTextStraight
+				:group-id="'third-section-mobile-running-text-group'"
+				:parent-element-width="thirdSectionMobileRunningTextWrapperWidth"
+				:group-width="thirdSectionMobileTextGroupWidth"
+				:initial-position="5"
+				:gap="5"
+				:animation-speed="20"
+				:direction="'right-to-left'"
+				:font-size="5"
+			>
+				<div
+					id="third-section-mobile-running-text-group"
+					class="third-section-mobile__running-text-group"
+					ref="thirdSectionMobileTextGroup"
+				>
+					<p class="third-section-mobile__running-text">REAL ESTATE MONKER</p>
+					<img
+						class="third-section-mobile__running-icon"
+						src="../assets/images/real-estate-text-divider-icon.svg"
+					/>
+				</div>
+
+				<div
+					id="third-section-mobile-running-text-group"
+					class="third-section-mobile__running-text-group"
+				>
+					<p class="third-section-mobile__running-text">REAL ESTATE MONKER</p>
+					<img
+						class="third-section-mobile__running-icon"
+						src="../assets/images/real-estate-text-divider-icon.svg"
+					/>
+				</div>
+			</RunningTextStraight>
+		</div>
+
+		<div class="third-section-mobile__body">
+			<p class="third-section-mobile__title">Featuring collection</p>
+
+			<img
+				class="third-section-mobile__monker-img"
+				ref="thirdSectionMonkers10k"
+				src="@/assets/images/monker-real-estate-10k.png"
+			/>
+
+			<p class="third-section-mobile__subtitle">RealEstate Monker</p>
+
+			<p class="third-section-mobile__description">
+				This collection suits best conservative investors, which prefer stable and predictable
+				Yield. Stake RWA NFT and get as much as 12% APY Yield return paid daily.
+				<br />
+				<br />
+				Real Estate Monker collection is fully backed by income from real estate business.
+			</p>
+
+			<div class="third-section-mobile__numbers">
+				<div>
+					<p class="third-section-mobile__numbers--large">$ 1000</p>
+					<p class="third-section-mobile__numbers--small">Invest from</p>
+				</div>
+
+				<div>
+					<p class="third-section-mobile__numbers--large">12% APY</p>
+					<p class="third-section-mobile__numbers--small">Paid daily</p>
+				</div>
+			</div>
+
+			<MonezoButton
+				class="third-section-mobile__button"
+				:text="'View Collection'"
+				:background="'filled'"
+				:initial-width="28.7"
+				:hover-width="28.7"
+			/>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
@@ -144,10 +225,13 @@
 	import { useResizeObserver } from '@vueuse/core';
 	import MonezoButton from '@/components/MonezoButton.vue';
 	import { gsap } from 'gsap';
+	import { useGlobalStore } from '@/stores/globalStore.js';
 
 	export default defineComponent({
 		components: { NavBar, RunningTextStraight, RunningTextVertical, MonezoButton },
 		setup() {
+			const store = useGlobalStore();
+
 			const thirdSectionMonkers1k = ref<HTMLImageElement | null>(null);
 			const thirdSectionMonkers10k = ref<HTMLImageElement | null>(null);
 			const monkerTransitionStartWidth = ref('60rem');
@@ -162,12 +246,22 @@
 			const rightTextGroup = ref<HTMLDivElement | null>(null);
 			const rightTextGroupHeight = ref(0);
 
+			const thirdSectionMobileRunningTextWrapper = ref<HTMLDivElement | null>(null);
+			const thirdSectionMobileTextGroup = ref<HTMLDivElement | null>(null);
+			const thirdSectionMobileTextGroupWidth = ref(0);
+
 			const navbarRunningTextWrapperWidth = computed(() =>
 				navbarRunningTextWrapper.value ? navbarRunningTextWrapper.value.offsetWidth : 0
 			);
 
 			const rightRunningTextWrapperHeight = computed(() =>
 				rightRunningTextWrapper.value ? rightRunningTextWrapper.value.offsetHeight : 0
+			);
+
+			const thirdSectionMobileRunningTextWrapperWidth = computed(() =>
+				thirdSectionMobileRunningTextWrapper.value
+					? thirdSectionMobileRunningTextWrapper.value.offsetHeight
+					: 0
 			);
 
 			const monkerFullHeightFormatted = computed(() => `${monkerFullHeight.value}rem`);
@@ -181,6 +275,10 @@
 				rightTextGroupHeight.value = entries[0].contentRect.height;
 			});
 
+			useResizeObserver(thirdSectionMobileTextGroup, (entries) => {
+				thirdSectionMobileTextGroupWidth.value = entries[0].contentRect.width;
+			});
+
 			useResizeObserver(thirdSectionMonkers1k, (entries) => {
 				monkerFullHeight.value = entries[0].contentRect.height / 10;
 			});
@@ -192,69 +290,71 @@
 			};
 
 			onMounted(() => {
-				const wrapper = document.querySelector('#fade');
-				const monkers = gsap.utils
-					.toArray([thirdSectionMonkers1k.value, thirdSectionMonkers10k.value])
-					.reverse() as HTMLElement[];
+				if (!store.isMobile) {
+					const wrapper = document.querySelector('#fade');
+					const monkers = gsap.utils
+						.toArray([thirdSectionMonkers1k.value, thirdSectionMonkers10k.value])
+						.reverse() as HTMLElement[];
 
-				const timeline = gsap.timeline({ paused: true });
+					const timeline = gsap.timeline({ paused: true });
 
-				monkers.forEach((monker: HTMLElement, index) => {
-					timeline.to(monker, {
-						xPercent: '-100',
-						scale: 0.8,
-						duration: 0.5,
-						opacity: 0,
+					monkers.forEach((monker: HTMLElement, index) => {
+						timeline.to(monker, {
+							xPercent: '-100',
+							scale: 0.8,
+							duration: 0.5,
+							opacity: 0,
+						});
+
+						timeline.set(monker, {
+							xPercent: 0,
+							scale: 1,
+							zIndex: 1,
+							opacity: 1,
+						});
+						timeline.addLabel(`label${index}`);
 					});
 
-					timeline.set(monker, {
-						xPercent: 0,
-						scale: 1,
-						zIndex: 1,
-						opacity: 1,
+					wrapper.addEventListener('click', () => {
+						if (timeline.nextLabel()) {
+							timeline.tweenTo(timeline.nextLabel());
+						} else {
+							timeline.progress(0).tweenTo(timeline.nextLabel());
+						}
+
+						if (timeline.currentLabel() === 'label1' || timeline.nextLabel() === 'label0') {
+							monkers[1].classList.add('scale');
+							monkers[0].classList.remove('scale');
+						} else if (timeline.currentLabel() === 'label0') {
+							monkers[1].classList.remove('scale');
+							monkers[0].classList.add('scale');
+						}
 					});
-					timeline.addLabel(`label${index}`);
-				});
 
-				wrapper.addEventListener('click', () => {
-					if (timeline.nextLabel()) {
-						timeline.tweenTo(timeline.nextLabel());
-					} else {
-						timeline.progress(0).tweenTo(timeline.nextLabel());
+					if (calculateMediaQuery(1920, 1200).matches) {
+						monkerTransitionStartWidth.value = '45rem';
+						monkerFullWidth.value = '65rem';
 					}
 
-					if (timeline.currentLabel() === 'label1' || timeline.nextLabel() === 'label0') {
-						monkers[1].classList.add('scale');
-						monkers[0].classList.remove('scale');
-					} else if (timeline.currentLabel() === 'label0') {
-						monkers[1].classList.remove('scale');
-						monkers[0].classList.add('scale');
+					if (calculateMediaQuery(1680, 1050).matches) {
+						monkerTransitionStartWidth.value = '35rem';
+						monkerFullWidth.value = '55rem';
 					}
-				});
 
-				if (calculateMediaQuery(1920, 1200).matches) {
-					monkerTransitionStartWidth.value = '45rem';
-					monkerFullWidth.value = '65rem';
-				}
+					if (calculateMediaQuery(1512, 982).matches) {
+						monkerTransitionStartWidth.value = '30rem';
+						monkerFullWidth.value = '50rem';
+					}
 
-				if (calculateMediaQuery(1680, 1050).matches) {
-					monkerTransitionStartWidth.value = '35rem';
-					monkerFullWidth.value = '55rem';
-				}
+					if (calculateMediaQuery(1470, 768).matches) {
+						monkerTransitionStartWidth.value = '25rem';
+						monkerFullWidth.value = '45rem';
+					}
 
-				if (calculateMediaQuery(1512, 982).matches) {
-					monkerTransitionStartWidth.value = '30rem';
-					monkerFullWidth.value = '50rem';
-				}
-
-				if (calculateMediaQuery(1470, 768).matches) {
-					monkerTransitionStartWidth.value = '25rem';
-					monkerFullWidth.value = '45rem';
-				}
-
-				if (calculateMediaQuery(1280, 800).matches) {
-					monkerTransitionStartWidth.value = '20rem';
-					monkerFullWidth.value = '40rem';
+					if (calculateMediaQuery(1280, 800).matches) {
+						monkerTransitionStartWidth.value = '20rem';
+						monkerFullWidth.value = '40rem';
+					}
 				}
 			});
 
@@ -267,12 +367,17 @@
 				rightTextGroup,
 				rightTextGroupHeight,
 				rightRunningTextWrapperHeight,
+				thirdSectionMobileRunningTextWrapper,
+				thirdSectionMobileRunningTextWrapperWidth,
+				thirdSectionMobileTextGroup,
+				thirdSectionMobileTextGroupWidth,
 				monkerTransitionStartWidth,
 				monkerFullWidth,
 				monkerFullHeightFormatted,
 				thirdSectionMonkers1k,
 				thirdSectionMonkers10k,
 				monkerClickIndicatorIconWidth,
+				store,
 			};
 		},
 	});
@@ -530,6 +635,108 @@
 							rotate: 90deg;
 						}
 					}
+				}
+			}
+		}
+	}
+
+	.third-section-mobile {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		height: unset;
+		overflow: hidden;
+		background: unset;
+		color: $monezo-night-black;
+		font-family: 'Termina';
+
+		&__body {
+			padding: 0 1.6rem;
+		}
+
+		&__running-text-wrapper {
+			width: 100%;
+			height: 7.7rem;
+			min-height: 7.7rem;
+			margin-bottom: 4rem;
+			border-bottom: 2px solid $monezo-night-black;
+			border-left: 0;
+			border-right: 0;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+		&__running-text-group {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			width: fit-content;
+			height: 100%;
+			gap: 5rem;
+			white-space: nowrap;
+		}
+
+		&__running-text {
+			font-weight: 700;
+		}
+
+		&__running-icon {
+			height: 80%;
+		}
+
+		&__title {
+			margin-bottom: 3rem;
+			font-size: 3.2rem;
+			font-weight: 700;
+			line-height: 3.8rem;
+		}
+
+		&__monker-img {
+			width: 100%;
+			margin-bottom: 2.4rem;
+		}
+
+		&__subtitle {
+			margin-bottom: 0.8rem;
+			font-size: 2rem;
+			font-weight: 700;
+			line-height: 2.4rem;
+		}
+
+		&__description {
+			margin-bottom: 2.4rem;
+			font-size: 1.4rem;
+			font-weight: 500;
+			line-height: 2.2rem;
+		}
+
+		&__numbers {
+			display: flex;
+			flex-direction: column;
+			gap: 2.4rem;
+			margin-bottom: 4rem;
+
+			&--large {
+				font-size: 3.2rem;
+				font-weight: 700;
+				line-height: 3.8rem;
+			}
+
+			&--small {
+				font-size: 1.6rem;
+				font-weight: 600;
+				line-height: 2.4rem;
+			}
+		}
+
+		&__button {
+			margin-bottom: 12rem;
+
+			.button {
+				width: 100%;
+
+				&:hover {
+					width: 100%;
 				}
 			}
 		}
