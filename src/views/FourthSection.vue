@@ -1,5 +1,5 @@
 <template>
-	<div class="fourth-section" id="snap-section">
+	<div class="fourth-section" id="snap-section" v-if="!store.isMobile">
 		<NavBar :first-page="false" :last-page="false">
 			<div class="navbar-running-text-wrapper" ref="navbarRunningTextWrapper">
 				<RunningTextStraight
@@ -157,6 +157,87 @@
 
 		<div class="pixelated-background"></div>
 	</div>
+
+	<div v-else class="fourth-section-mobile">
+		<div
+			class="fourth-section-mobile__running-text-wrapper"
+			ref="fourthSectionMobileRunningTextWrapper"
+		>
+			<RunningTextStraight
+				:group-id="'fourth-section-mobile-running-text-group'"
+				:parent-element-width="fourthSectionMobileRunningTextWrapperWidth"
+				:group-width="fourthSectionMobileTextGroupWidth"
+				:initial-position="5"
+				:gap="5"
+				:animation-speed="50"
+				:direction="'right-to-left'"
+				:font-size="5"
+			>
+				<div
+					id="fourth-section-mobile-running-text-group"
+					class="fourth-section-mobile__running-text-group"
+					ref="fourthSectionMobileTextGroup"
+				>
+					<p class="fourth-section-mobile__running-text">THE NEW CREATIVE ECONOMY</p>
+					<img
+						class="fourth-section-mobile__running-icon"
+						src="../assets/images/featuring-collection-text-divider-icon.svg"
+					/>
+				</div>
+
+				<div
+					id="fourth-section-mobile-running-text-group"
+					class="fourth-section-mobile__running-text-group"
+				>
+					<p class="fourth-section-mobile__running-text">THE NEW CREATIVE ECONOMY</p>
+					<img
+						class="fourth-section-mobile__running-icon"
+						src="../assets/images/featuring-collection-text-divider-icon.svg"
+					/>
+				</div>
+
+				<div
+					id="fourth-section-mobile-running-text-group"
+					class="fourth-section-mobile__running-text-group"
+				>
+					<p class="fourth-section-mobile__running-text">THE NEW CREATIVE ECONOMY</p>
+					<img
+						class="fourth-section-mobile__running-icon"
+						src="../assets/images/featuring-collection-text-divider-icon.svg"
+					/>
+				</div>
+
+				<div
+					id="fourth-section-mobile-running-text-group"
+					class="fourth-section-mobile__running-text-group"
+				>
+					<p class="fourth-section-mobile__running-text">THE NEW CREATIVE ECONOMY</p>
+					<img
+						class="fourth-section-mobile__running-icon"
+						src="../assets/images/featuring-collection-text-divider-icon.svg"
+					/>
+				</div>
+			</RunningTextStraight>
+		</div>
+
+		<div class="fourth-section-mobile__body">
+			<p class="fourth-section-mobile__title">How Yieldful NFT works</p>
+
+			<p class="fourth-section-mobile__description">
+				Project by project, Monezo changing the way new ideas come to life
+			</p>
+
+			<div class="fourth-section-mobile__media-wrapper"></div>
+
+			<MonezoButton
+				:text="'Start Now'"
+				:background="'filled'"
+				:initial-width="28.7"
+				:hover-width="28.7"
+				class="fourth-section-mobile__button"
+			/>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
@@ -167,6 +248,7 @@
 	import { useResizeObserver } from '@vueuse/core';
 	import MonezoButton from '@/components/MonezoButton.vue';
 	import YieldfulNftSquare from '@/components/YieldfulNftSquare.vue';
+	import { useGlobalStore } from '@/stores/globalStore.js';
 
 	export default defineComponent({
 		components: {
@@ -177,6 +259,8 @@
 			YieldfulNftSquare,
 		},
 		setup() {
+			const store = useGlobalStore();
+
 			const dataRowOne = [
 				{
 					title: 'BUSINESS',
@@ -297,6 +381,10 @@
 			const leftTextGroup = ref<HTMLDivElement | null>(null);
 			const leftTextGroupHeight = ref(0);
 
+			const fourthSectionMobileRunningTextWrapper = ref<HTMLDivElement | null>(null);
+			const fourthSectionMobileTextGroup = ref<HTMLDivElement | null>(null);
+			const fourthSectionMobileTextGroupWidth = ref(0);
+
 			const middleDescriptionText =
 				ref(`Monezo Escrow is a security system dedicated to ensuring liquidity funds safety. It
 							acts as a bridge between businesses & NFT holders. Its primary purpose is to transfer
@@ -311,12 +399,22 @@
 				leftRunningTextWrapper.value ? leftRunningTextWrapper.value.offsetHeight : 0
 			);
 
+			const fourthSectionMobileRunningTextWrapperWidth = computed(() =>
+				fourthSectionMobileRunningTextWrapper.value
+					? fourthSectionMobileRunningTextWrapper.value.offsetWidth
+					: 0
+			);
+
 			useResizeObserver(navbarTextGroup, (entries) => {
 				navbarTextGroupWidth.value = entries[0].contentRect.width;
 			});
 
 			useResizeObserver(leftTextGroup, (entries) => {
 				leftTextGroupHeight.value = entries[0].contentRect.height;
+			});
+
+			useResizeObserver(fourthSectionMobileTextGroup, (entries) => {
+				fourthSectionMobileTextGroupWidth.value = entries[0].contentRect.width;
 			});
 
 			onMounted(() => {});
@@ -330,9 +428,14 @@
 				leftRunningTextWrapperHeight,
 				leftTextGroup,
 				leftTextGroupHeight,
+				fourthSectionMobileRunningTextWrapper,
+				fourthSectionMobileRunningTextWrapperWidth,
+				fourthSectionMobileTextGroup,
+				fourthSectionMobileTextGroupWidth,
 				dataRowOne,
 				dataRowTwo,
 				middleDescriptionText,
+				store,
 			};
 		},
 	});
@@ -642,6 +745,87 @@
 
 				img {
 					width: 4.134rem;
+				}
+			}
+		}
+	}
+
+	.fourth-section-mobile {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		height: unset;
+		overflow: hidden;
+		border-bottom: 2px solid $monezo-night-black;
+		background: unset;
+		color: $monezo-night-black;
+		font-family: 'Termina';
+
+		&__running-text-wrapper {
+			width: 100%;
+			height: 7.7rem;
+			min-height: 7.7rem;
+			margin-bottom: 4rem;
+			border-bottom: 2px solid $monezo-night-black;
+			border-left: 0;
+			border-right: 0;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+		&__body {
+			padding: 0 1.6rem;
+		}
+
+		&__running-text-group {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			width: fit-content;
+			height: 100%;
+			gap: 5rem;
+			white-space: nowrap;
+		}
+
+		&__running-text {
+			font-size: 2.4rem;
+			font-weight: 700;
+		}
+
+		&__running-icon {
+			height: 60%;
+		}
+
+		&__title {
+			margin-bottom: 2.4rem;
+			font-size: 3.2rem;
+			font-weight: 700;
+			line-height: 3.8rem;
+		}
+
+		&__description {
+			margin-bottom: 6rem;
+			font-size: 1.4rem;
+			font-weight: 500;
+			line-height: 2.2rem;
+		}
+
+		&__media-wrapper {
+			width: 100%;
+			height: 20.5rem;
+			margin-bottom: 6rem;
+			border: 2px solid $monezo-night-black;
+			border-radius: 1.8rem;
+		}
+
+		&__button {
+			margin-bottom: 12rem;
+
+			.button {
+				width: 100%;
+
+				&:hover {
+					width: 100%;
 				}
 			}
 		}

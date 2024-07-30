@@ -646,6 +646,7 @@
 		flex-direction: column;
 		height: unset;
 		overflow: hidden;
+		border-bottom: 2px solid $monezo-night-black;
 		background: unset;
 		color: $monezo-night-black;
 		font-family: 'Termina';
@@ -677,11 +678,12 @@
 		}
 
 		&__running-text {
+			font-size: 2.4rem;
 			font-weight: 700;
 		}
 
 		&__running-icon {
-			height: 80%;
+			height: 70%;
 		}
 
 		&__title {
